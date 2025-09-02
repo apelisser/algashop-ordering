@@ -100,4 +100,43 @@ class CustomerTest {
             .isThrownBy(() -> customer.changePhone("478-256-2504"));
     }
 
+    @Test
+    void givenBrandNewCustomer_whenAddLoyaltyPoints_shouldSumPoints() {
+        Customer customer = new Customer(
+            IdGenerator.generateTimeBasedUUID(),
+            "John Doe",
+            LocalDate.of(1991, 7, 5),
+            "john.doe@example.com",
+            "478-256-2504",
+            "255-08-0578",
+            false,
+            OffsetDateTime.now()
+        );
+
+        customer.addLoyaltyPoints(10);
+        customer.addLoyaltyPoints(20);
+
+        Assertions.assertThat(customer.loyaltyPoints()).isEqualTo(30);
+    }
+
+    @Test
+    void givenBrandNewCustomer_whenAddInvalidLoyaltyPoints_shouldGenerateException() {
+        Customer customer = new Customer(
+            IdGenerator.generateTimeBasedUUID(),
+            "John Doe",
+            LocalDate.of(1991, 7, 5),
+            "john.doe@example.com",
+            "478-256-2504",
+            "255-08-0578",
+            false,
+            OffsetDateTime.now()
+        );
+
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> customer.addLoyaltyPoints(0));
+
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> customer.addLoyaltyPoints(-10));
+    }
+
 }
