@@ -1,5 +1,7 @@
 package com.apelisser.algashop.ordering.domain.valueobject;
 
+import com.apelisser.algashop.ordering.domain.exception.ErrorMessages;
+
 import java.util.Objects;
 
 public record FullName(String firstName, String lastName) {
@@ -9,11 +11,11 @@ public record FullName(String firstName, String lastName) {
         Objects.requireNonNull(lastName);
 
         if (firstName.isBlank()) {
-            throw new IllegalArgumentException("First name cannot be blank");
+            throw new IllegalArgumentException(ErrorMessages.VALIDATION_ERROR_FIRST_NAME_IS_BLANK);
         }
 
         if (lastName.isBlank()) {
-            throw new IllegalArgumentException("Last name cannot be blank");
+            throw new IllegalArgumentException(ErrorMessages.VALIDATION_ERROR_LAST_NAME_IS_BLANK);
         }
 
         this.firstName = firstName.trim();
