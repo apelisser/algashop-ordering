@@ -1,6 +1,7 @@
 package com.apelisser.algashop.ordering.domain.entity;
 
 import com.apelisser.algashop.ordering.domain.exception.CustomerArchivedException;
+import com.apelisser.algashop.ordering.domain.valueobject.Address;
 import com.apelisser.algashop.ordering.domain.valueobject.BirthDate;
 import com.apelisser.algashop.ordering.domain.valueobject.CustomerId;
 import com.apelisser.algashop.ordering.domain.valueobject.Document;
@@ -8,6 +9,7 @@ import com.apelisser.algashop.ordering.domain.valueobject.Email;
 import com.apelisser.algashop.ordering.domain.valueobject.FullName;
 import com.apelisser.algashop.ordering.domain.valueobject.LoyaltyPoints;
 import com.apelisser.algashop.ordering.domain.valueobject.Phone;
+import com.apelisser.algashop.ordering.domain.valueobject.ZipCode;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +31,16 @@ class CustomerTest {
                     new Phone("478-256-2504"),
                     new Document("255-08-0578"),
                     false,
-                    OffsetDateTime.now()
+                    OffsetDateTime.now(),
+                    Address.builder()
+                        .street("Bourbon Street")
+                        .number("1234")
+                        .neighborhood("North Ville")
+                        .city("York")
+                        .state("South California")
+                        .zipCode(new ZipCode("12345"))
+                        .complement("Apt. 114")
+                        .build()
                 )
             );
     }
@@ -44,7 +55,16 @@ class CustomerTest {
             new Phone("478-256-2504"),
             new Document("255-08-0578"),
             false,
-            OffsetDateTime.now()
+            OffsetDateTime.now(),
+            Address.builder()
+                .street("Bourbon Street")
+                .number("1234")
+                .neighborhood("North Ville")
+                .city("York")
+                .state("South California")
+                .zipCode(new ZipCode("12345"))
+                .complement("Apt. 114")
+                .build()
         );
 
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
@@ -61,7 +81,16 @@ class CustomerTest {
             new Phone("478-256-2504"),
             new Document("255-08-0578"),
             false,
-            OffsetDateTime.now()
+            OffsetDateTime.now(),
+            Address.builder()
+                .street("Bourbon Street")
+                .number("1234")
+                .neighborhood("North Ville")
+                .city("York")
+                .state("South California")
+                .zipCode(new ZipCode("12345"))
+                .complement("Apt. 114")
+                .build()
         );
 
         customer.archive();
@@ -88,7 +117,16 @@ class CustomerTest {
             true,
             OffsetDateTime.now(),
             OffsetDateTime.now(),
-            new LoyaltyPoints(10)
+            new LoyaltyPoints(10),
+            Address.builder()
+                .street("Bourbon Street")
+                .number("1234")
+                .neighborhood("North Ville")
+                .city("York")
+                .state("South California")
+                .zipCode(new ZipCode("12345"))
+                .complement("Apt. 114")
+                .build()
         );
 
         Assertions.assertThatExceptionOfType(CustomerArchivedException.class)
@@ -117,7 +155,16 @@ class CustomerTest {
             new Phone("478-256-2504"),
             new Document("255-08-0578"),
             false,
-            OffsetDateTime.now()
+            OffsetDateTime.now(),
+            Address.builder()
+                .street("Bourbon Street")
+                .number("1234")
+                .neighborhood("North Ville")
+                .city("York")
+                .state("South California")
+                .zipCode(new ZipCode("12345"))
+                .complement("Apt. 114")
+                .build()
         );
 
         customer.addLoyaltyPoints(new LoyaltyPoints(10));
@@ -136,7 +183,16 @@ class CustomerTest {
             new Phone("478-256-2504"),
             new Document("255-08-0578"),
             false,
-            OffsetDateTime.now()
+            OffsetDateTime.now(),
+            Address.builder()
+                .street("Bourbon Street")
+                .number("1234")
+                .neighborhood("North Ville")
+                .city("York")
+                .state("South California")
+                .zipCode(new ZipCode("12345"))
+                .complement("Apt. 114")
+                .build()
         );
 
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
