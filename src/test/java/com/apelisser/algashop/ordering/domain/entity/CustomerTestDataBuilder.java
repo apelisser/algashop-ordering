@@ -28,15 +28,16 @@ public class CustomerTestDataBuilder {
             .phone(new Phone("478-256-2504"))
             .document(new Document("255-08-0578"))
             .promotionNotificationsAllowed(false)
-            .address(                   Address.builder()
-                .street("Bourbon Street")
-                .number("1234")
-                .neighborhood("North Ville")
-                .city("York")
-                .state("South California")
-                .zipCode(new ZipCode("12345"))
-                .complement("Apt. 114")
-                .build());
+            .address(
+                Address.builder()
+                    .street("Bourbon Street")
+                    .number("1234")
+                    .neighborhood("North Ville")
+                    .city("York")
+                    .state("South California")
+                    .zipCode(new ZipCode("12345"))
+                    .complement("Apt. 114")
+                    .build());
     }
 
     public static Customer.ExistingCustomerBuilder existingCustomer() {
