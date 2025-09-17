@@ -4,7 +4,7 @@ import com.apelisser.algashop.ordering.domain.exception.CustomerArchivedExceptio
 import com.apelisser.algashop.ordering.domain.exception.ErrorMessages;
 import com.apelisser.algashop.ordering.domain.valueobject.Address;
 import com.apelisser.algashop.ordering.domain.valueobject.BirthDate;
-import com.apelisser.algashop.ordering.domain.valueobject.CustomerId;
+import com.apelisser.algashop.ordering.domain.valueobject.id.CustomerId;
 import com.apelisser.algashop.ordering.domain.valueobject.Document;
 import com.apelisser.algashop.ordering.domain.valueobject.Email;
 import com.apelisser.algashop.ordering.domain.valueobject.FullName;

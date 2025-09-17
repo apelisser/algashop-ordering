@@ -1,4 +1,4 @@
-package com.apelisser.algashop.ordering.domain.valueobject;
+package com.apelisser.algashop.ordering.domain.valueobject.id;
 
 import com.apelisser.algashop.ordering.domain.utility.IdGenerator;
 
