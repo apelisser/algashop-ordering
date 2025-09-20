@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.domain.entity;
 
+import com.apelisser.algashop.ordering.domain.exception.OrderStatusCannotBeChangedException;
 import com.apelisser.algashop.ordering.domain.valueobject.BillingInfo;
 import com.apelisser.algashop.ordering.domain.valueobject.Money;
 import com.apelisser.algashop.ordering.domain.valueobject.ProductName;
@@ -94,6 +95,27 @@ public class Order {
         this.items.add(item);
 
         this.recalculateTotals();
+    }
+
+    public void place() {
+        // TODO Business rules
+        this.changeStatus(OrderStatus.PLACED);
+    }
+
+    private void changeStatus(OrderStatus newStatus) {
+        Objects.requireNonNull(newStatus);
+        if (this.status.cannotChangeTo(newStatus)) {
+            throw new OrderStatusCannotBeChangedException(this.id(), this.status(), newStatus);
+        }
+        this.setStatus(newStatus);
+    }
+
+    public boolean isDraft() {
+        return this.status() == OrderStatus.DRAFT;
+    }
+
+    public boolean isPlaced() {
+        return this.status() == OrderStatus.PLACED;
     }
 
     public OrderId id() {
