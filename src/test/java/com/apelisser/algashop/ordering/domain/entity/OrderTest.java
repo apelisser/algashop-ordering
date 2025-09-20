@@ -59,4 +59,26 @@ class OrderTest {
             .isThrownBy(items::clear);
     }
 
+    @Test
+    void shouldCalculateTotals() {
+        Order order = Order.draft(new CustomerId());
+
+        order.addItem(
+            new ProductId(),
+            new ProductName("Keyboard"),
+            new Money("100"),
+            new Quantity(1)
+        );
+
+        order.addItem(
+            new ProductId(),
+            new ProductName("Mouse pad"),
+            new Money("19.99"),
+            new Quantity(1)
+        );
+
+        Assertions.assertThat(order.totalAmount()).isEqualTo(new Money("119.99"));
+        Assertions.assertThat(order.totalItems()).isEqualTo(new Quantity(2));
+    }
+
 }
