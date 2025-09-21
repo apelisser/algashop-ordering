@@ -217,4 +217,23 @@ class OrderTest {
             .isThrownBy(() ->order.changeShipping(shipping, shippingCost, expectedDeliveryDate));
     }
 
+    @Test
+    void givenDraftOrder_whenChangeItem_shouldRecalculateTotals() {
+        Order order = Order.draft(new CustomerId());
+        order.addItem(
+            new ProductId(),
+            new ProductName("Keyboard"),
+            new Money("100"),
+            new Quantity(1)
+        );
+
+        OrderItem item = order.items().iterator().next();
+        order.changeItemQuantity(item.id(), new Quantity(2));
+
+        Assertions.assertWith(order,
+            o -> Assertions.assertThat(o.totalAmount()).isEqualTo(new Money("200")),
+            o -> Assertions.assertThat(o.totalItems()).isEqualTo(new Quantity(2))
+        );
+    }
+
 }
