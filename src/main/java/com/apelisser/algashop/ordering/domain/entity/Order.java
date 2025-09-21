@@ -115,6 +115,11 @@ public class Order {
         this.changeStatus(OrderStatus.PLACED);
     }
 
+    public void markAsPaid() {
+        this.changeStatus(OrderStatus.PAID);
+        this.setPaidAt(OffsetDateTime.now());
+    }
+
     public void changePaymentMethod(PaymentMethod paymentMethod) {
         Objects.requireNonNull(paymentMethod);
         this.setPaymentMethod(paymentMethod);
@@ -145,6 +150,10 @@ public class Order {
 
     public boolean isPlaced() {
         return this.status() == OrderStatus.PLACED;
+    }
+
+    public boolean isPaid() {
+        return this.status() == OrderStatus.PAID;
     }
 
     public OrderId id() {
