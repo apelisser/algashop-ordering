@@ -1,8 +1,15 @@
 package com.apelisser.algashop.ordering.domain.entity;
 
-import com.apelisser.algashop.ordering.domain.valueobject.*;
+import com.apelisser.algashop.ordering.domain.valueobject.Address;
+import com.apelisser.algashop.ordering.domain.valueobject.BillingInfo;
+import com.apelisser.algashop.ordering.domain.valueobject.Document;
+import com.apelisser.algashop.ordering.domain.valueobject.FullName;
+import com.apelisser.algashop.ordering.domain.valueobject.Money;
+import com.apelisser.algashop.ordering.domain.valueobject.Phone;
+import com.apelisser.algashop.ordering.domain.valueobject.Quantity;
+import com.apelisser.algashop.ordering.domain.valueobject.ShippingInfo;
+import com.apelisser.algashop.ordering.domain.valueobject.ZipCode;
 import com.apelisser.algashop.ordering.domain.valueobject.id.CustomerId;
-import com.apelisser.algashop.ordering.domain.valueobject.id.ProductId;
 
 import java.time.LocalDate;
 
@@ -32,15 +39,11 @@ public final class OrderTestDataBuilder {
 
         if (withItems) {
             order.addItem(
-                new ProductId(),
-                new ProductName("Notebook X11"),
-                new Money("3000"),
+                ProductTestDataBuilder.aProduct().build(),
                 new Quantity(2));
 
             order.addItem(
-                new ProductId(),
-                new ProductName("4GB RAM"),
-                new Money("200"),
+                ProductTestDataBuilder.aProductAltRamMemory().build(),
                 new Quantity(1));
         }
 

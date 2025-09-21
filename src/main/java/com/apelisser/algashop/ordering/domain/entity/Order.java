@@ -6,13 +6,12 @@ import com.apelisser.algashop.ordering.domain.exception.OrderInvalidShippingDeli
 import com.apelisser.algashop.ordering.domain.exception.OrderStatusCannotBeChangedException;
 import com.apelisser.algashop.ordering.domain.valueobject.BillingInfo;
 import com.apelisser.algashop.ordering.domain.valueobject.Money;
-import com.apelisser.algashop.ordering.domain.valueobject.ProductName;
+import com.apelisser.algashop.ordering.domain.valueobject.Product;
 import com.apelisser.algashop.ordering.domain.valueobject.Quantity;
 import com.apelisser.algashop.ordering.domain.valueobject.ShippingInfo;
 import com.apelisser.algashop.ordering.domain.valueobject.id.CustomerId;
 import com.apelisser.algashop.ordering.domain.valueobject.id.OrderId;
 import com.apelisser.algashop.ordering.domain.valueobject.id.OrderItemId;
-import com.apelisser.algashop.ordering.domain.valueobject.id.ProductId;
 import lombok.Builder;
 
 import java.math.BigDecimal;
@@ -83,13 +82,14 @@ public class Order {
         );
     }
 
-    public void addItem(ProductId productId, ProductName productName, Money price, Quantity quantity) {
+    public void addItem(Product product, Quantity quantity) {
+        Objects.requireNonNull(product);
+        Objects.requireNonNull(quantity);
+
         OrderItem item = OrderItem.brandNew()
             .orderId(this.id())
-            .productId(productId)
-            .productName(productName)
+            .product(product)
             .quantity(quantity)
-            .price(price)
             .build();
 
         if (this.items == null) {

@@ -4,7 +4,6 @@ import com.apelisser.algashop.ordering.domain.exception.OrderInvalidShippingDeli
 import com.apelisser.algashop.ordering.domain.exception.OrderStatusCannotBeChangedException;
 import com.apelisser.algashop.ordering.domain.valueobject.*;
 import com.apelisser.algashop.ordering.domain.valueobject.id.CustomerId;
-import com.apelisser.algashop.ordering.domain.valueobject.id.ProductId;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -22,23 +21,17 @@ class OrderTest {
     @Test
     void shouldAddItem() {
         Order order = Order.draft(new CustomerId());
+        Product product = ProductTestDataBuilder.aProductAltMousePad().build();
 
-        ProductId productId = new ProductId();
-
-        order.addItem(
-            productId,
-            new ProductName("Keyboard"),
-            new Money("100"),
-            new Quantity(1)
-        );
+        order.addItem(product, new Quantity(1));
 
         Assertions.assertThat(order.items()).hasSize(1);
 
         OrderItem item = order.items().iterator().next();
         Assertions.assertWith(item,
             i -> Assertions.assertThat(i.productId()).isNotNull(),
-            i -> Assertions.assertThat(i.productName()).isEqualTo(new ProductName("Keyboard")),
-            i -> Assertions.assertThat(i.productId()).isEqualTo(productId),
+            i -> Assertions.assertThat(i.productName()).isEqualTo(new ProductName("Mouse Pad")),
+            i -> Assertions.assertThat(i.productId()).isEqualTo(product.id()),
             i -> Assertions.assertThat(i.price()).isEqualTo(new Money("100")),
             i -> Assertions.assertThat(i.quantity()).isEqualTo(new Quantity(1))
         );
@@ -48,12 +41,8 @@ class OrderTest {
     void shouldGenerateExceptionWhenTryToChangeItemSet() {
         Order order = Order.draft(new CustomerId());
 
-        order.addItem(
-            new ProductId(),
-            new ProductName("Keyboard"),
-            new Money("100"),
-            new Quantity(1)
-        );
+        Product product = ProductTestDataBuilder.aProductAltMousePad().build();
+        order.addItem(product, new Quantity(1));
 
         Set<OrderItem> items = order.items();
         Assertions.assertThatExceptionOfType(UnsupportedOperationException.class)
@@ -65,20 +54,16 @@ class OrderTest {
         Order order = Order.draft(new CustomerId());
 
         order.addItem(
-            new ProductId(),
-            new ProductName("Keyboard"),
-            new Money("100"),
+            ProductTestDataBuilder.aProductAltMousePad().build(),
             new Quantity(1)
         );
 
         order.addItem(
-            new ProductId(),
-            new ProductName("Mouse pad"),
-            new Money("19.99"),
+            ProductTestDataBuilder.aProductAltRamMemory().build(),
             new Quantity(1)
         );
 
-        Assertions.assertThat(order.totalAmount()).isEqualTo(new Money("119.99"));
+        Assertions.assertThat(order.totalAmount()).isEqualTo(new Money("700.00"));
         Assertions.assertThat(order.totalItems()).isEqualTo(new Quantity(2));
     }
 
@@ -221,18 +206,16 @@ class OrderTest {
     void givenDraftOrder_whenChangeItem_shouldRecalculateTotals() {
         Order order = Order.draft(new CustomerId());
         order.addItem(
-            new ProductId(),
-            new ProductName("Keyboard"),
-            new Money("100"),
-            new Quantity(1)
+            ProductTestDataBuilder.aProductAltMousePad().build(),
+            new Quantity(3)
         );
 
         OrderItem item = order.items().iterator().next();
-        order.changeItemQuantity(item.id(), new Quantity(2));
+        order.changeItemQuantity(item.id(), new Quantity(5));
 
         Assertions.assertWith(order,
-            o -> Assertions.assertThat(o.totalAmount()).isEqualTo(new Money("200")),
-            o -> Assertions.assertThat(o.totalItems()).isEqualTo(new Quantity(2))
+            o -> Assertions.assertThat(o.totalAmount()).isEqualTo(new Money("500")),
+            o -> Assertions.assertThat(o.totalItems()).isEqualTo(new Quantity(5))
         );
     }
 
