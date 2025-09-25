@@ -3,11 +3,11 @@ package com.apelisser.algashop.ordering.domain.valueobject;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class BillingInfoTest {
+class BillingTest {
 
     @Test
     void shouldGenerate() {
-        Runnable runnable = () -> BillingInfo.builder()
+        Runnable runnable = () -> Billing.builder()
             .fullName(new FullName("John", "Doe"))
             .document(new Document("12345678901"))
             .phone(new Phone("478-256-2504"))
@@ -19,28 +19,28 @@ class BillingInfoTest {
 
     @Test
     void shouldNotGenerate() {
-        Runnable runnableMissingFullName = () -> BillingInfo.builder()
+        Runnable runnableMissingFullName = () -> Billing.builder()
             .fullName(null)
             .document(new Document("12345678901"))
             .phone(new Phone("478-256-2504"))
             .address(this.buildAddress())
             .build();
 
-        Runnable runnableMissingDocument = () -> BillingInfo.builder()
+        Runnable runnableMissingDocument = () -> Billing.builder()
             .fullName(new FullName("John", "Doe"))
             .document(null)
             .phone(new Phone("478-256-2504"))
             .address(this.buildAddress())
             .build();
 
-        Runnable runnableMissingPhone = () -> BillingInfo.builder()
+        Runnable runnableMissingPhone = () -> Billing.builder()
             .fullName(new FullName("John", "Doe"))
             .document(new Document("12345678901"))
             .phone(null)
             .address(this.buildAddress())
             .build();
 
-        Runnable runnableMissingAddress = () -> BillingInfo.builder()
+        Runnable runnableMissingAddress = () -> Billing.builder()
             .fullName(new FullName("John", "Doe"))
             .document(new Document("12345678901"))
             .phone(new Phone("478-256-2504"))

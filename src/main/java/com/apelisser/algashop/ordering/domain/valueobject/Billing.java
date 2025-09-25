@@ -3,14 +3,15 @@ package com.apelisser.algashop.ordering.domain.valueobject;
 import lombok.Builder;
 
 @Builder
-public record BillingInfo(
+public record Billing(
     FullName fullName,
     Document document,
     Phone phone,
+    Email email,
     Address address
 ) {
 
-    public BillingInfo {
+    public Billing {
         if (fullName == null) {
             throw new IllegalArgumentException("Full name is required");
         }
@@ -21,6 +22,10 @@ public record BillingInfo(
 
         if (phone == null) {
             throw new IllegalArgumentException("Phone is required");
+        }
+
+        if (email == null) {
+            throw new IllegalArgumentException("E-mail is required");
         }
 
         if (address == null) {

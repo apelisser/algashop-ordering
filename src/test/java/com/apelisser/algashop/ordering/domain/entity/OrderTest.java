@@ -110,34 +110,13 @@ class OrderTest {
     }
 
     @Test
-    void givenDraftOrder_whenChangeChangeBillingInfo_shouldAllowChange() {
-        Address address = Address.builder()
-            .street("Bourbon Street")
-            .number("12345")
-            .neighborhood("North Ville")
-            .city("Montfort")
-            .state("South Carolina")
-            .zipCode(new ZipCode("12345"))
-            .build();
-
-        BillingInfo billing = BillingInfo.builder()
-            .address(address)
-            .document(new Document("225-09-1992"))
-            .phone(new Phone("123-111-9911"))
-            .fullName(new FullName("John", "Doe"))
-            .build();
-
-        BillingInfo expectedBilling = BillingInfo.builder()
-            .address(address)
-            .document(new Document("225-09-1992"))
-            .phone(new Phone("123-111-9911"))
-            .fullName(new FullName("John", "Doe"))
-            .build();
+    void givenDraftOrder_whenChangeChangeBilling_shouldAllowChange() {
+        Billing billing = OrderTestDataBuilder.aBilling();
 
         Order order = Order.draft(new CustomerId());
         order.changeBilling(billing);
 
-        Assertions.assertThat(order.billing()).isEqualTo(expectedBilling);
+        Assertions.assertThat(order.billing()).isEqualTo(billing);
     }
 
     @Test

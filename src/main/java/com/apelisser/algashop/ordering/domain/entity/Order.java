@@ -4,7 +4,7 @@ import com.apelisser.algashop.ordering.domain.exception.OrderCannotBePlacedExcep
 import com.apelisser.algashop.ordering.domain.exception.OrderDoesNotContainOrderItemException;
 import com.apelisser.algashop.ordering.domain.exception.OrderInvalidShippingDeliveryDateException;
 import com.apelisser.algashop.ordering.domain.exception.OrderStatusCannotBeChangedException;
-import com.apelisser.algashop.ordering.domain.valueobject.BillingInfo;
+import com.apelisser.algashop.ordering.domain.valueobject.Billing;
 import com.apelisser.algashop.ordering.domain.valueobject.Money;
 import com.apelisser.algashop.ordering.domain.valueobject.Product;
 import com.apelisser.algashop.ordering.domain.valueobject.Quantity;
@@ -32,7 +32,7 @@ public class Order {
     private OffsetDateTime paidAt;
     private OffsetDateTime canceledAt;
     private OffsetDateTime readyAt;
-    private BillingInfo billing;
+    private Billing billing;
     private Shipping shipping;
     private OrderStatus status;
     private PaymentMethod paymentMethod;
@@ -40,7 +40,7 @@ public class Order {
 
     @Builder(builderClassName = "ExistingOrderBuilder", builderMethodName = "existing")
     public Order(OrderId id, CustomerId customerId, Money totalAmount, Quantity totalItems, OffsetDateTime placedAt,
-                 OffsetDateTime paidAt, OffsetDateTime canceledAt, OffsetDateTime readyAt, BillingInfo billing,
+                 OffsetDateTime paidAt, OffsetDateTime canceledAt, OffsetDateTime readyAt, Billing billing,
                  Shipping shipping, OrderStatus status, PaymentMethod paymentMethod, Set<OrderItem> items) {
         this.setId(id);
         this.setCustomerId(customerId);
@@ -112,7 +112,7 @@ public class Order {
         this.setPaymentMethod(paymentMethod);
     }
 
-    public void changeBilling(BillingInfo billing) {
+    public void changeBilling(Billing billing) {
         Objects.requireNonNull(billing);
         this.setBilling(billing);
     }
@@ -181,7 +181,7 @@ public class Order {
         return readyAt;
     }
 
-    public BillingInfo billing() {
+    public Billing billing() {
         return billing;
     }
 
@@ -287,7 +287,7 @@ public class Order {
         this.readyAt = readyAt;
     }
 
-    private void setBilling(BillingInfo billing) {
+    private void setBilling(Billing billing) {
         this.billing = billing;
     }
 
