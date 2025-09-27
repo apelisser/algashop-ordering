@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.domain.entity;
 
+import com.apelisser.algashop.ordering.domain.exception.OrderCannotBeEditedException;
 import com.apelisser.algashop.ordering.domain.exception.OrderCannotBePlacedException;
 import com.apelisser.algashop.ordering.domain.exception.OrderDoesNotContainOrderItemException;
 import com.apelisser.algashop.ordering.domain.exception.OrderInvalidShippingDeliveryDateException;
@@ -76,6 +77,8 @@ public class Order {
     }
 
     public void addItem(Product product, Quantity quantity) {
+        this.verifyIfChangeable();
+
         Objects.requireNonNull(product);
         Objects.requireNonNull(quantity);
 
@@ -108,16 +111,19 @@ public class Order {
     }
 
     public void changePaymentMethod(PaymentMethod paymentMethod) {
+        this.verifyIfChangeable();
         Objects.requireNonNull(paymentMethod);
         this.setPaymentMethod(paymentMethod);
     }
 
     public void changeBilling(Billing billing) {
+        this.verifyIfChangeable();
         Objects.requireNonNull(billing);
         this.setBilling(billing);
     }
 
     public void changeShipping(Shipping shipping) {
+        this.verifyIfChangeable();
         Objects.requireNonNull(shipping);
 
         if (shipping.expectedDate().isBefore(LocalDate.now())) {
@@ -128,6 +134,7 @@ public class Order {
     }
 
     public void changeItemQuantity(OrderItemId orderItemId, Quantity quantity) {
+        this.verifyIfChangeable();
         Objects.requireNonNull(orderItemId);
         Objects.requireNonNull(quantity);
 
@@ -240,6 +247,12 @@ public class Order {
         }
         if (this.items() == null || items.isEmpty()) {
             throw OrderCannotBePlacedException.noItems(this.id());
+        }
+    }
+
+    private void verifyIfChangeable() {
+        if (!this.isDraft()) {
+            throw new OrderCannotBeEditedException(this.id(), this.status());
         }
     }
 

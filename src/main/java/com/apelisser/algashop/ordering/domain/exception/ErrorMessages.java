@@ -11,6 +11,7 @@ public final class ErrorMessages {
     public static final String VALIDATION_ERROR_DOCUMENT_IS_BLANK = "Document cannot be blank";
 
     public static final String ERROR_CUSTOMER_ARCHIVED = "Customer is archived it can't be changed";
+
     public static final String ERROR_ORDER_STATUS_CANNOT_BE_CHANGED = "Cannot change order %s status from %s to %s";
     public static final String ERROR_ORDER_DELIVERY_DATE_CANNOT_IN_THE_PAST = "Order %s expected delivery date cannot be in the past";
     public static final String ERROR_ORDER_CANNOT_BE_PLACED_HAS_NO_ITEMS = "Order %s cannot be placed has not items";
@@ -18,6 +19,8 @@ public final class ErrorMessages {
     public static final String ERROR_ORDER_CANNOT_BE_PLACED_HAS_NO_BILLING_INFO = "Order %s cannot be placed, it has no billing info";
     public static final String ERROR_ORDER_CANNOT_BE_PLACED_HAS_NO_PAYMENT_METHOD = "Order %s cannot be placed, it has no payment method";
     public static final String ERROR_ORDER_DOES_NOT_CONTAIN_ITEM = "Order %s does not contain item %s";
+    public static final String ERROR_ORDER_CANNOT_BE_EDITED = "Order %s with status %s cannot be edited";
+
     public static final String ERROR_PRODUCT_IS_OUT_OF_STOCK = "Product %s is out of stock";
 
     private ErrorMessages() {
