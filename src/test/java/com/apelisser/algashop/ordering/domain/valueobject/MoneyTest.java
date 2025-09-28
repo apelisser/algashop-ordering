@@ -25,7 +25,7 @@ class MoneyTest {
     }
 
     @Test
-    void shouldMutiplyValue() {
+    void shouldMultiplyValue() {
         Quantity multiplier = new Quantity(2);
         Money money = new Money(BigDecimal.TEN);
         Money expectedValue = new Money("20");
