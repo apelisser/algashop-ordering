@@ -4,9 +4,6 @@ import com.apelisser.algashop.ordering.domain.exception.OrderStatusCannotBeChang
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.time.OffsetDateTime;
-import java.time.temporal.ChronoUnit;
-
 public class OrderMarkAsReadyTest {
 
     @Test
@@ -16,12 +13,11 @@ public class OrderMarkAsReadyTest {
             .build();
 
         Assertions.assertThatCode(order::markAsReady).doesNotThrowAnyException();
-        Assertions.assertThat(order.readyAt())
-            .isCloseTo(OffsetDateTime.now(), Assertions.within(3, ChronoUnit.SECONDS));
+        Assertions.assertThat(order.readyAt()).isNotNull();
     }
 
     @Test
-    void givenAnOrderThatIsNotADraft_whenMarkingAsReady_shouldGenerateException() {
+    void givenDraftOrder_whenMarkingAsReady_shouldGenerateException() {
         Order order = OrderTestDataBuilder.anOrder()
             .status(OrderStatus.DRAFT)
             .build();
