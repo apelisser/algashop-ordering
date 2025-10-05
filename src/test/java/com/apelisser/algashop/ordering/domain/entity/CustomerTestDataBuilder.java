@@ -16,8 +16,10 @@ import java.util.UUID;
 
 public class CustomerTestDataBuilder {
 
-    private CustomerTestDataBuilder() {
+    public static CustomerId DEFAULT_CUSTOMER_ID = new CustomerId();
 
+    private CustomerTestDataBuilder() {
+        throw new UnsupportedOperationException("Utility class");
     }
 
     public static Customer.BrandNewCustomerBuilder brandNewCustomer() {
@@ -42,7 +44,7 @@ public class CustomerTestDataBuilder {
 
     public static Customer.ExistingCustomerBuilder existingCustomer() {
         return Customer.existing()
-            .id(new CustomerId())
+            .id(DEFAULT_CUSTOMER_ID)
             .fullName(new FullName("John", "Doe"))
             .birthDate(new BirthDate(LocalDate.of(1991, 7, 5)))
             .email(new Email("john.doe@example.com"))
@@ -66,7 +68,7 @@ public class CustomerTestDataBuilder {
 
     public static Customer.ExistingCustomerBuilder existingAnonymizedCustomer() {
         return Customer.existing()
-            .id(new CustomerId())
+            .id(DEFAULT_CUSTOMER_ID)
             .fullName(new FullName("Anonymous", "Anonymous"))
             .birthDate(null)
             .email(new Email(UUID.randomUUID() + "@anonymous.com"))

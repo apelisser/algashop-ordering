@@ -11,6 +11,7 @@ class BillingTest {
             .fullName(new FullName("John", "Doe"))
             .document(new Document("12345678901"))
             .phone(new Phone("478-256-2504"))
+            .email(new Email("john.doe@example.com"))
             .address(this.buildAddress())
             .build();
 

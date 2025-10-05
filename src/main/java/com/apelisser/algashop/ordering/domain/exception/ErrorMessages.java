@@ -23,6 +23,11 @@ public final class ErrorMessages {
 
     public static final String ERROR_PRODUCT_IS_OUT_OF_STOCK = "Product %s is out of stock";
 
+    public static final String ERROR_SHOPPING_CART_ITEM_INCOMPATIBLE_PRODUCT = "The product %s in the shopping cart is incompatible with the new product %s";
+
+    public static final String ERROR_SHOPPING_CART_DOES_NOT_CONTAIN_ITEM = "The shopping cart %s does not contain item %s";
+    public static final String ERROR_SHOPPING_CART_DOES_NOT_CONTAIN_PRODUCT = "The shopping cart %s does not contain product %s";
+
     private ErrorMessages() {
         throw new UnsupportedOperationException("Utility class");
     }
