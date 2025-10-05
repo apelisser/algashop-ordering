@@ -3,8 +3,8 @@ package com.apelisser.algashop.ordering.domain.entity;
 import com.apelisser.algashop.ordering.domain.exception.OrderCannotBeEditedException;
 import com.apelisser.algashop.ordering.domain.valueobject.Quantity;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
@@ -15,27 +15,26 @@ import static com.apelisser.algashop.ordering.domain.entity.PaymentMethod.CREDIT
 
 public class OrderChangingTest {
 
-    Order order;
-
-    @BeforeEach
-    void setUp() {
-        this.order = OrderTestDataBuilder.anOrder()
-            .status(DRAFT)
-            .build();
-    }
-
     @ParameterizedTest
     @MethodSource("changeCases")
     void givenDraftOrder_whenChangeIsPerformed_shouldNotThrowException(Consumer<Order> test) {
+        Order order = OrderTestDataBuilder.anOrder()
+            .status(DRAFT)
+            .build();
         Assertions.assertThatCode(() -> test.accept(order)).doesNotThrowAnyExceptionExcept();
     }
 
     @ParameterizedTest
-    @MethodSource("changeCases")
-    void givenAnOrderThatIsNotADraft_whenChangeIsPerformed_shouldGenerateException(Consumer<Order> test) {
-        order.place();
-        Assertions.assertThatExceptionOfType(OrderCannotBeEditedException.class)
-            .isThrownBy(() -> test.accept(order));
+    @EnumSource(value = OrderStatus.class, mode = EnumSource.Mode.EXCLUDE, names = {"DRAFT"})
+    void givenAnOrderThatIsNotADraft_whenChangeIsPerformed_shouldGenerateException(OrderStatus orderStatus) {
+        Order order = OrderTestDataBuilder.anOrder()
+            .status(orderStatus)
+            .build();
+
+        OrderChangingTest.changeCases().forEach(test ->
+            Assertions.assertThatExceptionOfType(OrderCannotBeEditedException.class)
+                .isThrownBy(() -> test.accept(order))
+        );
     }
 
     private static List<Consumer<Order>> changeCases() {
