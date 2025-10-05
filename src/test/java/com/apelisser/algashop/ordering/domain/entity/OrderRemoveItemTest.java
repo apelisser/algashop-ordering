@@ -38,6 +38,7 @@ public class OrderRemoveItemTest {
         Assertions.assertThatCode(removeItemTask).doesNotThrowAnyException();
         Assertions.assertWith(order,
             o -> Assertions.assertThat(o.items()).hasSize(0),
+            o -> Assertions.assertThat(o.totalItems()).isEqualTo(Quantity.ZERO),
             o -> Assertions.assertThat(o.totalAmount()).isEqualTo(Money.ZERO)
         );
     }
