@@ -37,9 +37,9 @@ public class ShoppingCartItem {
     }
 
     @Builder(builderClassName = "BrandShoppingCartItemBuilder", builderMethodName = "brandNew")
-    private static ShoppingCartItem createBrandNew(ShoppingCartId shoppingCartId, ProductId productId,
+    public ShoppingCartItem(ShoppingCartId shoppingCartId, ProductId productId,
             ProductName name, Money price, Quantity quantity, Boolean available) {
-        ShoppingCartItem shoppingCartItem = new ShoppingCartItem(
+        this(
             new ShoppingCartItemId(),
             shoppingCartId,
             productId,
@@ -47,12 +47,9 @@ public class ShoppingCartItem {
             price,
             quantity,
             Money.ZERO,
-            available
-        );
+            available);
 
-        shoppingCartItem.recalculateTotals();
-
-        return shoppingCartItem;
+        this.recalculateTotals();
     }
 
     void refresh(Product product) {
