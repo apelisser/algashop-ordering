@@ -3,6 +3,7 @@ package com.apelisser.algashop.ordering.domain.model.repository;
 import com.apelisser.algashop.ordering.domain.model.entity.Order;
 import com.apelisser.algashop.ordering.domain.model.entity.OrderTestDataBuilder;
 import com.apelisser.algashop.ordering.domain.model.valueobject.id.OrderId;
+import com.apelisser.algashop.ordering.infrastructure.persistence.assembler.OrderPersistenceAssembler;
 import com.apelisser.algashop.ordering.infrastructure.persistence.provider.OrdersPersistenceProvider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ import org.springframework.context.annotation.Import;
 import java.util.Optional;
 
 @DataJpaTest
-@Import(OrdersPersistenceProvider.class)
+@Import({OrdersPersistenceProvider.class, OrderPersistenceAssembler.class})
 class OrdersIT {
 
     Orders orders;
