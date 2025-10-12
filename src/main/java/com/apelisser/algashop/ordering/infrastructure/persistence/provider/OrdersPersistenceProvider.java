@@ -3,7 +3,8 @@ package com.apelisser.algashop.ordering.infrastructure.persistence.provider;
 import com.apelisser.algashop.ordering.domain.model.entity.Order;
 import com.apelisser.algashop.ordering.domain.model.repository.Orders;
 import com.apelisser.algashop.ordering.domain.model.valueobject.id.OrderId;
-import com.apelisser.algashop.ordering.infrastructure.persistence.assembler.OrderPersistenceAssembler;
+import com.apelisser.algashop.ordering.infrastructure.persistence.assembler.OrderPersistenceEntityAssembler;
+import com.apelisser.algashop.ordering.infrastructure.persistence.disassembler.OrderPersistenceEntityDisassembler;
 import com.apelisser.algashop.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
 import com.apelisser.algashop.ordering.infrastructure.persistence.repository.OrderPersistenceEntityRepository;
 import org.springframework.stereotype.Component;
@@ -14,17 +15,20 @@ import java.util.Optional;
 public class OrdersPersistenceProvider implements Orders {
 
     private final OrderPersistenceEntityRepository persistenceRepository;
-    private final OrderPersistenceAssembler assembler;
+    private final OrderPersistenceEntityAssembler assembler;
+    private final OrderPersistenceEntityDisassembler disassembler;
 
     public OrdersPersistenceProvider(OrderPersistenceEntityRepository persistenceRepository,
-            OrderPersistenceAssembler assembler) {
+            OrderPersistenceEntityAssembler assembler, OrderPersistenceEntityDisassembler disassembler) {
         this.persistenceRepository = persistenceRepository;
         this.assembler = assembler;
+        this.disassembler = disassembler;
     }
 
     @Override
     public Optional<Order> ofId(OrderId orderId) {
-        return Optional.empty();
+        Optional<OrderPersistenceEntity> possibleEntity = persistenceRepository.findById(orderId.value().toLong());
+        return possibleEntity.map(disassembler::toDomainEntity);
     }
 
     @Override

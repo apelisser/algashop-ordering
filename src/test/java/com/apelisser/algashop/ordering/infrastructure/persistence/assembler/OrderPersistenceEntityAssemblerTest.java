@@ -6,9 +6,9 @@ import com.apelisser.algashop.ordering.infrastructure.persistence.entity.OrderPe
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class OrderPersistenceAssemblerTest {
+class OrderPersistenceEntityAssemblerTest {
 
-    final OrderPersistenceAssembler assembler = new OrderPersistenceAssembler();
+    final OrderPersistenceEntityAssembler assembler = new OrderPersistenceEntityAssembler();
 
     @Test
     void shouldConvertToDomain() {
@@ -22,7 +22,7 @@ class OrderPersistenceAssemblerTest {
             p -> Assertions.assertThat(p.getTotalItems()).isEqualTo(order.totalItems().value()),
             p -> Assertions.assertThat(p.getStatus()).isEqualTo(order.status().name()),
             p -> Assertions.assertThat(p.getPaymentMethod()).isEqualTo(order.paymentMethod().name()),
-            p -> Assertions.assertThat(p.getPlacetAt()).isEqualTo(order.placedAt()),
+            p -> Assertions.assertThat(p.getPlacedAt()).isEqualTo(order.placedAt()),
             p -> Assertions.assertThat(p.getPaidAt()).isEqualTo(order.paidAt()),
             p -> Assertions.assertThat(p.getCanceledAt()).isEqualTo(order.canceledAt()),
             p -> Assertions.assertThat(p.getReadyAt()).isEqualTo(order.readyAt())

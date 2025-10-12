@@ -35,7 +35,7 @@ public class OrderPersistenceEntity {
     private String status;
     private String paymentMethod;
 
-    private OffsetDateTime placetAt;
+    private OffsetDateTime placedAt;
     private OffsetDateTime paidAt;
     private OffsetDateTime canceledAt;
     private OffsetDateTime readyAt;

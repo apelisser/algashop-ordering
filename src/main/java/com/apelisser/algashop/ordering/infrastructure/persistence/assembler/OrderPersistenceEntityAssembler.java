@@ -5,7 +5,7 @@ import com.apelisser.algashop.ordering.infrastructure.persistence.entity.OrderPe
 import org.springframework.stereotype.Component;
 
 @Component
-public class OrderPersistenceAssembler {
+public class OrderPersistenceEntityAssembler {
 
     public OrderPersistenceEntity fromDomain(Order order) {
         return merge(new OrderPersistenceEntity(), order);
@@ -18,7 +18,7 @@ public class OrderPersistenceAssembler {
         orderPersistenceEntity.setTotalItems(order.totalItems().value());
         orderPersistenceEntity.setStatus(order.status().name());
         orderPersistenceEntity.setPaymentMethod(order.paymentMethod().name());
-        orderPersistenceEntity.setPlacetAt(order.placedAt());
+        orderPersistenceEntity.setPlacedAt(order.placedAt());
         orderPersistenceEntity.setPaidAt(order.paidAt());
         orderPersistenceEntity.setCanceledAt(order.canceledAt());
         orderPersistenceEntity.setReadyAt(order.readyAt());
