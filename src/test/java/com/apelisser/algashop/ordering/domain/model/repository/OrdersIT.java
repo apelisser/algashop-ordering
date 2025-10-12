@@ -1,6 +1,7 @@
 package com.apelisser.algashop.ordering.domain.model.repository;
 
 import com.apelisser.algashop.ordering.domain.model.entity.Order;
+import com.apelisser.algashop.ordering.domain.model.entity.OrderStatus;
 import com.apelisser.algashop.ordering.domain.model.entity.OrderTestDataBuilder;
 import com.apelisser.algashop.ordering.domain.model.valueobject.id.OrderId;
 import com.apelisser.algashop.ordering.infrastructure.persistence.assembler.OrderPersistenceEntityAssembler;
@@ -53,6 +54,21 @@ class OrdersIT {
             order -> Assertions.assertThat(order.status()).isEqualTo(originalOrder.status()),
             order -> Assertions.assertThat(order.paymentMethod()).isEqualTo(originalOrder.paymentMethod())
         );
+    }
+
+    @Test
+    void shouldUpdateExistingOrder() {
+        Order order = OrderTestDataBuilder.anOrder().status(OrderStatus.PLACED).build();
+        orders.add(order);
+
+        order = orders.ofId(order.id()).orElseThrow();
+
+        order.markAsPaid();
+        orders.add(order);
+
+        order = orders.ofId(order.id()).orElseThrow();
+
+        Assertions.assertThat(order.isPaid()).isTrue();
     }
 
 }
