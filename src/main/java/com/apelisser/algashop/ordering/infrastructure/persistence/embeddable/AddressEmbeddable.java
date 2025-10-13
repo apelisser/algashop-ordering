@@ -1,0 +1,35 @@
+package com.apelisser.algashop.ordering.infrastructure.persistence.embeddable;
+
+import com.apelisser.algashop.ordering.domain.model.valueobject.ZipCode;
+import jakarta.persistence.Embeddable;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Embeddable
+public class AddressEmbeddable {
+
+    private String street;
+    private String complement;
+    private String neighborhood;
+    private String number;
+    private String city;
+    private String state;
+    private ZipCode zipCode;
+
+    public AddressEmbeddable() {
+    }
+
+    public AddressEmbeddable(String street, String complement, String neighborhood, String number,
+            String city, String state, ZipCode zipCode) {
+        this.street = street;
+        this.complement = complement;
+        this.neighborhood = neighborhood;
+        this.number = number;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+    }
+
+}
