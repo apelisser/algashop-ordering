@@ -38,11 +38,12 @@ public class Order implements AggregateRoot<OrderId> {
     private OrderStatus status;
     private PaymentMethod paymentMethod;
     private Set<OrderItem> items;
+    private Long version;
 
     @Builder(builderClassName = "ExistingOrderBuilder", builderMethodName = "existing")
     public Order(OrderId id, CustomerId customerId, Money totalAmount, Quantity totalItems, OffsetDateTime placedAt,
-                 OffsetDateTime paidAt, OffsetDateTime canceledAt, OffsetDateTime readyAt, Billing billing,
-                 Shipping shipping, OrderStatus status, PaymentMethod paymentMethod, Set<OrderItem> items) {
+            OffsetDateTime paidAt, OffsetDateTime canceledAt, OffsetDateTime readyAt, Billing billing,
+            Shipping shipping, OrderStatus status, PaymentMethod paymentMethod, Long version, Set<OrderItem> items) {
         this.setId(id);
         this.setCustomerId(customerId);
         this.setTotalAmount(totalAmount);
@@ -55,6 +56,7 @@ public class Order implements AggregateRoot<OrderId> {
         this.setShipping(shipping);
         this.setStatus(status);
         this.setPaymentMethod(paymentMethod);
+        this.setVersion(version);
         this.setItems(items);
     }
 
@@ -71,6 +73,7 @@ public class Order implements AggregateRoot<OrderId> {
             null,
             null,
             OrderStatus.DRAFT,
+            null,
             null,
             new HashSet<>()
         );
@@ -227,6 +230,10 @@ public class Order implements AggregateRoot<OrderId> {
         return paymentMethod;
     }
 
+    public Long version() {
+        return version;
+    }
+
     public Set<OrderItem> items() {
         return Collections.unmodifiableSet(items);
     }
@@ -338,6 +345,10 @@ public class Order implements AggregateRoot<OrderId> {
 
     private void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     private void setItems(Set<OrderItem> items) {
