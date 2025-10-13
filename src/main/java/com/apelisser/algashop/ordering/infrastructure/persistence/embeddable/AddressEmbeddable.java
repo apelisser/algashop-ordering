@@ -1,6 +1,5 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.embeddable;
 
-import com.apelisser.algashop.ordering.domain.model.valueobject.ZipCode;
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,13 +15,13 @@ public class AddressEmbeddable {
     private String number;
     private String city;
     private String state;
-    private ZipCode zipCode;
+    private String zipCode;
 
     public AddressEmbeddable() {
     }
 
     public AddressEmbeddable(String street, String complement, String neighborhood, String number,
-            String city, String state, ZipCode zipCode) {
+            String city, String state, String zipCode) {
         this.street = street;
         this.complement = complement;
         this.neighborhood = neighborhood;

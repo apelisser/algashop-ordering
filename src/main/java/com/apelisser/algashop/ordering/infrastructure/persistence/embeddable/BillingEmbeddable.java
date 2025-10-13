@@ -1,6 +1,5 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.embeddable;
 
-import com.apelisser.algashop.ordering.domain.model.valueobject.Address;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import lombok.Getter;
@@ -17,13 +16,13 @@ public class BillingEmbeddable {
     private String phone;
     private String email;
     @Embedded
-    private Address address;
+    private AddressEmbeddable address;
 
     public BillingEmbeddable() {
     }
 
     public BillingEmbeddable(String firstName, String lastName, String document, String phone, String email,
-            Address address) {
+            AddressEmbeddable address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.document = document;
