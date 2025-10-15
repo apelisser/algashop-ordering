@@ -1,11 +1,13 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.embeddable;
 
 import jakarta.persistence.Embeddable;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 @Embeddable
 public class AddressEmbeddable {
 
