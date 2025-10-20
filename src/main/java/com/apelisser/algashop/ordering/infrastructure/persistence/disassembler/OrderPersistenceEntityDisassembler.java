@@ -1,19 +1,25 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.disassembler;
 
 import com.apelisser.algashop.ordering.domain.model.entity.Order;
+import com.apelisser.algashop.ordering.domain.model.entity.OrderItem;
 import com.apelisser.algashop.ordering.domain.model.entity.OrderStatus;
 import com.apelisser.algashop.ordering.domain.model.entity.PaymentMethod;
 import com.apelisser.algashop.ordering.domain.model.valueobject.*;
 import com.apelisser.algashop.ordering.domain.model.valueobject.id.CustomerId;
 import com.apelisser.algashop.ordering.domain.model.valueobject.id.OrderId;
+import com.apelisser.algashop.ordering.domain.model.valueobject.id.OrderItemId;
+import com.apelisser.algashop.ordering.domain.model.valueobject.id.ProductId;
 import com.apelisser.algashop.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
 import com.apelisser.algashop.ordering.infrastructure.persistence.embeddable.BillingEmbeddable;
 import com.apelisser.algashop.ordering.infrastructure.persistence.embeddable.RecipientEmbeddable;
 import com.apelisser.algashop.ordering.infrastructure.persistence.embeddable.ShippingEmbeddable;
+import com.apelisser.algashop.ordering.infrastructure.persistence.entity.OrderItemPersistenceEntity;
 import com.apelisser.algashop.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class OrderPersistenceEntityDisassembler {
@@ -31,10 +37,28 @@ public class OrderPersistenceEntityDisassembler {
             .canceledAt(persistenceEntity.getCanceledAt())
             .readyAt(persistenceEntity.getReadyAt())
             .version(persistenceEntity.getVersion())
-            .items(new HashSet<>())
+            .items(this.items(persistenceEntity.getItems()))
             .billing(this.billing(persistenceEntity.getBilling()))
             .shipping(this.shipping(persistenceEntity.getShipping()))
             .build();
+    }
+
+    private Set<OrderItem> items(Set<OrderItemPersistenceEntity> itemsPersistence) {
+        if (itemsPersistence == null || itemsPersistence.isEmpty()) {
+            return new HashSet<>();
+        }
+
+        return itemsPersistence.stream()
+            .map(item -> OrderItem.existing()
+                .id(new OrderItemId(item.getId()))
+                .orderId(new OrderId(item.getOrder().getId()))
+                .productId(new ProductId(item.getProductId()))
+                .productName(new ProductName(item.getProductName()))
+                .price(new Money(item.getPrice()))
+                .quantity(new Quantity(item.getQuantity()))
+                .totalAmount(new Money(item.getTotalAmount()))
+                .build())
+            .collect(Collectors.toSet());
     }
 
     private Billing billing(BillingEmbeddable billingEmbeddable) {
