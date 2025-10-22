@@ -39,7 +39,7 @@ public class OrdersPersistenceProvider implements Orders {
 
     @Override
     public boolean exists(OrderId orderId) {
-        return false;
+        return persistenceRepository.existsById(orderId.value().toLong());
     }
 
     @Override
@@ -50,6 +50,11 @@ public class OrdersPersistenceProvider implements Orders {
             persistenceEntity -> update(aggregateRoot, persistenceEntity),
             () -> insert(aggregateRoot)
         );
+    }
+
+    @Override
+    public long count() {
+        return persistenceRepository.count();
     }
 
     private void update(Order aggregateRoot, OrderPersistenceEntity persistenceEntity) {
@@ -74,11 +79,6 @@ public class OrdersPersistenceProvider implements Orders {
         } catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Override
-    public long count() {
-        return 0;
     }
 
 }
