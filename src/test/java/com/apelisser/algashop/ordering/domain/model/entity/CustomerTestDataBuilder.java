@@ -16,7 +16,7 @@ import java.util.UUID;
 
 public class CustomerTestDataBuilder {
 
-    public static CustomerId DEFAULT_CUSTOMER_ID = new CustomerId();
+    public static final CustomerId DEFAULT_CUSTOMER_ID = new CustomerId();
 
     private CustomerTestDataBuilder() {
         throw new UnsupportedOperationException("Utility class");

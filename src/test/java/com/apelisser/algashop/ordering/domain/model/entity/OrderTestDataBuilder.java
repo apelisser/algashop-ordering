@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 public final class OrderTestDataBuilder {
 
-    private CustomerId customerId = new CustomerId();
+    private CustomerId customerId = CustomerTestDataBuilder.DEFAULT_CUSTOMER_ID;
     private PaymentMethod paymentMethod = PaymentMethod.GATEWAY_BALANCE;
     private Shipping shipping = aShipping();
     private Billing billing = aBilling();

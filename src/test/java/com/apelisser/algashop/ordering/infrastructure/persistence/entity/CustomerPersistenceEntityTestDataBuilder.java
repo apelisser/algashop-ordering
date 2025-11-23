@@ -1,6 +1,6 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.entity;
 
-import com.apelisser.algashop.ordering.domain.model.utility.IdGenerator;
+import com.apelisser.algashop.ordering.domain.model.entity.CustomerTestDataBuilder;
 import com.apelisser.algashop.ordering.infrastructure.persistence.embeddable.AddressEmbeddableTestDataBuilder;
 
 import java.time.LocalDate;
@@ -12,9 +12,8 @@ public class CustomerPersistenceEntityTestDataBuilder {
     }
 
     public static CustomerPersistenceEntity.CustomerPersistenceEntityBuilder existingCustomer() {
-
         return CustomerPersistenceEntity.builder()
-            .id(IdGenerator.generateTimeBasedUUID())
+            .id(CustomerTestDataBuilder.DEFAULT_CUSTOMER_ID.value())
             .firstName("John")
             .lastName("Doe")
             .birthDate(LocalDate.parse("1990-01-23"))

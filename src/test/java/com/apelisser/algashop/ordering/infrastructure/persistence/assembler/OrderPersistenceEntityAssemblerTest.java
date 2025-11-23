@@ -3,19 +3,43 @@ package com.apelisser.algashop.ordering.infrastructure.persistence.assembler;
 import com.apelisser.algashop.ordering.domain.model.entity.Order;
 import com.apelisser.algashop.ordering.domain.model.entity.OrderItem;
 import com.apelisser.algashop.ordering.domain.model.entity.OrderTestDataBuilder;
+import com.apelisser.algashop.ordering.infrastructure.persistence.entity.CustomerPersistenceEntity;
+import com.apelisser.algashop.ordering.infrastructure.persistence.entity.CustomerPersistenceEntityTestDataBuilder;
 import com.apelisser.algashop.ordering.infrastructure.persistence.entity.OrderItemPersistenceEntity;
 import com.apelisser.algashop.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
 import com.apelisser.algashop.ordering.infrastructure.persistence.entity.OrderPersistenceEntityTestDataBuilder;
+import com.apelisser.algashop.ordering.infrastructure.persistence.repository.CustomerPersistenceEntityRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
+@ExtendWith(MockitoExtension.class)
 class OrderPersistenceEntityAssemblerTest {
 
-    final OrderPersistenceEntityAssembler assembler = new OrderPersistenceEntityAssembler();
+    @Mock
+    private CustomerPersistenceEntityRepository customerPersistenceEntityRepository;
+
+    @InjectMocks
+    private OrderPersistenceEntityAssembler assembler;
+
+    @BeforeEach
+    void setUp() {
+        Mockito.when(customerPersistenceEntityRepository.getReferenceById(Mockito.any(UUID.class)))
+            .then(a -> {
+                UUID customerId = a.getArgument(0, UUID.class);
+                return CustomerPersistenceEntityTestDataBuilder.existingCustomer().id(customerId).build();
+            });
+    }
 
     @Test
     void shouldConvertToDomain() {

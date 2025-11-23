@@ -1,17 +1,19 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.provider;
 
+import com.apelisser.algashop.ordering.domain.model.entity.CustomerTestDataBuilder;
 import com.apelisser.algashop.ordering.domain.model.entity.Order;
 import com.apelisser.algashop.ordering.domain.model.entity.OrderStatus;
 import com.apelisser.algashop.ordering.domain.model.entity.OrderTestDataBuilder;
+import com.apelisser.algashop.ordering.infrastructure.persistence.assembler.CustomerPersistenceEntityAssembler;
 import com.apelisser.algashop.ordering.infrastructure.persistence.assembler.OrderPersistenceEntityAssembler;
 import com.apelisser.algashop.ordering.infrastructure.persistence.config.SpringDataAuditingConfig;
+import com.apelisser.algashop.ordering.infrastructure.persistence.disassembler.CustomerPersistenceEntityDisassembler;
 import com.apelisser.algashop.ordering.infrastructure.persistence.disassembler.OrderPersistenceEntityDisassembler;
 import com.apelisser.algashop.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
 import com.apelisser.algashop.ordering.infrastructure.persistence.repository.OrderPersistenceEntityRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
@@ -23,19 +25,30 @@ import org.springframework.transaction.annotation.Transactional;
     OrdersPersistenceProvider.class,
     OrderPersistenceEntityAssembler.class,
     OrderPersistenceEntityDisassembler.class,
+    CustomersPersistenceProvider.class,
+    CustomerPersistenceEntityAssembler.class,
+    CustomerPersistenceEntityDisassembler.class,
     SpringDataAuditingConfig.class
 })
 class OrdersPersistenceProviderIT {
 
-    private static final Logger log = LoggerFactory.getLogger(OrdersPersistenceProviderIT.class);
     private final OrdersPersistenceProvider persistenceProvider;
+    private final CustomersPersistenceProvider customersPersistenceProvider;
     private final OrderPersistenceEntityRepository entityRepository;
 
     @Autowired
     public OrdersPersistenceProviderIT(OrdersPersistenceProvider persistenceProvider,
-            OrderPersistenceEntityRepository entityRepository) {
+            CustomersPersistenceProvider customersPersistenceProvider, OrderPersistenceEntityRepository entityRepository) {
         this.persistenceProvider = persistenceProvider;
+        this.customersPersistenceProvider = customersPersistenceProvider;
         this.entityRepository = entityRepository;
+    }
+
+    @BeforeEach
+    void setUp() {
+        if (!customersPersistenceProvider.exists(CustomerTestDataBuilder.DEFAULT_CUSTOMER_ID)) {
+            customersPersistenceProvider.add(CustomerTestDataBuilder.existingCustomer().build());
+        }
     }
 
     @Test
