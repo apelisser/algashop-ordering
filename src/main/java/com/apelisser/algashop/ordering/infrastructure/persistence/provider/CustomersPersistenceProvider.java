@@ -2,6 +2,7 @@ package com.apelisser.algashop.ordering.infrastructure.persistence.provider;
 
 import com.apelisser.algashop.ordering.domain.model.entity.Customer;
 import com.apelisser.algashop.ordering.domain.model.repository.Customers;
+import com.apelisser.algashop.ordering.domain.model.valueobject.Email;
 import com.apelisser.algashop.ordering.domain.model.valueobject.id.CustomerId;
 import com.apelisser.algashop.ordering.infrastructure.persistence.assembler.CustomerPersistenceEntityAssembler;
 import com.apelisser.algashop.ordering.infrastructure.persistence.disassembler.CustomerPersistenceEntityDisassembler;
@@ -57,16 +58,22 @@ public class CustomersPersistenceProvider implements Customers {
         return persistenceRepository.count();
     }
 
-    private void insert(Customer aggregateRoot) {
-        CustomerPersistenceEntity persistenceEntity = assembler.fromDomain(aggregateRoot);
-        persistenceRepository.saveAndFlush(persistenceEntity);
-        updateVersion(aggregateRoot, persistenceEntity);
+    @Override
+    public Optional<Customer> ofEmail(Email email) {
+        return persistenceRepository.findByEmail(email.value())
+            .map(disassembler::toDomainEntity);
     }
 
     private void update(Customer aggregateRoot, CustomerPersistenceEntity persistenceEntity) {
         persistenceEntity = assembler.merge(persistenceEntity, aggregateRoot);
         entityManager.detach(persistenceEntity);
         persistenceEntity = persistenceRepository.saveAndFlush(persistenceEntity);
+        updateVersion(aggregateRoot, persistenceEntity);
+    }
+
+    private void insert(Customer aggregateRoot) {
+        CustomerPersistenceEntity persistenceEntity = assembler.fromDomain(aggregateRoot);
+        persistenceRepository.saveAndFlush(persistenceEntity);
         updateVersion(aggregateRoot, persistenceEntity);
     }
 

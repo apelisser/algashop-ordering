@@ -2,8 +2,19 @@ package com.apelisser.algashop.ordering.infrastructure.persistence.entity;
 
 import com.apelisser.algashop.ordering.infrastructure.persistence.embeddable.BillingEmbeddable;
 import com.apelisser.algashop.ordering.infrastructure.persistence.embeddable.ShippingEmbeddable;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -51,11 +62,13 @@ public class OrderPersistenceEntity {
 
     @CreatedBy
     private UUID createdByUserId;
+
     @CreatedDate
     private OffsetDateTime createdAt;
 
     @LastModifiedBy
     private UUID lastModifiedByUserId;
+
     @LastModifiedDate
     private OffsetDateTime lastModifiedAt;
 

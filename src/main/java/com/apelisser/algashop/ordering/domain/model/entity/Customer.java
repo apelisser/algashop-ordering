@@ -239,7 +239,7 @@ public class Customer implements AggregateRoot<CustomerId> {
         this.address = address;
     }
 
-    public void setVersion(Long version) {
+    private void setVersion(Long version) {
         this.version = version;
     }
 
