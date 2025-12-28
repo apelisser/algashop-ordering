@@ -25,11 +25,11 @@ public class ShoppingCartItem {
 
     @Builder(builderClassName = "ExistingShoppingCartItemBuilder", builderMethodName = "existing")
     public ShoppingCartItem(ShoppingCartItemId id, ShoppingCartId shoppingCartId, ProductId productId,
-            ProductName name, Money price, Quantity quantity, Money totalAmount, Boolean available) {
+            ProductName productName, Money price, Quantity quantity, Money totalAmount, Boolean available) {
         this.setId(id);
         this.setShoppingCartId(shoppingCartId);
         this.setProductId(productId);
-        this.setName(name);
+        this.setName(productName);
         this.setPrice(price);
         this.setQuantity(quantity);
         this.setTotalAmount(totalAmount);
@@ -38,12 +38,12 @@ public class ShoppingCartItem {
 
     @Builder(builderClassName = "BrandShoppingCartItemBuilder", builderMethodName = "brandNew")
     public ShoppingCartItem(ShoppingCartId shoppingCartId, ProductId productId,
-            ProductName name, Money price, Quantity quantity, Boolean available) {
+            ProductName productName, Money price, Quantity quantity, Boolean available) {
         this(
             new ShoppingCartItemId(),
             shoppingCartId,
             productId,
-            name,
+            productName,
             price,
             quantity,
             Money.ZERO,

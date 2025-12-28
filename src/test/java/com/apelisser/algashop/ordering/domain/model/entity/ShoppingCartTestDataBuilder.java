@@ -1,19 +1,14 @@
 package com.apelisser.algashop.ordering.domain.model.entity;
 
-import com.apelisser.algashop.ordering.domain.model.valueobject.Money;
 import com.apelisser.algashop.ordering.domain.model.valueobject.Quantity;
 import com.apelisser.algashop.ordering.domain.model.valueobject.id.CustomerId;
 import com.apelisser.algashop.ordering.domain.model.valueobject.id.ShoppingCartId;
-
-import java.time.OffsetDateTime;
-import java.util.HashSet;
 
 public class ShoppingCartTestDataBuilder {
 
     public static ShoppingCartId DEFAULT_SHOPPING_CART_ID = new ShoppingCartId();
 
     private CustomerId customerId = CustomerTestDataBuilder.DEFAULT_CUSTOMER_ID;
-    private OffsetDateTime createdAt = OffsetDateTime.now();
     private boolean withItems = true;
 
     private ShoppingCartTestDataBuilder() {}
@@ -23,15 +18,7 @@ public class ShoppingCartTestDataBuilder {
     }
 
     public ShoppingCart build() {
-        ShoppingCart shoppingCart = ShoppingCart.existing()
-            .id(DEFAULT_SHOPPING_CART_ID)
-            .customerId(customerId)
-            .createdAt(createdAt)
-            .totalAmount(Money.ZERO)
-            .totalItems(Quantity.ZERO)
-            .createdAt(createdAt)
-            .items(new HashSet<>())
-            .build();
+        ShoppingCart shoppingCart = ShoppingCart.startShopping(customerId);
 
         if (withItems) {
             shoppingCart.addItem(ProductTestDataBuilder.aProduct().build(), new Quantity(1));
@@ -43,11 +30,6 @@ public class ShoppingCartTestDataBuilder {
 
     public ShoppingCartTestDataBuilder customerId(CustomerId customerId) {
         this.customerId = customerId;
-        return this;
-    }
-
-    public ShoppingCartTestDataBuilder createdAt(OffsetDateTime createdAt) {
-        this.createdAt = createdAt;
         return this;
     }
 

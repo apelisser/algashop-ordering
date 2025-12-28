@@ -23,7 +23,7 @@ public class ShoppingCartItemTestDataBuilder {
         return ShoppingCartItem.brandNew()
             .shoppingCartId(shoppingCartId)
             .productId(productId)
-            .name(productName)
+            .productName(productName)
             .price(price)
             .quantity(quantity)
             .available(available)

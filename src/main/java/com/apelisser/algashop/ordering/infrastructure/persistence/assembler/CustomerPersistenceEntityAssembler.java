@@ -27,6 +27,7 @@ public class CustomerPersistenceEntityAssembler {
         persistenceEntity.setArchivedAt(customer.archivedAt());
         persistenceEntity.setLoyaltyPoints(customer.loyaltyPoints().value());
         persistenceEntity.setAddress(addressEmbeddable(customer.address()));
+        persistenceEntity.setVersion(customer.version());
 
         return persistenceEntity;
     }

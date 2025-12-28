@@ -213,11 +213,11 @@ class ShoppingCartTest {
     }
 
     @Test
-    void givenShoppingCartWithSameId_whenComparing_shouldBeEqual() {
-        ShoppingCart shoppingCart = ShoppingCartTestDataBuilder.aShoppingCart().build();
-        ShoppingCart anotherShoppingCart = ShoppingCartTestDataBuilder.aShoppingCart().build();
+    public void givenDifferentIds_whenCompareItems_shouldNotBeEqual() {
+        ShoppingCart shoppingCart1 = ShoppingCartTestDataBuilder.aShoppingCart().build();
+        ShoppingCart shoppingCart2 = ShoppingCartTestDataBuilder.aShoppingCart().build();
 
-        Assertions.assertThat(shoppingCart).isEqualTo(anotherShoppingCart);
+        Assertions.assertThat(shoppingCart1).isNotEqualTo(shoppingCart2);
     }
 
 }

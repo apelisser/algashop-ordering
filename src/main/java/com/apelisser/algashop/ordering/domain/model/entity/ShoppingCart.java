@@ -27,6 +27,8 @@ public class ShoppingCart implements AggregateRoot<ShoppingCartId> {
     private OffsetDateTime createdAt;
     private Set<ShoppingCartItem> items;
 
+    private Long version;
+
     @Builder(builderClassName = "ExistingShoppingCartBuilder", builderMethodName = "existing")
     public ShoppingCart(ShoppingCartId id, CustomerId customerId, Money totalAmount, Quantity totalItems,
             OffsetDateTime createdAt, Set<ShoppingCartItem> items) {
@@ -73,7 +75,7 @@ public class ShoppingCart implements AggregateRoot<ShoppingCartId> {
             ShoppingCartItem newItem = ShoppingCartItem.brandNew()
                 .shoppingCartId(this.id())
                 .productId(product.id())
-                .name(product.name())
+                .productName(product.name())
                 .price(product.price())
                 .quantity(quantity)
                 .available(product.inStock())
@@ -144,6 +146,10 @@ public class ShoppingCart implements AggregateRoot<ShoppingCartId> {
         return this.createdAt;
     }
 
+    public Long version() {
+        return version;
+    }
+
     private void recalculateTotals() {
         if (this.isEmpty()) {
             this.setTotalAmount(Money.ZERO);
@@ -206,6 +212,10 @@ public class ShoppingCart implements AggregateRoot<ShoppingCartId> {
     private void setItems(Set<ShoppingCartItem> items) {
         Objects.requireNonNull(items);
         this.items = items;
+    }
+
+    private void setVersion(Long version) {
+        this.version = version;
     }
 
     @Override
