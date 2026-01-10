@@ -178,6 +178,10 @@ public class Order implements AggregateRoot<OrderId> {
         return this.status() == OrderStatus.PAID;
     }
 
+    public boolean isReady() {
+        return this.status() == OrderStatus.READY;
+    }
+
     public boolean isCanceled() {
         return this.status() == OrderStatus.CANCELED;
     }

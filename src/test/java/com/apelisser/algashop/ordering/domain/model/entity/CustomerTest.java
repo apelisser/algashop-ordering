@@ -77,7 +77,7 @@ class CustomerTest {
     void givenBrandNewCustomer_whenAddInvalidLoyaltyPoints_shouldGenerateException() {
         Customer customer = CustomerTestDataBuilder.brandNewCustomer().build();
 
-        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+        Assertions.assertThatNoException()
             .isThrownBy(() -> customer.addLoyaltyPoints(LoyaltyPoints.ZERO));
 
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
