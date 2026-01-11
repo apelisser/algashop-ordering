@@ -3,6 +3,7 @@ package com.apelisser.algashop.ordering.domain.model.service;
 import com.apelisser.algashop.ordering.domain.model.entity.Customer;
 import com.apelisser.algashop.ordering.domain.model.exception.CustomerEmailIsInUseException;
 import com.apelisser.algashop.ordering.domain.model.repository.Customers;
+import com.apelisser.algashop.ordering.domain.model.utility.DomainService;
 import com.apelisser.algashop.ordering.domain.model.valueobject.Address;
 import com.apelisser.algashop.ordering.domain.model.valueobject.BirthDate;
 import com.apelisser.algashop.ordering.domain.model.valueobject.Document;
@@ -11,6 +12,7 @@ import com.apelisser.algashop.ordering.domain.model.valueobject.FullName;
 import com.apelisser.algashop.ordering.domain.model.valueobject.Phone;
 import com.apelisser.algashop.ordering.domain.model.valueobject.id.CustomerId;
 
+@DomainService
 public class CustomerRegistrationService {
 
     private final Customers customers;
