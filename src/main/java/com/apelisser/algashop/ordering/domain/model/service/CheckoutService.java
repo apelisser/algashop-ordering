@@ -17,6 +17,11 @@ import java.util.Set;
 public class CheckoutService {
 
     public Order checkout(ShoppingCart shoppingCart, Billing billing, Shipping shipping, PaymentMethod paymentMethod) {
+        Objects.requireNonNull(shoppingCart);
+        Objects.requireNonNull(billing);
+        Objects.requireNonNull(shipping);
+        Objects.requireNonNull(paymentMethod);
+
         this.validateShoppingCart(shoppingCart);
 
         Order order = Order.draft(shoppingCart.customerId());
