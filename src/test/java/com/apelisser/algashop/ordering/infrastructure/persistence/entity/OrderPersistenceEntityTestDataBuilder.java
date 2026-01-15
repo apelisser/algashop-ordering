@@ -1,6 +1,8 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.entity;
 
 import com.apelisser.algashop.ordering.domain.model.IdGenerator;
+import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderItemPersistenceEntity;
+import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderPersistenceEntity;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;

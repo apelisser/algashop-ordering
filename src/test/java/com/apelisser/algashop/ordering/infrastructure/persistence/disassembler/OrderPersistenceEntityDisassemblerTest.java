@@ -7,8 +7,9 @@ import com.apelisser.algashop.ordering.domain.model.commons.Money;
 import com.apelisser.algashop.ordering.domain.model.commons.Quantity;
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerId;
 import com.apelisser.algashop.ordering.domain.model.order.OrderId;
-import com.apelisser.algashop.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
+import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderPersistenceEntity;
 import com.apelisser.algashop.ordering.infrastructure.persistence.entity.OrderPersistenceEntityTestDataBuilder;
+import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderPersistenceEntityDisassembler;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

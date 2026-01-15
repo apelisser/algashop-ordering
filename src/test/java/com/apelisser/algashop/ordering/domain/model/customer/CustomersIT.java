@@ -2,9 +2,9 @@ package com.apelisser.algashop.ordering.domain.model.customer;
 
 import com.apelisser.algashop.ordering.domain.model.commons.Email;
 import com.apelisser.algashop.ordering.domain.model.commons.FullName;
-import com.apelisser.algashop.ordering.infrastructure.persistence.assembler.CustomerPersistenceEntityAssembler;
-import com.apelisser.algashop.ordering.infrastructure.persistence.disassembler.CustomerPersistenceEntityDisassembler;
-import com.apelisser.algashop.ordering.infrastructure.persistence.provider.CustomersPersistenceProvider;
+import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityAssembler;
+import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityDisassembler;
+import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomersPersistenceProvider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

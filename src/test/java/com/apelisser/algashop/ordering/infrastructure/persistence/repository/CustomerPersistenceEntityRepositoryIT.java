@@ -1,7 +1,8 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.repository;
 
-import com.apelisser.algashop.ordering.infrastructure.persistence.config.SpringDataAuditingConfig;
-import com.apelisser.algashop.ordering.infrastructure.persistence.entity.CustomerPersistenceEntity;
+import com.apelisser.algashop.ordering.infrastructure.persistence.SpringDataAuditingConfig;
+import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntity;
+import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityRepository;
 import com.apelisser.algashop.ordering.infrastructure.persistence.entity.CustomerPersistenceEntityTestDataBuilder;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
