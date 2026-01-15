@@ -1,0 +1,21 @@
+package com.apelisser.algashop.ordering.domain.model.customer;
+
+import com.apelisser.algashop.ordering.domain.model.DomainException;
+import com.apelisser.algashop.ordering.domain.model.ErrorMessages;
+
+import java.io.Serial;
+
+public class CustomerArchivedException extends DomainException {
+
+    @Serial
+    private static final long serialVersionUID = 3777829463935748988L;
+
+    public CustomerArchivedException() {
+        super(ErrorMessages.ERROR_CUSTOMER_ARCHIVED);
+    }
+
+    public CustomerArchivedException(Throwable cause) {
+        super(ErrorMessages.ERROR_CUSTOMER_ARCHIVED, cause);
+    }
+
+}

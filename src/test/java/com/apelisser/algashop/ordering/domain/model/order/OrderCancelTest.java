@@ -1,0 +1,41 @@
+package com.apelisser.algashop.ordering.domain.model.order;
+
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
+
+public class OrderCancelTest {
+
+    @ParameterizedTest
+    @EnumSource(value = OrderStatus.class, mode = EnumSource.Mode.EXCLUDE, names = {"CANCELED"})
+    void givenAnUncancelledOrder_whenCancelIsPerformed_shouldCancel(OrderStatus status) {
+        Order order = OrderTestDataBuilder.anOrder()
+            .status(status)
+            .build();
+
+        Assertions.assertWith(order,
+            o -> Assertions.assertThat(o.isCanceled()).isFalse(),
+            o -> Assertions.assertThat(o.canceledAt()).isNull(),
+            o -> Assertions.assertThatCode(o::cancel).doesNotThrowAnyException(),
+            o -> Assertions.assertThat(o.isCanceled()).isTrue(),
+            o -> Assertions.assertThat(o.canceledAt()).isNotNull()
+        );
+    }
+
+
+    @Test
+    void givenACanceledOrder_whenCancelIsPerformed_shouldGenerateException() {
+        Order order = OrderTestDataBuilder.anOrder()
+            .status(OrderStatus.CANCELED)
+            .build();
+
+        Assertions.assertWith(order,
+            o -> Assertions.assertThat(o.isCanceled()).isTrue(),
+            o -> Assertions.assertThat(o.canceledAt()).isNotNull(),
+            o -> Assertions.assertThatExceptionOfType(OrderStatusCannotBeChangedException.class)
+                .isThrownBy(o::cancel)
+        );
+    }
+
+}

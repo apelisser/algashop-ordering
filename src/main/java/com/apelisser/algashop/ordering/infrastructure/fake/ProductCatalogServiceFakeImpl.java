@@ -1,10 +1,10 @@
 package com.apelisser.algashop.ordering.infrastructure.fake;
 
-import com.apelisser.algashop.ordering.domain.model.service.ProductCatalogService;
-import com.apelisser.algashop.ordering.domain.model.valueobject.Money;
-import com.apelisser.algashop.ordering.domain.model.valueobject.Product;
-import com.apelisser.algashop.ordering.domain.model.valueobject.ProductName;
-import com.apelisser.algashop.ordering.domain.model.valueobject.id.ProductId;
+import com.apelisser.algashop.ordering.domain.model.product.ProductCatalogService;
+import com.apelisser.algashop.ordering.domain.model.commons.Money;
+import com.apelisser.algashop.ordering.domain.model.product.Product;
+import com.apelisser.algashop.ordering.domain.model.product.ProductName;
+import com.apelisser.algashop.ordering.domain.model.product.ProductId;
 
 import java.util.Optional;
 

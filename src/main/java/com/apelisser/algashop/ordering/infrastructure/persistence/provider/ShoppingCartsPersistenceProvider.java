@@ -1,9 +1,9 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.provider;
 
-import com.apelisser.algashop.ordering.domain.model.entity.ShoppingCart;
-import com.apelisser.algashop.ordering.domain.model.repository.ShoppingCarts;
-import com.apelisser.algashop.ordering.domain.model.valueobject.id.CustomerId;
-import com.apelisser.algashop.ordering.domain.model.valueobject.id.ShoppingCartId;
+import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCart;
+import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCarts;
+import com.apelisser.algashop.ordering.domain.model.customer.CustomerId;
+import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartId;
 import com.apelisser.algashop.ordering.infrastructure.persistence.assembler.ShoppingCartPersistenceEntityAssembler;
 import com.apelisser.algashop.ordering.infrastructure.persistence.disassembler.ShoppingCartPersistenceEntityDisassembler;
 import com.apelisser.algashop.ordering.infrastructure.persistence.entity.ShoppingCartPersistenceEntity;

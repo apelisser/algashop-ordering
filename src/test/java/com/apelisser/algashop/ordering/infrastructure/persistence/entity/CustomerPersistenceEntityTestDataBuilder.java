@@ -1,6 +1,6 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.entity;
 
-import com.apelisser.algashop.ordering.domain.model.entity.CustomerTestDataBuilder;
+import com.apelisser.algashop.ordering.domain.model.customer.CustomerTestDataBuilder;
 import com.apelisser.algashop.ordering.infrastructure.persistence.embeddable.AddressEmbeddableTestDataBuilder;
 
 import java.time.LocalDate;

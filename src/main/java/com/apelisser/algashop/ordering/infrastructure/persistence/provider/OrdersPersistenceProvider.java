@@ -1,10 +1,10 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.provider;
 
-import com.apelisser.algashop.ordering.domain.model.entity.Order;
-import com.apelisser.algashop.ordering.domain.model.repository.Orders;
-import com.apelisser.algashop.ordering.domain.model.valueobject.Money;
-import com.apelisser.algashop.ordering.domain.model.valueobject.id.CustomerId;
-import com.apelisser.algashop.ordering.domain.model.valueobject.id.OrderId;
+import com.apelisser.algashop.ordering.domain.model.order.Order;
+import com.apelisser.algashop.ordering.domain.model.order.Orders;
+import com.apelisser.algashop.ordering.domain.model.commons.Money;
+import com.apelisser.algashop.ordering.domain.model.customer.CustomerId;
+import com.apelisser.algashop.ordering.domain.model.order.OrderId;
 import com.apelisser.algashop.ordering.infrastructure.persistence.assembler.OrderPersistenceEntityAssembler;
 import com.apelisser.algashop.ordering.infrastructure.persistence.disassembler.OrderPersistenceEntityDisassembler;
 import com.apelisser.algashop.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;

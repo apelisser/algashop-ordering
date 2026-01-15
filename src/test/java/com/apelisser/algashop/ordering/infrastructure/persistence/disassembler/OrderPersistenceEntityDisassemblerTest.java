@@ -1,12 +1,12 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.disassembler;
 
-import com.apelisser.algashop.ordering.domain.model.entity.Order;
-import com.apelisser.algashop.ordering.domain.model.entity.OrderStatus;
-import com.apelisser.algashop.ordering.domain.model.entity.PaymentMethod;
-import com.apelisser.algashop.ordering.domain.model.valueobject.Money;
-import com.apelisser.algashop.ordering.domain.model.valueobject.Quantity;
-import com.apelisser.algashop.ordering.domain.model.valueobject.id.CustomerId;
-import com.apelisser.algashop.ordering.domain.model.valueobject.id.OrderId;
+import com.apelisser.algashop.ordering.domain.model.order.Order;
+import com.apelisser.algashop.ordering.domain.model.order.OrderStatus;
+import com.apelisser.algashop.ordering.domain.model.order.PaymentMethod;
+import com.apelisser.algashop.ordering.domain.model.commons.Money;
+import com.apelisser.algashop.ordering.domain.model.commons.Quantity;
+import com.apelisser.algashop.ordering.domain.model.customer.CustomerId;
+import com.apelisser.algashop.ordering.domain.model.order.OrderId;
 import com.apelisser.algashop.ordering.infrastructure.persistence.entity.OrderPersistenceEntity;
 import com.apelisser.algashop.ordering.infrastructure.persistence.entity.OrderPersistenceEntityTestDataBuilder;
 import org.assertj.core.api.Assertions;

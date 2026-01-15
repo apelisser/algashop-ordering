@@ -1,8 +1,8 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.assembler;
 
-import com.apelisser.algashop.ordering.domain.model.entity.Customer;
-import com.apelisser.algashop.ordering.domain.model.entity.CustomerTestDataBuilder;
-import com.apelisser.algashop.ordering.domain.model.valueobject.Address;
+import com.apelisser.algashop.ordering.domain.model.customer.Customer;
+import com.apelisser.algashop.ordering.domain.model.customer.CustomerTestDataBuilder;
+import com.apelisser.algashop.ordering.domain.model.commons.Address;
 import com.apelisser.algashop.ordering.infrastructure.persistence.entity.CustomerPersistenceEntity;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

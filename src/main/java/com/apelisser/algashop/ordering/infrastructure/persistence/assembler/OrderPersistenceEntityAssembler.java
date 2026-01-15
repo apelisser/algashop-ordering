@@ -1,11 +1,11 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.assembler;
 
-import com.apelisser.algashop.ordering.domain.model.entity.Order;
-import com.apelisser.algashop.ordering.domain.model.entity.OrderItem;
-import com.apelisser.algashop.ordering.domain.model.valueobject.Address;
-import com.apelisser.algashop.ordering.domain.model.valueobject.Billing;
-import com.apelisser.algashop.ordering.domain.model.valueobject.Recipient;
-import com.apelisser.algashop.ordering.domain.model.valueobject.Shipping;
+import com.apelisser.algashop.ordering.domain.model.order.Order;
+import com.apelisser.algashop.ordering.domain.model.order.OrderItem;
+import com.apelisser.algashop.ordering.domain.model.commons.Address;
+import com.apelisser.algashop.ordering.domain.model.order.Billing;
+import com.apelisser.algashop.ordering.domain.model.order.Recipient;
+import com.apelisser.algashop.ordering.domain.model.order.Shipping;
 import com.apelisser.algashop.ordering.infrastructure.persistence.embeddable.AddressEmbeddable;
 import com.apelisser.algashop.ordering.infrastructure.persistence.embeddable.BillingEmbeddable;
 import com.apelisser.algashop.ordering.infrastructure.persistence.embeddable.RecipientEmbeddable;

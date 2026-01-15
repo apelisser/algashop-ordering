@@ -1,6 +1,6 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.entity;
 
-import com.apelisser.algashop.ordering.domain.model.utility.IdGenerator;
+import com.apelisser.algashop.ordering.domain.model.IdGenerator;
 import com.apelisser.algashop.ordering.infrastructure.persistence.entity.ShoppingCartPersistenceEntity.ShoppingCartPersistenceEntityBuilder;
 
 import java.math.BigDecimal;

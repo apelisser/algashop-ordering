@@ -1,9 +1,9 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.provider;
 
-import com.apelisser.algashop.ordering.domain.model.entity.Customer;
-import com.apelisser.algashop.ordering.domain.model.repository.Customers;
-import com.apelisser.algashop.ordering.domain.model.valueobject.Email;
-import com.apelisser.algashop.ordering.domain.model.valueobject.id.CustomerId;
+import com.apelisser.algashop.ordering.domain.model.customer.Customer;
+import com.apelisser.algashop.ordering.domain.model.customer.Customers;
+import com.apelisser.algashop.ordering.domain.model.commons.Email;
+import com.apelisser.algashop.ordering.domain.model.customer.CustomerId;
 import com.apelisser.algashop.ordering.infrastructure.persistence.assembler.CustomerPersistenceEntityAssembler;
 import com.apelisser.algashop.ordering.infrastructure.persistence.disassembler.CustomerPersistenceEntityDisassembler;
 import com.apelisser.algashop.ordering.infrastructure.persistence.entity.CustomerPersistenceEntity;
