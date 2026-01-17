@@ -1,9 +1,6 @@
 package com.apelisser.algashop.ordering.application.customer.management;
 
-import com.apelisser.algashop.ordering.application.customer.management.CustomerManagementApplicationService;
 import com.apelisser.algashop.ordering.application.commons.AddressData;
-import com.apelisser.algashop.ordering.application.customer.management.CustomerInput;
-import com.apelisser.algashop.ordering.application.customer.management.CustomerOutput;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
