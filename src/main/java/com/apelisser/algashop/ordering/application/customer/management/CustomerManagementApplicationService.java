@@ -1,8 +1,6 @@
-package com.apelisser.algashop.ordering.application.service;
+package com.apelisser.algashop.ordering.application.customer.management;
 
-import com.apelisser.algashop.ordering.application.model.AddressData;
-import com.apelisser.algashop.ordering.application.model.CustomerInput;
-import com.apelisser.algashop.ordering.application.model.CustomerOutput;
+import com.apelisser.algashop.ordering.application.commons.AddressData;
 import com.apelisser.algashop.ordering.domain.model.commons.Address;
 import com.apelisser.algashop.ordering.domain.model.commons.Document;
 import com.apelisser.algashop.ordering.domain.model.commons.Email;

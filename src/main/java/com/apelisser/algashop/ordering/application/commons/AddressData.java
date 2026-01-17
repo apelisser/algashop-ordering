@@ -1,4 +1,4 @@
-package com.apelisser.algashop.ordering.application.model;
+package com.apelisser.algashop.ordering.application.commons;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

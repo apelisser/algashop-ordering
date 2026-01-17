@@ -1,5 +1,6 @@
-package com.apelisser.algashop.ordering.application.model;
+package com.apelisser.algashop.ordering.application.customer.management;
 
+import com.apelisser.algashop.ordering.application.commons.AddressData;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
