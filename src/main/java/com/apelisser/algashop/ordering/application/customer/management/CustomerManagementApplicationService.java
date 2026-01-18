@@ -99,4 +99,11 @@ public class CustomerManagementApplicationService {
         customers.add(customer);
     }
 
+    public void archive(UUID customerId) {
+        Objects.requireNonNull(customerId);
+        Customer customer = customers.ofId(new CustomerId(customerId)).orElseThrow(CustomerNotFoundException::new);
+        customer.archive();
+        customers.add(customer);
+    }
+
 }

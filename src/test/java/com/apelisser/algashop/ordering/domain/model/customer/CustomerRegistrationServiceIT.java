@@ -16,8 +16,6 @@ import java.time.LocalDate;
 @SpringBootTest
 class CustomerRegistrationServiceIT {
 
-    Customers customers;
-
     @Autowired
     CustomerAlreadyHaveShoppingCartException.CustomerRegistrationService customerRegistrationService;
 

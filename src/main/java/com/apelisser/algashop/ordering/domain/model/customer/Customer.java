@@ -96,7 +96,7 @@ public class Customer implements AggregateRoot<CustomerId> {
         Address.AddressBuilder addressBuilder = this.address().toBuilder();
         this.setAddress(
             addressBuilder
-                .number("Anon")
+                .number("Anonymized")
                 .complement(null).build()
         );
     }

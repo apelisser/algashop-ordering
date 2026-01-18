@@ -29,6 +29,7 @@ public class CustomerOutput {
     private Integer loyaltyPoints;
     private OffsetDateTime registeredAt;
     private OffsetDateTime archivedAt;
+    private Boolean archived;
     private AddressData address;
 
     public CustomerOutput() {
@@ -36,7 +37,7 @@ public class CustomerOutput {
 
     public CustomerOutput(UUID id, String firstName, String lastName, String email, String document, String phone,
             LocalDate birthDate, Boolean promotionNotificationsAllowed, Integer loyaltyPoints,
-            OffsetDateTime registeredAt, OffsetDateTime archivedAt, AddressData address) {
+            OffsetDateTime registeredAt, OffsetDateTime archivedAt, Boolean archived, AddressData address) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -48,6 +49,7 @@ public class CustomerOutput {
         this.loyaltyPoints = loyaltyPoints;
         this.registeredAt = registeredAt;
         this.archivedAt = archivedAt;
+        this.archived = archived;
         this.address = address;
     }
 
