@@ -1,6 +1,8 @@
 package com.apelisser.algashop.ordering.application.customer.management;
 
-import com.apelisser.algashop.ordering.domain.model.customer.Customers;
+import com.apelisser.algashop.ordering.domain.model.customer.CustomerArchivedException;
+import com.apelisser.algashop.ordering.domain.model.customer.CustomerId;
+import com.apelisser.algashop.ordering.domain.model.customer.CustomerNotFoundException;
 import com.apelisser.algashop.ordering.domain.model.product.ProductCatalogService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -98,6 +100,24 @@ class CustomerManagementApplicationServiceIT {
         Assertions.assertThat(archivedCustomer.getPromotionNotificationsAllowed()).isFalse();
         Assertions.assertThat(archivedCustomer.getAddress().getComplement()).isNull();
         Assertions.assertThat(archivedCustomer.getAddress().getNumber()).isEqualTo("Anonymized");
+    }
+
+    @Test
+    void giveANonExistentCustomer_whenArchive_shouldThrowException() {
+        CustomerId customerId = new CustomerId();
+
+        Assertions.assertThatExceptionOfType(CustomerNotFoundException.class)
+            .isThrownBy(() -> customerManagementApplicationService.archive(customerId.value()));
+    }
+
+    @Test
+    void giveAnArchivedCustomer_whenArchive_shouldThrowException() {
+        CustomerInput customerInput = CustomerInputTestDataBuilder.aCustomer().build();
+        UUID customerId = customerManagementApplicationService.create(customerInput);
+        customerManagementApplicationService.archive(customerId);
+
+        Assertions.assertThatExceptionOfType(CustomerArchivedException.class)
+            .isThrownBy(() -> customerManagementApplicationService.archive(customerId));
     }
 
 }
