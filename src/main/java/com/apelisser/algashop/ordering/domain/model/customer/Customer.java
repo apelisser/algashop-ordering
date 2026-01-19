@@ -1,15 +1,11 @@
 package com.apelisser.algashop.ordering.domain.model.customer;
 
 import com.apelisser.algashop.ordering.domain.model.AggregateRoot;
-import com.apelisser.algashop.ordering.domain.model.commons.Money;
 import com.apelisser.algashop.ordering.domain.model.ErrorMessages;
 import com.apelisser.algashop.ordering.domain.model.commons.Address;
 import com.apelisser.algashop.ordering.domain.model.commons.Document;
 import com.apelisser.algashop.ordering.domain.model.commons.Email;
 import com.apelisser.algashop.ordering.domain.model.commons.FullName;
-import com.apelisser.algashop.ordering.domain.model.order.Order;
-import com.apelisser.algashop.ordering.domain.model.order.OrderNotBelongsToCustomerException;
-import com.apelisser.algashop.ordering.domain.model.DomainService;
 import com.apelisser.algashop.ordering.domain.model.commons.Phone;
 import lombok.Builder;
 
@@ -265,43 +261,6 @@ public class Customer implements AggregateRoot<CustomerId> {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
-    }
-
-    @DomainService
-    public static class CustomerLoyaltyPointsService {
-
-        private static final LoyaltyPoints BASE_POINTS = new LoyaltyPoints(5);
-
-        private static final Money EXPECTED_AMOUNT_TO_GIVE_POINTS = new Money("1000");
-
-        public void addPoints(Customer customer, Order order) {
-            Objects.requireNonNull(customer);
-            Objects.requireNonNull(order);
-
-            if (!customer.id().equals(order.customerId())) {
-                throw new OrderNotBelongsToCustomerException();
-            }
-
-            if (!order.isReady()) {
-                throw new CantAddLoyaltyPointsOrderIsNotReadyException();
-            }
-
-            customer.addLoyaltyPoints(calculatePoints(order));
-
-        }
-
-        private LoyaltyPoints calculatePoints(Order order) {
-            if (shouldGivePointsByAmount(order.totalAmount())) {
-                Money result = order.totalAmount().divide(EXPECTED_AMOUNT_TO_GIVE_POINTS);
-                return new LoyaltyPoints(result.value().intValue() * BASE_POINTS.value());
-            }
-            return LoyaltyPoints.ZERO;
-        }
-
-        private boolean shouldGivePointsByAmount(Money amount) {
-            return amount.compareTo(EXPECTED_AMOUNT_TO_GIVE_POINTS) >= 0;
-        }
-
     }
 
 }

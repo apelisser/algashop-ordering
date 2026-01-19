@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class CustomerLoyaltyPointsServiceTest {
 
-    Customer.CustomerLoyaltyPointsService customerLoyaltyPointsService = new Customer.CustomerLoyaltyPointsService();
+    CustomerLoyaltyPointsService customerLoyaltyPointsService = new CustomerLoyaltyPointsService();
 
     @Test
     void givenValidCustomerAndOrder_whenAddingPoints_shouldAccumulate() {

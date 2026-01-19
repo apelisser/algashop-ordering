@@ -99,6 +99,7 @@ public class CustomerManagementApplicationService {
         customers.add(customer);
     }
 
+    @Transactional
     public void archive(UUID customerId) {
         Objects.requireNonNull(customerId);
         Customer customer = customers.ofId(new CustomerId(customerId)).orElseThrow(CustomerNotFoundException::new);
@@ -106,6 +107,7 @@ public class CustomerManagementApplicationService {
         customers.add(customer);
     }
 
+    @Transactional
     public void changeEmail(UUID customerId, String email) {
         Objects.requireNonNull(customerId);
         Customer customer = customers.ofId(new CustomerId(customerId)).orElseThrow(CustomerNotFoundException::new);

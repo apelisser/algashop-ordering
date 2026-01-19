@@ -4,12 +4,10 @@ import com.apelisser.algashop.ordering.domain.model.customer.CustomerArchivedExc
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerEmailIsInUseException;
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerId;
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerNotFoundException;
-import com.apelisser.algashop.ordering.domain.model.product.ProductCatalogService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -18,9 +16,6 @@ import java.util.UUID;
 @SpringBootTest
 @Transactional
 class CustomerManagementApplicationServiceIT {
-
-    @MockitoBean
-    ProductCatalogService productCatalogService;
 
     @Autowired
     CustomerManagementApplicationService customerManagementApplicationService;
