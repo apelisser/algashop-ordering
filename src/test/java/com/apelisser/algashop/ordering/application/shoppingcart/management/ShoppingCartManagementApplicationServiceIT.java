@@ -89,12 +89,13 @@ class ShoppingCartManagementApplicationServiceIT {
             .thenReturn(Optional.of(product));
 
         Integer quantity = 2;
+        ShoppingCartId nonExistentShoppingCartId = new ShoppingCartId();
         Assertions.assertThatExceptionOfType(ShoppingCartNotFoundException.class)
             .isThrownBy(() -> shoppingCartManagementApplicationService.addItem(
                 new ShoppingCartItemInput(
                 quantity,
                 product.id().value(),
-                new ShoppingCartId().value()))
+                nonExistentShoppingCartId.value()))
             );
     }
 
