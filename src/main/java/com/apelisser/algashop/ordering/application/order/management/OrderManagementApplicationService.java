@@ -5,6 +5,7 @@ import com.apelisser.algashop.ordering.domain.model.order.OrderId;
 import com.apelisser.algashop.ordering.domain.model.order.OrderNotFoundException;
 import com.apelisser.algashop.ordering.domain.model.order.Orders;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
@@ -17,6 +18,7 @@ public class OrderManagementApplicationService {
         this.orders = orders;
     }
 
+    @Transactional
     public void cancel(Long orderId) {
         Objects.requireNonNull(orderId);
         Order order = orders.ofId(new OrderId(orderId))
@@ -25,6 +27,7 @@ public class OrderManagementApplicationService {
         orders.add(order);
     }
 
+    @Transactional
     public void markAsPaid(Long orderId) {
         Objects.requireNonNull(orderId);
         Order order = orders.ofId(new OrderId(orderId))
@@ -33,6 +36,7 @@ public class OrderManagementApplicationService {
         orders.add(order);
     }
 
+    @Transactional
     public void markAsReady(Long orderId) {
         Objects.requireNonNull(orderId);
         Order order = orders.ofId(new OrderId(orderId))
