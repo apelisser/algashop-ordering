@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.domain.model.customer;
 
+import com.apelisser.algashop.ordering.domain.model.AbstractEventSourceEntity;
 import com.apelisser.algashop.ordering.domain.model.AggregateRoot;
 import com.apelisser.algashop.ordering.domain.model.ErrorMessages;
 import com.apelisser.algashop.ordering.domain.model.commons.Address;
@@ -13,7 +14,7 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Customer implements AggregateRoot<CustomerId> {
+public class Customer extends AbstractEventSourceEntity implements AggregateRoot<CustomerId> {
 
     private CustomerId id;
     private FullName fullName;
@@ -32,7 +33,7 @@ public class Customer implements AggregateRoot<CustomerId> {
     @Builder(builderClassName = "BrandNewCustomerBuilder", builderMethodName = "brandNew")
     private static Customer createBrandNew(FullName fullName, BirthDate birthDate, Email email, Phone phone,
             Document document, Boolean promotionNotificationsAllowed, Address address) {
-        return new Customer(
+        Customer customer = new Customer(
             new CustomerId(),
             fullName,
             birthDate,
@@ -47,6 +48,10 @@ public class Customer implements AggregateRoot<CustomerId> {
             address,
             null
         );
+
+        customer.publishDomainEvent(new CustomerRegisteredEvent(customer.id(), customer.registeredAt()));
+
+        return customer;
     }
 
     @Builder(builderClassName = "ExistingCustomerBuilder", builderMethodName = "existing")
