@@ -8,6 +8,7 @@ import com.apelisser.algashop.ordering.domain.model.customer.Customers;
 import com.apelisser.algashop.ordering.domain.model.order.Order;
 import com.apelisser.algashop.ordering.domain.model.order.OrderId;
 import com.apelisser.algashop.ordering.domain.model.order.Orders;
+import com.apelisser.algashop.ordering.domain.model.order.shipping.ShippingCostService;
 import com.apelisser.algashop.ordering.domain.model.product.Product;
 import com.apelisser.algashop.ordering.domain.model.product.ProductTestDataBuilder;
 import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCart;
@@ -18,10 +19,15 @@ import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartNot
 import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartTestDataBuilder;
 import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCarts;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 
 @SpringBootTest
 @Transactional
@@ -29,6 +35,10 @@ class CheckoutApplicationServiceIT {
 
     @Autowired
     CheckoutApplicationService checkoutApplicationService;
+
+
+    @MockitoBean
+    ShippingCostService shippingCostService;
 
     @Autowired
     Customers customers;
@@ -38,6 +48,14 @@ class CheckoutApplicationServiceIT {
 
     @Autowired
     Orders orders;
+
+    @BeforeEach
+    void setUp() {
+        Mockito.when(shippingCostService.calculate(Mockito.any(ShippingCostService.CalculationRequest.class)))
+            .thenReturn(new ShippingCostService.CalculationResult(
+                new Money("20"),
+                LocalDate.now().plusDays(5)));
+    }
 
     @Test
     void shouldCheckout() {
