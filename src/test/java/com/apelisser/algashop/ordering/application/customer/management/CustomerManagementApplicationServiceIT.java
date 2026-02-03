@@ -63,7 +63,7 @@ class CustomerManagementApplicationServiceIT {
             .listen(Mockito.any(CustomerArchivedEvent.class));
 
         Mockito.verify(customerNotificationService)
-            .notifyNewRegistration(Mockito.any(UUID.class));
+            .notifyNewRegistration(Mockito.any(CustomerNotificationService.NotifyNewRegistrationInput.class));
     }
 
     @Test

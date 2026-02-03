@@ -22,7 +22,12 @@ public class CustomerEventListener {
     @EventListener
     public void listen(CustomerRegisteredEvent event) {
         log.info("Received CustomerRegisteredEvent [listen 01) {}", event);
-        customerNotificationService.notifyNewRegistration(event.customerId().value());
+        var input = new CustomerNotificationService.NotifyNewRegistrationInput(
+            event.customerId().value(),
+            event.fullName().firstName(),
+            event.email().value());
+
+        customerNotificationService.notifyNewRegistration(input);
     }
 
     @EventListener
