@@ -18,7 +18,7 @@ public class CustomerEventListener {
     }
 
     @EventListener
-    public void listenSecond(CustomerRegisteredEvent event) {
+    public void listenSecondary(CustomerRegisteredEvent event) {
         log.info("Received CustomerRegisteredEvent [listen 02) {}", event);
     }
 
