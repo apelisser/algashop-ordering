@@ -19,10 +19,12 @@ import com.apelisser.algashop.ordering.domain.model.order.OrderTestDataBuilder;
 import com.apelisser.algashop.ordering.domain.model.order.Orders;
 import com.apelisser.algashop.ordering.domain.model.product.Product;
 import com.apelisser.algashop.ordering.domain.model.product.ProductTestDataBuilder;
+import com.apelisser.algashop.ordering.infrastructure.listener.customer.CustomerEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
@@ -37,6 +39,9 @@ class CustomerLoyaltyPointsApplicationServiceIT {
 
     @Autowired
     CustomerLoyaltyPointsApplicationService customerLoyaltyPointsApplicationService;
+
+    @MockitoBean
+    CustomerEventListener customerEventListener;
 
     @Test
     void shouldAddLoyaltyPoints() {
