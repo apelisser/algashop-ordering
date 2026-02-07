@@ -1,6 +1,6 @@
 package com.apelisser.algashop.ordering.application.customer.management;
 
-import com.apelisser.algashop.ordering.application.customer.notification.CustomerNotificationService;
+import com.apelisser.algashop.ordering.application.customer.notification.CustomerNotificationApplicationService;
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerArchivedEvent;
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerArchivedException;
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerEmailIsInUseException;
@@ -30,7 +30,7 @@ class CustomerManagementApplicationServiceIT {
     CustomerEventListener customerEventListener;
 
     @MockitoSpyBean
-    CustomerNotificationService customerNotificationService;
+    CustomerNotificationApplicationService customerNotificationApplicationService;
 
     @Test
     void shouldRegister() {
@@ -62,8 +62,8 @@ class CustomerManagementApplicationServiceIT {
         Mockito.verify(customerEventListener, Mockito.never())
             .listen(Mockito.any(CustomerArchivedEvent.class));
 
-        Mockito.verify(customerNotificationService)
-            .notifyNewRegistration(Mockito.any(CustomerNotificationService.NotifyNewRegistrationInput.class));
+        Mockito.verify(customerNotificationApplicationService)
+            .notifyNewRegistration(Mockito.any(CustomerNotificationApplicationService.NotifyNewRegistrationInput.class));
     }
 
     @Test

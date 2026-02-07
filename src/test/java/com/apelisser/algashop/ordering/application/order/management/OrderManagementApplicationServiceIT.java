@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.application.order.management;
 
+import com.apelisser.algashop.ordering.application.customer.loyaltypoints.CustomerLoyaltyPointsApplicationService;
 import com.apelisser.algashop.ordering.domain.model.customer.Customer;
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerTestDataBuilder;
 import com.apelisser.algashop.ordering.domain.model.customer.Customers;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 @SpringBootTest
 @Transactional
@@ -28,6 +31,9 @@ class OrderManagementApplicationServiceIT {
 
     @MockitoSpyBean
     OrderEventListener orderEventListener;
+
+    @MockitoSpyBean
+    CustomerLoyaltyPointsApplicationService customerLoyaltyPointsApplicationService;
 
     @Test
     void shouldCancelOrder() {
@@ -140,6 +146,12 @@ class OrderManagementApplicationServiceIT {
 
         Mockito.verify(orderEventListener, Mockito.times(1))
             .listen(Mockito.any(OrderReadyEvent.class));
+
+        Mockito.verify(customerLoyaltyPointsApplicationService)
+            .addLoyaltyPoints(
+                Mockito.any(UUID.class),
+                Mockito.any(String.class)
+            );
     }
 
     @Test

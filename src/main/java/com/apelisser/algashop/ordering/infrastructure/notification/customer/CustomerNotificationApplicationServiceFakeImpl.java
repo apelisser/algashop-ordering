@@ -1,14 +1,14 @@
 package com.apelisser.algashop.ordering.infrastructure.notification.customer;
 
-import com.apelisser.algashop.ordering.application.customer.notification.CustomerNotificationService;
+import com.apelisser.algashop.ordering.application.customer.notification.CustomerNotificationApplicationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerNotificationServiceFakeImpl implements CustomerNotificationService {
+public class CustomerNotificationApplicationServiceFakeImpl implements CustomerNotificationApplicationService {
 
-    private static final Logger log = LoggerFactory.getLogger(CustomerNotificationServiceFakeImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(CustomerNotificationApplicationServiceFakeImpl.class);
 
     @Override
     public void notifyNewRegistration(NotifyNewRegistrationInput input) {
