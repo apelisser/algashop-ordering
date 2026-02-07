@@ -20,10 +20,12 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.domain.AbstractAggregateRoot;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -36,7 +38,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "shopping_cart")
 @EntityListeners(AuditingEntityListener.class)
-public class ShoppingCartPersistenceEntity {
+public class ShoppingCartPersistenceEntity extends AbstractAggregateRoot<ShoppingCartPersistenceEntity> {
 
     @Id
     private UUID id;
@@ -106,6 +108,12 @@ public class ShoppingCartPersistenceEntity {
 
         updatedItems.forEach(item -> item.setShoppingCart(this));
         this.setItems(updatedItems);
+    }
+
+    public void addEvents(Collection<Object> events) {
+        if (events != null) {
+            events.forEach(this::registerEvent);
+        }
     }
 
 }

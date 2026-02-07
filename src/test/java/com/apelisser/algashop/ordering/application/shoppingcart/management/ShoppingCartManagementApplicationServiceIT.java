@@ -14,14 +14,8 @@ import com.apelisser.algashop.ordering.domain.model.product.ProductId;
 import com.apelisser.algashop.ordering.domain.model.product.ProductNotFoundException;
 import com.apelisser.algashop.ordering.domain.model.product.ProductOutOfStockException;
 import com.apelisser.algashop.ordering.domain.model.product.ProductTestDataBuilder;
-import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCart;
-import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartDoesNotContainItemException;
-import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartId;
-import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartItem;
-import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartItemId;
-import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartNotFoundException;
-import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartTestDataBuilder;
-import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCarts;
+import com.apelisser.algashop.ordering.domain.model.shoppingcart.*;
+import com.apelisser.algashop.ordering.infrastructure.listener.shoppingcart.ShoppingCartEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -48,6 +42,10 @@ class ShoppingCartManagementApplicationServiceIT {
 
     @Autowired
     Customers customers;
+
+    @Autowired
+    @MockitoBean
+    ShoppingCartEventListener shoppingCartEventListener;
 
     @Test
     void shouldAddItem() {
@@ -77,6 +75,8 @@ class ShoppingCartManagementApplicationServiceIT {
         Assertions.assertThat(updatedShoppingCart.findItem(product.id()).productId()).isEqualTo(product.id());
         Assertions.assertThat(updatedShoppingCart.totalItems()).isEqualTo(new Quantity(2));
         Assertions.assertThat(updatedShoppingCart.totalAmount()).isEqualTo(new Money("200"));
+
+        Mockito.verify(shoppingCartEventListener).listen(Mockito.any(ShoppingCartItemAddedEvent.class));
     }
 
     @Test
@@ -162,6 +162,8 @@ class ShoppingCartManagementApplicationServiceIT {
         Assertions.assertThat(shoppingCart.customerId()).isEqualTo(customer.id());
         Assertions.assertThat(shoppingCart.totalAmount()).isEqualTo(Money.ZERO);
         Assertions.assertThat(shoppingCart.totalItems()).isEqualTo(Quantity.ZERO);
+
+        Mockito.verify(shoppingCartEventListener).listen(Mockito.any(ShoppingCartCreatedEvent.class));
     }
 
     @Test
@@ -208,6 +210,8 @@ class ShoppingCartManagementApplicationServiceIT {
         Assertions.assertThat(updatedShoppingCart).isNotNull();
         Assertions.assertThat(updatedShoppingCart.totalItems()).isEqualTo(Quantity.ZERO);
         Assertions.assertThat(updatedShoppingCart.totalAmount()).isEqualTo(Money.ZERO);
+
+        Mockito.verify(shoppingCartEventListener).listen(Mockito.any(ShoppingCartItemRemovedEvent.class));
     }
 
     @Test
@@ -272,6 +276,8 @@ class ShoppingCartManagementApplicationServiceIT {
         Assertions.assertThat(emptyShoppingCart).isNotNull();
         Assertions.assertThat(emptyShoppingCart.totalItems()).isEqualTo(Quantity.ZERO);
         Assertions.assertThat(emptyShoppingCart.totalAmount()).isEqualTo(Money.ZERO);
+
+        Mockito.verify(shoppingCartEventListener).listen(Mockito.any(ShoppingCartEmptiedEvent.class));
     }
 
     @Test
