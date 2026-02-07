@@ -7,6 +7,7 @@ import com.apelisser.algashop.ordering.domain.model.customer.CustomerTestDataBui
 import com.apelisser.algashop.ordering.domain.model.customer.Customers;
 import com.apelisser.algashop.ordering.domain.model.order.Order;
 import com.apelisser.algashop.ordering.domain.model.order.OrderId;
+import com.apelisser.algashop.ordering.domain.model.order.OrderPlacedEvent;
 import com.apelisser.algashop.ordering.domain.model.order.Orders;
 import com.apelisser.algashop.ordering.domain.model.order.shipping.ShippingCostService;
 import com.apelisser.algashop.ordering.domain.model.product.Product;
@@ -18,6 +19,7 @@ import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartIte
 import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartNotFoundException;
 import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartTestDataBuilder;
 import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCarts;
+import com.apelisser.algashop.ordering.infrastructure.listener.order.OrderEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,6 +50,9 @@ class CheckoutApplicationServiceIT {
 
     @Autowired
     Orders orders;
+
+    @MockitoBean
+    OrderEventListener orderEventListener;
 
     @BeforeEach
     void setUp() {
@@ -81,6 +86,9 @@ class CheckoutApplicationServiceIT {
         Assertions.assertThat(shoppingCart).isNotNull();
         Assertions.assertThat(shoppingCart.totalItems()).isEqualTo(Quantity.ZERO);
         Assertions.assertThat(shoppingCart.totalAmount()).isEqualTo(Money.ZERO);
+
+        Mockito.verify(orderEventListener, Mockito.times(1))
+            .listen(Mockito.any(OrderPlacedEvent.class));
     }
 
     @Test

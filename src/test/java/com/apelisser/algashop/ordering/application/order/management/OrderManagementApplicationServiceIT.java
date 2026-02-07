@@ -3,17 +3,14 @@ package com.apelisser.algashop.ordering.application.order.management;
 import com.apelisser.algashop.ordering.domain.model.customer.Customer;
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerTestDataBuilder;
 import com.apelisser.algashop.ordering.domain.model.customer.Customers;
-import com.apelisser.algashop.ordering.domain.model.order.Order;
-import com.apelisser.algashop.ordering.domain.model.order.OrderId;
-import com.apelisser.algashop.ordering.domain.model.order.OrderNotFoundException;
-import com.apelisser.algashop.ordering.domain.model.order.OrderStatus;
-import com.apelisser.algashop.ordering.domain.model.order.OrderStatusCannotBeChangedException;
-import com.apelisser.algashop.ordering.domain.model.order.OrderTestDataBuilder;
-import com.apelisser.algashop.ordering.domain.model.order.Orders;
+import com.apelisser.algashop.ordering.domain.model.order.*;
+import com.apelisser.algashop.ordering.infrastructure.listener.order.OrderEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
@@ -28,6 +25,9 @@ class OrderManagementApplicationServiceIT {
 
     @Autowired
     Customers customers;
+
+    @MockitoSpyBean
+    OrderEventListener orderEventListener;
 
     @Test
     void shouldCancelOrder() {
@@ -47,6 +47,9 @@ class OrderManagementApplicationServiceIT {
         Assertions.assertThat(canceledOrder).isNotNull();
         Assertions.assertThat(canceledOrder.isCanceled()).isTrue();
         Assertions.assertThat(canceledOrder.canceledAt()).isNotNull();
+
+        Mockito.verify(orderEventListener, Mockito.times(1))
+            .listen(Mockito.any(OrderCanceledEvent.class));
     }
 
     @Test
@@ -89,6 +92,9 @@ class OrderManagementApplicationServiceIT {
         Assertions.assertThat(paidOrder).isNotNull();
         Assertions.assertThat(paidOrder.isPaid()).isTrue();
         Assertions.assertThat(paidOrder.paidAt()).isNotNull();
+
+        Mockito.verify(orderEventListener, Mockito.times(1))
+            .listen(Mockito.any(OrderPaidEvent.class));
     }
 
     @Test
@@ -131,6 +137,9 @@ class OrderManagementApplicationServiceIT {
         Assertions.assertThat(readyOrder).isNotNull();
         Assertions.assertThat(readyOrder.isReady()).isTrue();
         Assertions.assertThat(readyOrder.readyAt()).isNotNull();
+
+        Mockito.verify(orderEventListener, Mockito.times(1))
+            .listen(Mockito.any(OrderReadyEvent.class));
     }
 
     @Test
