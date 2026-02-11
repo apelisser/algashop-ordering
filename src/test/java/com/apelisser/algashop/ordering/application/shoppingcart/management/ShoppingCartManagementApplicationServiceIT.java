@@ -22,6 +22,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
@@ -43,8 +44,7 @@ class ShoppingCartManagementApplicationServiceIT {
     @Autowired
     Customers customers;
 
-    @Autowired
-    @MockitoBean
+    @MockitoSpyBean
     ShoppingCartEventListener shoppingCartEventListener;
 
     @Test

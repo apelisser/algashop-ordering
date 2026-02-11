@@ -27,6 +27,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -37,7 +38,6 @@ class CheckoutApplicationServiceIT {
 
     @Autowired
     CheckoutApplicationService checkoutApplicationService;
-
 
     @MockitoBean
     ShippingCostService shippingCostService;
@@ -51,7 +51,7 @@ class CheckoutApplicationServiceIT {
     @Autowired
     Orders orders;
 
-    @MockitoBean
+    @MockitoSpyBean
     OrderEventListener orderEventListener;
 
     @BeforeEach
