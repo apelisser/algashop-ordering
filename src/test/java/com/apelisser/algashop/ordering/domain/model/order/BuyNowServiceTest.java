@@ -10,6 +10,7 @@ import com.apelisser.algashop.ordering.domain.model.product.Product;
 import com.apelisser.algashop.ordering.domain.model.commons.Quantity;
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerId;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,11 +23,21 @@ import java.time.Year;
 @ExtendWith(MockitoExtension.class)
 class BuyNowServiceTest {
 
-    @InjectMocks
     BuyNowService buyNowService;
 
     @Mock
     Orders orders;
+
+    @BeforeEach
+    void setUp() {
+        var specification = new CustomerHaveFreeShippingSpecification(
+            orders,
+            100,
+            2L,
+            200
+        );
+        buyNowService = new BuyNowService(orders, specification);
+    }
 
     @Test
     void givenValidPurchaseData_whenBuyNow_shouldCreateAnOrder() {
