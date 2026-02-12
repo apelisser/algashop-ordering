@@ -32,9 +32,9 @@ class BuyNowServiceTest {
     void setUp() {
         var specification = new CustomerHaveFreeShippingSpecification(
             orders,
-            100,
+            new LoyaltyPoints(100),
             2L,
-            200
+            new LoyaltyPoints(2000)
         );
         buyNowService = new BuyNowService(orders, specification);
     }
