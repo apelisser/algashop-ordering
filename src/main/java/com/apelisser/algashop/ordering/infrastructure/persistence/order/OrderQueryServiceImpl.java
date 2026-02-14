@@ -2,6 +2,7 @@ package com.apelisser.algashop.ordering.infrastructure.persistence.order;
 
 import com.apelisser.algashop.ordering.application.order.query.CustomerMinimalOutput;
 import com.apelisser.algashop.ordering.application.order.query.OrderDetailOutput;
+import com.apelisser.algashop.ordering.application.order.query.OrderFilter;
 import com.apelisser.algashop.ordering.application.order.query.OrderQueryService;
 import com.apelisser.algashop.ordering.application.order.query.OrderSummaryOutput;
 import com.apelisser.algashop.ordering.application.utility.Mapper;
@@ -47,7 +48,7 @@ public class OrderQueryServiceImpl implements OrderQueryService {
     }
 
     @Override
-    public Page<OrderSummaryOutput> filter(PageFilter filter) {
+    public Page<OrderSummaryOutput> filter(OrderFilter filter) {
         Long totalQueryResults = countTotalQueryResults(filter);
 
         if (totalQueryResults.equals(0L)) {
@@ -56,6 +57,19 @@ public class OrderQueryServiceImpl implements OrderQueryService {
         }
 
         return filterQuery(filter, totalQueryResults);
+    }
+
+    private Long countTotalQueryResults(OrderFilter filter) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
+        Root<OrderPersistenceEntity> root = criteriaQuery.from(OrderPersistenceEntity.class);
+
+        Expression<Long> count = builder.count(root);
+        criteriaQuery.select(count);
+
+        TypedQuery<Long> query = entityManager.createQuery(criteriaQuery);
+
+        return query.getSingleResult();
     }
 
     private Page<OrderSummaryOutput> filterQuery(PageFilter filter, Long totalQueryResults) {
@@ -94,19 +108,6 @@ public class OrderQueryServiceImpl implements OrderQueryService {
         PageRequest pageRequest = PageRequest.of(filter.getPage(), filter.getSize());
 
         return new PageImpl<>(query.getResultList(), pageRequest, totalQueryResults);
-    }
-
-    private Long countTotalQueryResults(PageFilter filter) {
-        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
-        Root<OrderPersistenceEntity> root = criteriaQuery.from(OrderPersistenceEntity.class);
-
-        Expression<Long> count = builder.count(root);
-        criteriaQuery.select(count);
-
-        TypedQuery<Long> query = entityManager.createQuery(criteriaQuery);
-
-        return query.getSingleResult();
     }
 
 }
