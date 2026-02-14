@@ -1,6 +1,6 @@
 package com.apelisser.algashop.ordering.infrastructure.utility.modelmapper;
 
-import com.apelisser.algashop.ordering.application.customer.management.CustomerOutput;
+import com.apelisser.algashop.ordering.application.customer.query.CustomerOutput;
 import com.apelisser.algashop.ordering.application.utility.Mapper;
 import com.apelisser.algashop.ordering.domain.model.commons.FullName;
 import com.apelisser.algashop.ordering.domain.model.customer.BirthDate;

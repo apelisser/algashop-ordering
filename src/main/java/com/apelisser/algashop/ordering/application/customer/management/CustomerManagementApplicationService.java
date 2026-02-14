@@ -25,13 +25,10 @@ public class CustomerManagementApplicationService {
 
     private final CustomerRegistrationService customerRegistration;
     private final Customers customers;
-    private final Mapper mapper;
 
-    public CustomerManagementApplicationService(CustomerRegistrationService customerRegistration,
-            Customers customers, Mapper mapper) {
+    public CustomerManagementApplicationService(CustomerRegistrationService customerRegistration, Customers customers) {
         this.customerRegistration = customerRegistration;
         this.customers = customers;
-        this.mapper = mapper;
     }
 
     @Transactional
@@ -61,13 +58,6 @@ public class CustomerManagementApplicationService {
         customers.add(customer);
 
         return customer.id().value();
-    }
-
-    @Transactional(readOnly = true)
-    public CustomerOutput findById(UUID customerId) {
-        Objects.requireNonNull(customerId);
-        Customer customer = customers.ofId(new CustomerId(customerId)).orElseThrow(CustomerNotFoundException::new);
-        return mapper.convert(customer, CustomerOutput.class);
     }
 
     @Transactional

@@ -1,4 +1,4 @@
-package com.apelisser.algashop.ordering.application.customer.management;
+package com.apelisser.algashop.ordering.application.customer.query;
 
 import com.apelisser.algashop.ordering.application.commons.AddressData;
 import lombok.Builder;
