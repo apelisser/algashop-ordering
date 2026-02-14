@@ -1,6 +1,9 @@
 package com.apelisser.algashop.ordering.application.checkout;
 
 import com.apelisser.algashop.ordering.domain.model.commons.ZipCode;
+import com.apelisser.algashop.ordering.domain.model.customer.Customer;
+import com.apelisser.algashop.ordering.domain.model.customer.CustomerNotFoundException;
+import com.apelisser.algashop.ordering.domain.model.customer.Customers;
 import com.apelisser.algashop.ordering.domain.model.order.Billing;
 import com.apelisser.algashop.ordering.domain.model.order.CheckoutService;
 import com.apelisser.algashop.ordering.domain.model.order.Order;
@@ -28,9 +31,12 @@ public class CheckoutApplicationService {
     private final ShippingInputDisassembler shippingInputDisassembler;
     private final BillingInputDisassembler billingInputDisassembler;
     private final Orders orders;
+    private final Customers customers;
 
     public CheckoutApplicationService(ShoppingCarts shoppingCarts, ShippingCostService shippingCostService,
-            OriginAddressService originAddressService, CheckoutService checkoutService, ShippingInputDisassembler shippingInputDisassembler, BillingInputDisassembler billingInputDisassembler, Orders orders) {
+            OriginAddressService originAddressService, CheckoutService checkoutService,
+            ShippingInputDisassembler shippingInputDisassembler, BillingInputDisassembler billingInputDisassembler,
+            Orders orders, Customers customers) {
         this.shoppingCarts = shoppingCarts;
         this.shippingCostService = shippingCostService;
         this.originAddressService = originAddressService;
@@ -38,6 +44,7 @@ public class CheckoutApplicationService {
         this.shippingInputDisassembler = shippingInputDisassembler;
         this.billingInputDisassembler = billingInputDisassembler;
         this.orders = orders;
+        this.customers = customers;
     }
 
     @Transactional
@@ -51,10 +58,12 @@ public class CheckoutApplicationService {
 
         Billing billing = billingInputDisassembler.toDomainModel(input.getBilling());
 
+        Customer customer = customers.ofId(shoppingCart.customerId()).orElseThrow(CustomerNotFoundException::new);
+
         ShippingCostService.CalculationResult shippingCost = this.calculateShippingCost(input.getShipping());
         Shipping shipping = shippingInputDisassembler.toDomainModel(input.getShipping(), shippingCost);
 
-        Order order = checkoutService.checkout(shoppingCart, billing, shipping, paymentMethod);
+        Order order = checkoutService.checkout(customer, shoppingCart, billing, shipping, paymentMethod);
 
         orders.add(order);
         shoppingCarts.add(shoppingCart);

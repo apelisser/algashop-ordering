@@ -1,5 +1,7 @@
 package com.apelisser.algashop.ordering.domain.model.order;
 
+import com.apelisser.algashop.ordering.domain.model.commons.Money;
+import com.apelisser.algashop.ordering.domain.model.customer.Customer;
 import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCart;
 import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartItem;
 import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartCantProceedToCheckoutException;
@@ -12,7 +14,14 @@ import java.util.Set;
 @DomainService
 public class CheckoutService {
 
-    public Order checkout(ShoppingCart shoppingCart, Billing billing, Shipping shipping, PaymentMethod paymentMethod) {
+    private final CustomerHaveFreeShippingSpecification hasFreeShippingSpecification;
+
+    public CheckoutService(CustomerHaveFreeShippingSpecification hasFreeShippingSpecification) {
+        this.hasFreeShippingSpecification = hasFreeShippingSpecification;
+    }
+
+    public Order checkout(Customer customer, ShoppingCart shoppingCart, Billing billing, Shipping shipping,
+            PaymentMethod paymentMethod) {
         Objects.requireNonNull(shoppingCart);
         Objects.requireNonNull(billing);
         Objects.requireNonNull(shipping);
@@ -22,7 +31,14 @@ public class CheckoutService {
 
         Order order = Order.draft(shoppingCart.customerId());
         order.changeBilling(billing);
-        order.changeShipping(shipping);
+
+        if (haveFreeShipping(customer)) {
+            Shipping freeShipping = shipping.toBuilder().cost(Money.ZERO).build();
+            order.changeShipping(freeShipping);
+        } else {
+            order.changeShipping(shipping);
+        }
+
         order.changePaymentMethod(paymentMethod);
 
         this.addItemsToOrder(order, shoppingCart.items());
@@ -51,6 +67,10 @@ public class CheckoutService {
 
             order.addItem(product, item.quantity());
         });
+    }
+
+    private boolean haveFreeShipping(Customer customer) {
+        return this.hasFreeShippingSpecification.isSatisfiedBy(customer);
     }
 
 }
