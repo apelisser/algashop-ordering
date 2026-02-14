@@ -1,6 +1,8 @@
 package com.apelisser.algashop.ordering.application.checkout;
 
 import com.apelisser.algashop.ordering.application.commons.AddressData;
+import com.apelisser.algashop.ordering.application.order.query.BillingData;
+import com.apelisser.algashop.ordering.application.order.query.RecipientData;
 import com.apelisser.algashop.ordering.domain.model.order.PaymentMethod;
 
 import java.util.UUID;

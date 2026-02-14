@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.application.checkout;
 
+import com.apelisser.algashop.ordering.application.order.query.BillingData;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

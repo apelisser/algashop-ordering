@@ -1,6 +1,7 @@
 package com.apelisser.algashop.ordering.application.checkout;
 
 import com.apelisser.algashop.ordering.application.commons.AddressData;
+import com.apelisser.algashop.ordering.application.order.query.RecipientData;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
