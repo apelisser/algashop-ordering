@@ -25,6 +25,24 @@ public class OrderFilter extends SortablePageFilter<OrderFilter.SortType> {
     private BigDecimal totalAmountFrom;
     private BigDecimal totalAmountTo;
 
+    public OrderFilter() {
+    }
+
+    public OrderFilter(int page, int size) {
+        super(page, size);
+    }
+
+    public OrderFilter(String status, String orderId, UUID customerId, OffsetDateTime placedAtFrom,
+            OffsetDateTime placedAtTo, BigDecimal totalAmountFrom, BigDecimal totalAmountTo) {
+        this.status = status;
+        this.orderId = orderId;
+        this.customerId = customerId;
+        this.placedAtFrom = placedAtFrom;
+        this.placedAtTo = placedAtTo;
+        this.totalAmountFrom = totalAmountFrom;
+        this.totalAmountTo = totalAmountTo;
+    }
+
     @Override
     public SortType getSortByPropertyOrDefault() {
         return getSortByProperty() == null ? SortType.PLACED_AT : getSortByProperty();

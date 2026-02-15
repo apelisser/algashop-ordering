@@ -15,6 +15,7 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Path;
+import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -23,6 +24,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Component
 @Transactional(readOnly = true)
@@ -65,19 +68,21 @@ public class OrderQueryServiceImpl implements OrderQueryService {
         Root<OrderPersistenceEntity> root = criteriaQuery.from(OrderPersistenceEntity.class);
 
         Expression<Long> count = builder.count(root);
+        Predicate[] predicates = toPredicates(builder, root, filter);
+
         criteriaQuery.select(count);
+        criteriaQuery.where(predicates);
 
         TypedQuery<Long> query = entityManager.createQuery(criteriaQuery);
 
         return query.getSingleResult();
     }
 
-    private Page<OrderSummaryOutput> filterQuery(PageFilter filter, Long totalQueryResults) {
+    private Page<OrderSummaryOutput> filterQuery(OrderFilter filter, Long totalQueryResults) {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<OrderSummaryOutput> criteriaQuery = builder.createQuery(OrderSummaryOutput.class);
 
         Root<OrderPersistenceEntity> root = criteriaQuery.from(OrderPersistenceEntity.class);
-
         Path<Object> customer = root.get("customer");
 
         criteriaQuery.select(
@@ -99,6 +104,9 @@ public class OrderQueryServiceImpl implements OrderQueryService {
                 root.get("status"),
                 root.get("paymentMethod"))
         );
+        Predicate[] predicates = toPredicates(builder, root, filter);
+
+        criteriaQuery.where(predicates);
 
         TypedQuery<OrderSummaryOutput> query = entityManager.createQuery(criteriaQuery);
 
@@ -108,6 +116,19 @@ public class OrderQueryServiceImpl implements OrderQueryService {
         PageRequest pageRequest = PageRequest.of(filter.getPage(), filter.getSize());
 
         return new PageImpl<>(query.getResultList(), pageRequest, totalQueryResults);
+    }
+
+    private Predicate[] toPredicates(CriteriaBuilder builder, Root<OrderPersistenceEntity> root, OrderFilter filter) {
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (filter.getCustomerId() != null) {
+            Path<Object> customerIdPath = root.get("customer").get("id");
+            UUID expectedCustomerId = filter.getCustomerId();
+            Predicate predicate = builder.equal(customerIdPath, expectedCustomerId);
+            predicates.add(predicate);
+        }
+
+        return predicates.toArray(new Predicate[0]);
     }
 
 }
