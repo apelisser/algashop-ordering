@@ -140,7 +140,7 @@ class CustomerQueryServiceIT {
 
         Assertions.assertThat(ascSortPage.getContent())
             .extracting(CustomerSummaryOutput::getFirstName)
-            .containsExactlyInAnyOrder("Alice", "John", "Lily", "Mark");
+            .containsExactly("Alice", "John", "Lily", "Mark");
 
         CustomerFilter descSortFilter = new CustomerFilter();
         descSortFilter.setSortByProperty(CustomerFilter.SortType.FIRST_NAME);
@@ -150,7 +150,7 @@ class CustomerQueryServiceIT {
 
         Assertions.assertThat(descSortPage.getContent())
             .extracting(CustomerSummaryOutput::getFirstName)
-            .containsExactlyInAnyOrder("Mark", "Lily", "John", "Alice");
+            .containsExactly("Mark", "Lily", "John", "Alice");
     }
 
     @Test
@@ -163,7 +163,7 @@ class CustomerQueryServiceIT {
 
         Assertions.assertThat(ascSortPage.getContent())
             .extracting(CustomerSummaryOutput::getFirstName)
-            .containsExactlyInAnyOrder("Mark", "Lily", "John", "Alice");
+            .containsExactly("Mark", "Lily", "John", "Alice");
 
         CustomerFilter descSortFilter = new CustomerFilter();
         descSortFilter.setSortByProperty(CustomerFilter.SortType.REGISTERED_AT);
@@ -173,7 +173,7 @@ class CustomerQueryServiceIT {
 
         Assertions.assertThat(descSortPage.getContent())
             .extracting(CustomerSummaryOutput::getFirstName)
-            .containsExactlyInAnyOrder("Alice", "John", "Lily", "Mark");
+            .containsExactly("Alice", "John", "Lily", "Mark");
     }
 
     @Test
