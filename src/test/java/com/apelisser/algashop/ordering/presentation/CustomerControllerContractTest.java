@@ -1,24 +1,36 @@
 package com.apelisser.algashop.ordering.presentation;
 
+import com.apelisser.algashop.ordering.application.customer.management.CustomerInput;
+import com.apelisser.algashop.ordering.application.customer.management.CustomerManagementApplicationService;
+import com.apelisser.algashop.ordering.application.customer.query.CustomerOutputTestDataBuilder;
+import com.apelisser.algashop.ordering.application.customer.query.CustomerQueryService;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.nio.charset.StandardCharsets;
+import java.util.UUID;
 
 @WebMvcTest(controllers = CustomerController.class)
 class CustomerControllerContractTest {
 
     @Autowired
     private WebApplicationContext context;
+
+    @MockitoBean
+    CustomerManagementApplicationService customerManagementApplicationService;
+
+    @MockitoBean
+    CustomerQueryService customerQueryService;
 
     @BeforeEach
     void setUpAll() {
@@ -30,6 +42,12 @@ class CustomerControllerContractTest {
 
     @Test
     void createCustomerContract() {
+        Mockito.when(customerManagementApplicationService.create(Mockito.any(CustomerInput.class)))
+            .thenReturn(UUID.randomUUID());
+
+        Mockito.when(customerQueryService.findById(Mockito.any(UUID.class)))
+            .thenReturn(CustomerOutputTestDataBuilder.existing().build());
+
         String jsonInput = """
             {
               "firstName": "John",
