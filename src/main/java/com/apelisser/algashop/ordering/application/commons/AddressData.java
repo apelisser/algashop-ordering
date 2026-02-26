@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.application.commons;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -13,12 +14,24 @@ import lombok.ToString;
 @Builder
 public class AddressData {
 
+    @NotBlank
     private String street;
+
+    @NotBlank
     private String number;
+
     private String complement;
+
+    @NotBlank
     private String neighborhood;
+
+    @NotBlank
     private String city;
+
+    @NotBlank
     private String state;
+
+    @NotBlank
     private String zipCode;
 
     public AddressData() {
