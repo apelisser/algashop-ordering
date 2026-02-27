@@ -1,8 +1,10 @@
 package com.apelisser.algashop.ordering.presentation;
 
+import com.apelisser.algashop.ordering.application.commons.AddressData;
 import com.apelisser.algashop.ordering.application.customer.management.CustomerInput;
 import com.apelisser.algashop.ordering.application.customer.management.CustomerManagementApplicationService;
 import com.apelisser.algashop.ordering.application.customer.query.CustomerFilter;
+import com.apelisser.algashop.ordering.application.customer.query.CustomerOutput;
 import com.apelisser.algashop.ordering.application.customer.query.CustomerOutputTestDataBuilder;
 import com.apelisser.algashop.ordering.application.customer.query.CustomerQueryService;
 import com.apelisser.algashop.ordering.application.customer.query.CustomerSummaryOutput;
@@ -208,6 +210,46 @@ class CustomerControllerContractTest {
                     "content[1].archived", Matchers.equalTo(customer2.getArchived()),
                     "content[1].registeredAt", Matchers.equalTo(formatter.format(customer2.getRegisteredAt()))
                 );
+    }
+
+    @Test
+    void findByIdContract() {
+        CustomerOutput customer = CustomerOutputTestDataBuilder.existing().build();
+        Mockito.when(customerQueryService.findById(customer.getId())).thenReturn(customer);
+
+        AddressData address = customer.getAddress();
+
+        RestAssuredMockMvc
+            .given()
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+            .when()
+                .get("/api/v1/customers/{customerId}", customer.getId())
+            .then()
+                .assertThat()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .statusCode(HttpStatus.OK.value())
+                .body(
+                    "id", Matchers.is(customer.getId().toString()),
+                    "firstName", Matchers.equalTo(customer.getFirstName()),
+                    "lastName", Matchers.equalTo(customer.getLastName()),
+                    "email", Matchers.equalTo(customer.getEmail()),
+                    "document", Matchers.equalTo(customer.getDocument()),
+                    "phone", Matchers.equalTo(customer.getPhone()),
+                    "birthDate", Matchers.equalTo(customer.getBirthDate().toString()),
+                    "promotionNotificationsAllowed", Matchers.equalTo(customer.getPromotionNotificationsAllowed()),
+                    "loyaltyPoints", Matchers.equalTo(customer.getLoyaltyPoints()),
+                    "archivedAt", Matchers.nullValue(),
+                    "archived", Matchers.equalTo(customer.getArchived()),
+                    "registeredAt", Matchers.equalTo(customer.getRegisteredAt().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)),
+                    "address.street", Matchers.equalTo(address.getStreet()),
+                    "address.number", Matchers.equalTo(address.getNumber()),
+                    "address.complement", Matchers.equalTo(address.getComplement()),
+                    "address.neighborhood", Matchers.equalTo(address.getNeighborhood()),
+                    "address.city", Matchers.equalTo(address.getCity()),
+                    "address.state", Matchers.equalTo(address.getState()),
+                    "address.zipCode", Matchers.equalTo(address.getZipCode())
+                );
+
     }
 
 }
