@@ -2,10 +2,13 @@ package com.apelisser.algashop.ordering.presentation;
 
 import com.apelisser.algashop.ordering.application.customer.management.CustomerInput;
 import com.apelisser.algashop.ordering.application.customer.management.CustomerManagementApplicationService;
+import com.apelisser.algashop.ordering.application.customer.query.CustomerFilter;
 import com.apelisser.algashop.ordering.application.customer.query.CustomerOutput;
 import com.apelisser.algashop.ordering.application.customer.query.CustomerQueryService;
+import com.apelisser.algashop.ordering.application.customer.query.CustomerSummaryOutput;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +35,11 @@ public class CustomerController {
     public CustomerOutput create(@RequestBody @Valid CustomerInput input) {
         UUID customerId = customerManagementApplicationService.create(input);
         return customerQueryService.findById(customerId);
+    }
+
+    @GetMapping
+    public PageModel<CustomerSummaryOutput> findAll(CustomerFilter customerFilter) {
+        return PageModel.of(customerQueryService.filter(customerFilter));
     }
 
 }
