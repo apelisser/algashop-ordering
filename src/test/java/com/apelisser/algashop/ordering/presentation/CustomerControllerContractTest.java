@@ -520,11 +520,8 @@ class CustomerControllerContractTest {
 
     @Test
     void updateCustomerError404Contract() {
-        Mockito.when(customerManagementApplicationService.create(Mockito.any(CustomerInput.class)))
-            .thenReturn(UUID.randomUUID());
-
         Mockito.doThrow(new CustomerNotFoundException())
-            .when(customerQueryService).findById(Mockito.any(UUID.class));
+            .when(customerManagementApplicationService).update(Mockito.any(UUID.class), Mockito.any(CustomerUpdateInput.class));
 
         String jsonInput = """
             {
