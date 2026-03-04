@@ -417,8 +417,6 @@ class CustomerControllerContractTest {
     @Test
     void updateCustomerContract() {
         UUID customerId = UUID.randomUUID();
-        Mockito.when(customerManagementApplicationService.create(Mockito.any(CustomerInput.class)))
-            .thenReturn(customerId);
 
         CustomerOutput updatedCustomerOutput = CustomerOutputTestDataBuilder.existing()
             .id(customerId)
@@ -517,6 +515,50 @@ class CustomerControllerContractTest {
                     "detail", Matchers.notNullValue(),
                     "instance", Matchers.notNullValue(),
                     "fieldErrors", Matchers.notNullValue()
+                );
+    }
+
+    @Test
+    void updateCustomerError404Contract() {
+        Mockito.when(customerManagementApplicationService.create(Mockito.any(CustomerInput.class)))
+            .thenReturn(UUID.randomUUID());
+
+        Mockito.doThrow(new CustomerNotFoundException())
+            .when(customerQueryService).findById(Mockito.any(UUID.class));
+
+        String jsonInput = """
+            {
+              "firstName": "John",
+              "lastName": "Doe",
+              "phone": "(11) 88888-8888",
+              "promotionNotificationsAllowed": false,
+              "address": {
+                "street": "Bourbon Street",
+                "number": "456",
+                "complement": null,
+                "neighborhood": "Center",
+                "city": "New York",
+                "state": "New York",
+                "zipCode": "54321"
+              }
+            }
+            """;
+
+        RestAssuredMockMvc
+            .given()
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+                .body(jsonInput)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .when()
+                .put("/api/v1/customers/{customerId}", UUID.randomUUID())
+            .then()
+                .assertThat()
+                .statusCode(HttpStatus.NOT_FOUND.value())
+                .body(
+                    "status", Matchers.is(HttpStatus.NOT_FOUND.value()),
+                    "type", Matchers.is("/errors/not-found"),
+                    "title", Matchers.notNullValue(),
+                    "instance", Matchers.notNullValue()
                 );
     }
 
