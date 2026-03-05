@@ -58,7 +58,7 @@ dependencies {
 }
 
 contracts {
-
+    packageWithBaseClasses = "com.apelisser.algashop.ordering.contract.base"
 }
 
 tasks.named('contractTest') {

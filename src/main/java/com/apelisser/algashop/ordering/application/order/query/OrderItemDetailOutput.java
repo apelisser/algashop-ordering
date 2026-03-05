@@ -19,7 +19,7 @@ public class OrderItemDetailOutput {
     private String id;
     private String orderId;
     private UUID productId;
-    private String name;
+    private String productName;
     private BigDecimal price;
     private Integer quantity;
     private BigDecimal totalAmount;
@@ -27,12 +27,12 @@ public class OrderItemDetailOutput {
     public OrderItemDetailOutput() {
     }
 
-    public OrderItemDetailOutput(String id, String orderId, UUID productId, String name, BigDecimal price,
+    public OrderItemDetailOutput(String id, String orderId, UUID productId, String productName, BigDecimal price,
             Integer quantity, BigDecimal totalAmount) {
         this.id = id;
         this.orderId = orderId;
         this.productId = productId;
-        this.name = name;
+        this.productName = productName;
         this.price = price;
         this.quantity = quantity;
         this.totalAmount = totalAmount;
