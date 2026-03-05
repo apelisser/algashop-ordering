@@ -2,6 +2,7 @@ package com.apelisser.algashop.ordering.contract.base;
 
 import com.apelisser.algashop.ordering.application.order.query.OrderDetailOutputTestDataBuilder;
 import com.apelisser.algashop.ordering.application.order.query.OrderQueryService;
+import com.apelisser.algashop.ordering.domain.model.order.OrderNotFoundException;
 import com.apelisser.algashop.ordering.presentation.OrderController;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,6 +24,9 @@ public class OrderBase {
     @MockitoBean
     OrderQueryService orderQueryService;
 
+    public static final String VALID_ORDER_ID = "01226N0640J7Q";
+    public static final String NOT_FOUND_ORDER_ID = "01226N0693HDH";
+
     @BeforeEach
     void setUp() {
         RestAssuredMockMvc.mockMvc(MockMvcBuilders.webAppContextSetup(context)
@@ -31,9 +35,11 @@ public class OrderBase {
 
         RestAssuredMockMvc.enableLoggingOfRequestAndResponseIfValidationFails();
 
-        String id = "01226N0640J7Q";
-        Mockito.when(orderQueryService.findById(id))
-            .thenReturn(OrderDetailOutputTestDataBuilder.placedOrder(id).build());
+        Mockito.when(orderQueryService.findById(VALID_ORDER_ID))
+            .thenReturn(OrderDetailOutputTestDataBuilder.placedOrder(VALID_ORDER_ID).build());
+
+        Mockito.when(orderQueryService.findById(NOT_FOUND_ORDER_ID))
+            .thenThrow(new OrderNotFoundException());
     }
 
 }
