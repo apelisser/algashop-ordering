@@ -564,9 +564,6 @@ class CustomerControllerContractTest {
         Mockito.doThrow(new CustomerEmailIsInUseException())
             .when(customerManagementApplicationService).update(Mockito.any(UUID.class), Mockito.any(CustomerUpdateInput.class));
 
-        Mockito.when(customerQueryService.findById(Mockito.any(UUID.class)))
-            .thenReturn(CustomerOutputTestDataBuilder.existing().build());
-
         String jsonInput = """
             {
               "firstName": "John",
@@ -608,9 +605,6 @@ class CustomerControllerContractTest {
     void updateCustomerError422Contract() {
         Mockito.doThrow(new DomainException())
             .when(customerManagementApplicationService).update(Mockito.any(UUID.class), Mockito.any(CustomerUpdateInput.class));
-
-        Mockito.when(customerQueryService.findById(Mockito.any(UUID.class)))
-            .thenReturn(CustomerOutputTestDataBuilder.existing().build());
 
         String jsonInput = """
             {
