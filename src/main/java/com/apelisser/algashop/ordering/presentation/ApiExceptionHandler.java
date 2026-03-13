@@ -42,8 +42,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         ProblemDetail problemDetail = ProblemDetail.forStatus(status);
         problemDetail.setTitle("Invalid fields");
-        problemDetail.setDetail("One or more field are invalid");
-        problemDetail.setType(URI.create("/errors/invalid-field"));
+        problemDetail.setDetail("One or more fields are invalid");
+        problemDetail.setType(URI.create("/errors/invalid-fields"));
 
         Map<String, String> fieldErrors = ex.getBindingResult().getAllErrors().stream().collect(
             Collectors.toMap(
@@ -51,7 +51,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                 objectError -> messageSource.getMessage(objectError, LocaleContextHolder.getLocale())
             ));
 
-        problemDetail.setProperty("fieldErrors", fieldErrors);
+        problemDetail.setProperty("fields", fieldErrors);
 
         return super.handleExceptionInternal(ex, problemDetail, headers, status, request);
     }

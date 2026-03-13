@@ -17,6 +17,7 @@ public class OrderDetailOutputTestDataBuilder {
     public static OrderDetailOutput.OrderDetailOutputBuilder placedOrder() {
         return placedOrder(new OrderId().toString());
     }
+
     public static OrderDetailOutput.OrderDetailOutputBuilder placedOrder(String orderId) {
         return OrderDetailOutput.builder()
             .id(orderId)
@@ -59,6 +60,7 @@ public class OrderDetailOutputTestDataBuilder {
                 .firstName("John")
                 .lastName("Doe")
                 .document("12345")
+                .email("john.doe@example.com")
                 .phone("5511912341234")
                 .address(AddressData.builder()
                     .street("Bourbon Street")

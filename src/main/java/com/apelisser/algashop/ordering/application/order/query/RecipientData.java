@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.application.order.query;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -13,9 +14,16 @@ import lombok.ToString;
 @Builder
 public class RecipientData {
 
+    @NotBlank
     private String firstName;
+
+    @NotBlank
     private String lastName;
+
+    @NotBlank
     private String document;
+
+    @NotBlank
     private String phone;
 
     public RecipientData() {

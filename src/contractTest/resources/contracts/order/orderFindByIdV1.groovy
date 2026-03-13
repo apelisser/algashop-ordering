@@ -6,12 +6,15 @@ Contract.make {
     request {
         method GET()
         headers {
-            accept 'application/json'
+            accept(applicationJson())
         }
         url("/api/v1/orders/01226N0640J7Q")
     }
     response {
         status 200
+        headers {
+            contentType(applicationJson())
+        }
         body([
             id: "01226N0640J7Q",
             customer: [

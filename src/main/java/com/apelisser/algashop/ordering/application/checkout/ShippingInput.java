@@ -2,6 +2,8 @@ package com.apelisser.algashop.ordering.application.checkout;
 
 import com.apelisser.algashop.ordering.application.commons.AddressData;
 import com.apelisser.algashop.ordering.application.order.query.RecipientData;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,7 +17,12 @@ import lombok.ToString;
 @Builder
 public class ShippingInput {
 
+    @NotNull
+    @Valid
     private RecipientData recipient;
+
+    @NotNull
+    @Valid
     private AddressData address;
 
     public ShippingInput() {
