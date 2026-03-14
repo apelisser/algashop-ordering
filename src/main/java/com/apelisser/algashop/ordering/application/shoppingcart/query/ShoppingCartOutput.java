@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.application.shoppingcart.query;
 
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,12 +15,15 @@ import java.util.UUID;
 @Setter
 @ToString
 @EqualsAndHashCode
+@Builder
 public class ShoppingCartOutput {
 
     private UUID id;
     private UUID customerId;
     private Integer totalItems;
     private BigDecimal totalAmount;
+
+    @Builder.Default
     private List<ShoppingCartItemOutput> items = new ArrayList<>();
 
     public ShoppingCartOutput() {

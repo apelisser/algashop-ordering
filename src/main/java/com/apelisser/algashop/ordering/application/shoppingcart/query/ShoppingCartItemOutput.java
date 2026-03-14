@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.application.shoppingcart.query;
 
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.util.UUID;
 @Setter
 @ToString
 @EqualsAndHashCode
+@Builder
 public class ShoppingCartItemOutput {
 
     private UUID id;
