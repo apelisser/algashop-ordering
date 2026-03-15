@@ -10,7 +10,7 @@ import com.apelisser.algashop.ordering.application.order.query.OrderQueryService
 import com.apelisser.algashop.ordering.application.order.query.OrderSummaryOutput;
 import com.apelisser.algashop.ordering.application.order.query.OrderSummaryOutputTestDataBuilder;
 import com.apelisser.algashop.ordering.domain.model.order.OrderNotFoundException;
-import com.apelisser.algashop.ordering.presentation.OrderController;
+import com.apelisser.algashop.ordering.presentation.order.OrderController;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;

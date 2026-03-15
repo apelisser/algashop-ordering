@@ -1,4 +1,4 @@
-package com.apelisser.algashop.ordering.presentation;
+package com.apelisser.algashop.ordering.presentation.shoppingcart;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;

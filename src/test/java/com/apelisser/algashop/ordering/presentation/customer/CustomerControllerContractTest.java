@@ -1,4 +1,4 @@
-package com.apelisser.algashop.ordering.presentation;
+package com.apelisser.algashop.ordering.presentation.customer;
 
 import com.apelisser.algashop.ordering.application.commons.AddressData;
 import com.apelisser.algashop.ordering.application.customer.management.CustomerInput;

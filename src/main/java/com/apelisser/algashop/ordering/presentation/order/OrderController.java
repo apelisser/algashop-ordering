@@ -1,4 +1,4 @@
-package com.apelisser.algashop.ordering.presentation;
+package com.apelisser.algashop.ordering.presentation.order;
 
 import com.apelisser.algashop.ordering.application.checkout.BuyNowApplicationService;
 import com.apelisser.algashop.ordering.application.checkout.BuyNowInput;
@@ -8,6 +8,7 @@ import com.apelisser.algashop.ordering.application.order.query.OrderDetailOutput
 import com.apelisser.algashop.ordering.application.order.query.OrderFilter;
 import com.apelisser.algashop.ordering.application.order.query.OrderQueryService;
 import com.apelisser.algashop.ordering.application.order.query.OrderSummaryOutput;
+import com.apelisser.algashop.ordering.presentation.PageModel;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
