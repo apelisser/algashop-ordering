@@ -1,0 +1,21 @@
+{
+    "id" : "98d19a9c-0b63-4ac7-85e9-0bc6dd7f4531",
+    "request" : {
+        "url" : "/api/v1/products/fffe4676-367b-4015-941a-41c31c3b3d3e",
+        "method" : "GET",
+        "headers" : {
+            "Accept" : {
+                "matches" : "application/json.*"
+            }
+        }
+    },
+    "response" : {
+        "status" : 200,
+        "body" : "{\"id\":\"{{{request.path.[3]}}}\",\"addedAt\":\"2018-08-18T12:23:34.123Z\",\"name\":\"Notebook X11\",\"brand\":\"Deep Diver\",\"regularPrice\":1500.00,\"salePrice\":1000.00,\"inStock\":true,\"enabled\":true,\"category\":{\"id\":\"81cdce21-e5c8-41ca-b61b-a3514d62d5c0\",\"name\":\"Notebook\"},\"description\":\"A gamer notebook\"}",
+        "headers" : {
+            "Content-Type" : "application/json"
+        },
+        "transformers" : [ "response-template", "spring-cloud-contract" ]
+    },
+    "uuid" : "98d19a9c-0b63-4ac7-85e9-0bc6dd7f4531"
+}
