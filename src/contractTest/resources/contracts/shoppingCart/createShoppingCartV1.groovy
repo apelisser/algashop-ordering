@@ -11,7 +11,10 @@ Contract.make {
         }
         urlPath("/api/v1/shopping-carts")
         body([
-            customerId: "1e7f075c-ede5-49a0-a389-ba81052f45fb"
+            customerId: value(
+                stub(anyUuid()),
+                test("1e7f075c-ede5-49a0-a389-ba81052f45fb")
+            )
         ])
     }
     response {
