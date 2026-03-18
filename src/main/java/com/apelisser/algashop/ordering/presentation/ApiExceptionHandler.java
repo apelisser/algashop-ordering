@@ -86,6 +86,26 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return problemDetail;
     }
 
+    @ExceptionHandler(GatewayTimeoutException.class)
+    public ProblemDetail handleGatewayTimeoutException(GatewayTimeoutException ex) {
+        log.error(ex.getMessage(), ex);
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.GATEWAY_TIMEOUT);
+        problemDetail.setTitle("Gateway Timeout");
+        problemDetail.setDetail(ex.getMessage());
+        problemDetail.setType(URI.create("/errors/gateway-timeout"));
+        return problemDetail;
+    }
+
+    @ExceptionHandler(BadGatewayException.class)
+    public ProblemDetail handleBadGatewayException(BadGatewayException ex) {
+        log.error(ex.getMessage(), ex);
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_GATEWAY);
+        problemDetail.setTitle("Bad Gateway");
+        problemDetail.setDetail(ex.getMessage());
+        problemDetail.setType(URI.create("/errors/bad-gateway"));
+        return problemDetail;
+    }
+
     @ExceptionHandler(Exception.class)
     public ProblemDetail handleException(Exception ex) {
         log.error(ex.getMessage(), ex);
