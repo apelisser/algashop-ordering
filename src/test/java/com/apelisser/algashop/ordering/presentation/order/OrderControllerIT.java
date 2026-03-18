@@ -22,12 +22,18 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
+import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 import java.util.UUID;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureStubRunner(
+    stubsMode = StubRunnerProperties.StubsMode.LOCAL,
+    ids = "com.apelisser.algashop:product-catalog:0.0.1-SNAPSHOT:8781"
+)
 public class OrderControllerIT {
 
     @LocalServerPort
@@ -66,8 +72,8 @@ public class OrderControllerIT {
             .usingFilesUnderClasspath("src/test/resources/wiremock/product-catalog")
             .extensions(new ResponseTemplateTransformer(true)));
 
-        wireMockRapidex.start();
-        wireMockProductCatalog.start();
+//        wireMockRapidex.start();
+//        wireMockProductCatalog.start();
     }
 
     @AfterEach
