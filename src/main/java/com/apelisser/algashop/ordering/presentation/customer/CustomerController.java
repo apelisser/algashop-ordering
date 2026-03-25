@@ -7,6 +7,8 @@ import com.apelisser.algashop.ordering.application.customer.query.CustomerFilter
 import com.apelisser.algashop.ordering.application.customer.query.CustomerOutput;
 import com.apelisser.algashop.ordering.application.customer.query.CustomerQueryService;
 import com.apelisser.algashop.ordering.application.customer.query.CustomerSummaryOutput;
+import com.apelisser.algashop.ordering.application.shoppingcart.query.ShoppingCartOutput;
+import com.apelisser.algashop.ordering.application.shoppingcart.query.ShoppingCartQueryService;
 import com.apelisser.algashop.ordering.presentation.PageModel;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -31,11 +33,13 @@ public class CustomerController {
 
     private final CustomerManagementApplicationService customerManagementApplicationService;
     private final CustomerQueryService customerQueryService;
+    private final ShoppingCartQueryService shoppingCartQueryService;
 
     public CustomerController(CustomerManagementApplicationService customerManagementApplicationService,
-        CustomerQueryService customerQueryService) {
+            CustomerQueryService customerQueryService, ShoppingCartQueryService shoppingCartQueryService) {
         this.customerManagementApplicationService = customerManagementApplicationService;
         this.customerQueryService = customerQueryService;
+        this.shoppingCartQueryService = shoppingCartQueryService;
     }
 
     @PostMapping
@@ -58,6 +62,11 @@ public class CustomerController {
     @GetMapping("/{customerId}")
     public CustomerOutput findById(@PathVariable UUID customerId) {
         return customerQueryService.findById(customerId);
+    }
+
+    @GetMapping("/{customerId}/shopping-cart")
+    public ShoppingCartOutput findShoppingCartByCustomerId(@PathVariable UUID customerId) {
+        return shoppingCartQueryService.findByCustomerId(customerId);
     }
 
     @PutMapping("/{customerId}")

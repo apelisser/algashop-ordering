@@ -10,9 +10,11 @@ import com.apelisser.algashop.ordering.application.customer.query.CustomerOutput
 import com.apelisser.algashop.ordering.application.customer.query.CustomerQueryService;
 import com.apelisser.algashop.ordering.application.customer.query.CustomerSummaryOutput;
 import com.apelisser.algashop.ordering.application.customer.query.CustomerSummaryOutputTestDataBuilder;
+import com.apelisser.algashop.ordering.application.shoppingcart.query.ShoppingCartQueryService;
 import com.apelisser.algashop.ordering.domain.model.DomainEntityNotFoundException;
 import com.apelisser.algashop.ordering.domain.model.DomainException;
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerEmailIsInUseException;
+import com.apelisser.algashop.ordering.domain.model.customer.CustomerId;
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerNotFoundException;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.hamcrest.Matchers;
@@ -44,6 +46,9 @@ class CustomerControllerContractTest {
 
     @MockitoBean
     CustomerQueryService customerQueryService;
+
+    @MockitoBean
+    ShoppingCartQueryService shoppingCartQueryService;
 
     @BeforeEach
     void setUpAll() {
@@ -151,11 +156,11 @@ class CustomerControllerContractTest {
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body(
                     "status", Matchers.is(HttpStatus.BAD_REQUEST.value()),
-                    "type", Matchers.is("/errors/invalid-field"),
+                    "type", Matchers.is("/errors/invalid-fields"),
                     "title", Matchers.notNullValue(),
                     "detail", Matchers.notNullValue(),
                     "instance", Matchers.notNullValue(),
-                    "fieldErrors", Matchers.notNullValue()
+                    "fields", Matchers.notNullValue()
                 );
     }
 
@@ -282,7 +287,7 @@ class CustomerControllerContractTest {
     @Test
     void createCustomerError409Contract() {
         Mockito.when(customerManagementApplicationService.create(Mockito.any(CustomerInput.class)))
-            .thenThrow(new CustomerEmailIsInUseException());
+            .thenThrow(new CustomerEmailIsInUseException(new CustomerId()));
 
         String jsonInput = """
             {
@@ -510,11 +515,11 @@ class CustomerControllerContractTest {
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body(
                     "status", Matchers.is(HttpStatus.BAD_REQUEST.value()),
-                    "type", Matchers.is("/errors/invalid-field"),
+                    "type", Matchers.is("/errors/invalid-fields"),
                     "title", Matchers.notNullValue(),
                     "detail", Matchers.notNullValue(),
                     "instance", Matchers.notNullValue(),
-                    "fieldErrors", Matchers.notNullValue()
+                    "fields", Matchers.notNullValue()
                 );
     }
 
@@ -561,7 +566,7 @@ class CustomerControllerContractTest {
 
     @Test
     void updateCustomerError409Contract() {
-        Mockito.doThrow(new CustomerEmailIsInUseException())
+        Mockito.doThrow(new CustomerEmailIsInUseException(new CustomerId()))
             .when(customerManagementApplicationService).update(Mockito.any(UUID.class), Mockito.any(CustomerUpdateInput.class));
 
         String jsonInput = """
