@@ -30,13 +30,13 @@ public class ShoppingService {
 
     private void checkIfCustomerExists(CustomerId customerId) {
         if (!customers.exists(customerId)) {
-            throw new CustomerNotFoundException();
+            throw new CustomerNotFoundException(customerId);
         }
     }
 
     private void checkIfCustomerAlreadyHasAShoppingCart(CustomerId customerId) {
         if (shoppingCarts.ofCustomer(customerId).isPresent()) {
-            throw new CustomerAlreadyHaveShoppingCartException();
+            throw new CustomerAlreadyHaveShoppingCartException(customerId);
         }
     }
 

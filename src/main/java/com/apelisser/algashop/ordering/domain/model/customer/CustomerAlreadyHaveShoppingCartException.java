@@ -1,6 +1,7 @@
 package com.apelisser.algashop.ordering.domain.model.customer;
 
 import com.apelisser.algashop.ordering.domain.model.DomainException;
+import com.apelisser.algashop.ordering.domain.model.ErrorMessages;
 import com.apelisser.algashop.ordering.domain.model.commons.Address;
 import com.apelisser.algashop.ordering.domain.model.commons.Document;
 import com.apelisser.algashop.ordering.domain.model.commons.Email;
@@ -14,6 +15,10 @@ public class CustomerAlreadyHaveShoppingCartException extends DomainException {
 
     @Serial
     private static final long serialVersionUID = -2391769211223564401L;
+
+    public CustomerAlreadyHaveShoppingCartException(CustomerId customerId) {
+        super(String.format(ErrorMessages.ERROR_CUSTOMER_ALREADY_HAVE_SHOPPING_CART, customerId));
+    }
 
     @DomainService
     public static class CustomerRegistrationService {
