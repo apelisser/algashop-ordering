@@ -22,10 +22,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.cloud.contract.stubrunner.spring.AutoConfigureStubRunner;
-import org.springframework.cloud.contract.stubrunner.spring.StubRunnerProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.UUID;
 
@@ -34,6 +33,7 @@ import java.util.UUID;
 //    stubsMode = StubRunnerProperties.StubsMode.LOCAL,
 //    ids = "com.apelisser.algashop:product-catalog:0.0.1-SNAPSHOT:8781"
 //)
+@DirtiesContext(classMode =  DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class OrderControllerIT {
 
     @LocalServerPort
@@ -45,7 +45,6 @@ public class OrderControllerIT {
     @Autowired
     OrderPersistenceEntityRepository orderPersistenceEntityRepository;
 
-    private static boolean databaseInitialized;
     private static final UUID validCustomerId = UUID.fromString("6e148bd5-47f6-4022-b9da-07cfaa294f7a");
     private static final UUID validProductId = UUID.fromString("fffe4676-367b-4015-941a-41c31c3b3d3e");
 
@@ -54,13 +53,16 @@ public class OrderControllerIT {
 
     @BeforeEach
     void setUp() {
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();;
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
         RestAssured.port = port;
 
         JsonConfig jsonConfig = JsonConfig.jsonConfig().numberReturnType(JsonPathConfig.NumberReturnType.BIG_DECIMAL);
         RestAssured.config().jsonConfig(jsonConfig);
 
-        initDatabase();
+        customerRepository.saveAndFlush(
+            CustomerPersistenceEntityTestDataBuilder.existingCustomer()
+                .id(validCustomerId)
+                .build());
 
         wireMockRapidex = new WireMockServer(WireMockConfiguration.options()
             .port(8780)
@@ -80,19 +82,6 @@ public class OrderControllerIT {
     void tearDown() {
         wireMockRapidex.stop();
         wireMockProductCatalog.stop();
-    }
-
-    void initDatabase() {
-        if (databaseInitialized) {
-            return;
-        }
-
-        customerRepository.saveAndFlush(
-            CustomerPersistenceEntityTestDataBuilder.existingCustomer()
-                .id(validCustomerId)
-                .build());
-        databaseInitialized = true;
-
     }
 
     @Test
