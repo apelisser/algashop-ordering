@@ -1,0 +1,10 @@
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": null,
+    "document": null,
+    "phone": null,
+    "birthDate": null,
+    "promotionNotificationsAllowed": null,
+    "address": null
+}
