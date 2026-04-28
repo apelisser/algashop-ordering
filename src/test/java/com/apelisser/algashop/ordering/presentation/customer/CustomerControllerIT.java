@@ -40,7 +40,7 @@ class CustomerControllerIT {
     void shouldCreateCustomer() {
         String json = AlgaShopResourceUtils.readContent("json/create-customer.json");
 
-        String createdOrderId = RestAssured
+        String createdCustomerId = RestAssured
             .given()
                 .accept(MediaType.APPLICATION_JSON_VALUE)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -55,12 +55,12 @@ class CustomerControllerIT {
                     "id", Matchers.not(Matchers.emptyString()))
                 .extract().jsonPath().getString("id");
 
-        boolean customerExists = customerPersistenceEntityRepository.existsById(UUID.fromString(createdOrderId));
+        boolean customerExists = customerPersistenceEntityRepository.existsById(UUID.fromString(createdCustomerId));
         Assertions.assertThat(customerExists).isTrue();
     }
 
     @Test
-    void shouldNotCreateCustomerWhenThereIsInvalidData() {
+    void shouldNotCreateCustomerWithInvalidData() {
         String json = AlgaShopResourceUtils.readContent("json/create-customer-with-invalid-data.json");
 
         RestAssured
@@ -108,7 +108,7 @@ class CustomerControllerIT {
     }
 
     @Test
-    void shouldNotArchiveANonInexistentCustomer() {
+    void shouldReturnNotFoundWhenArchivingNonExistentCustomer() {
         UUID nonExistentCustomerId = UUID.randomUUID();
 
         RestAssured
