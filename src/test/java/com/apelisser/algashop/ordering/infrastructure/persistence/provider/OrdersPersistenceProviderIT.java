@@ -64,7 +64,6 @@ class OrdersPersistenceProviderIT {
         Assertions.assertThat(persistenceEntity).satisfies(
             p -> Assertions.assertThat(p.getStatus()).isEqualTo(OrderStatus.PLACED.name()),
             p -> Assertions.assertThat(p.getCreatedByUserId()).isNotNull(),
-            p -> Assertions.assertThat(p.getCreatedAt()).isNotNull(),
             p -> Assertions.assertThat(p.getLastModifiedByUserId()).isNotNull(),
             p -> Assertions.assertThat(p.getLastModifiedAt()).isNotNull()
         );
@@ -78,7 +77,6 @@ class OrdersPersistenceProviderIT {
         Assertions.assertThat(persistenceEntity).satisfies(
             p -> Assertions.assertThat(p.getStatus()).isEqualTo(OrderStatus.PAID.name()),
             p -> Assertions.assertThat(p.getCreatedByUserId()).isNotNull(),
-            p -> Assertions.assertThat(p.getCreatedAt()).isNotNull(),
             p -> Assertions.assertThat(p.getLastModifiedByUserId()).isNotNull(),
             p -> Assertions.assertThat(p.getLastModifiedAt()).isNotNull()
         );

@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.domain.AbstractAggregateRoot;
@@ -55,21 +54,18 @@ public class CustomerPersistenceEntity extends AbstractAggregateRoot<CustomerPer
 
     @Embedded
     @AttributeOverrides({
-        @AttributeOverride(name = "address.street", column = @Column(name = "address_street")),
-        @AttributeOverride(name = "address.number", column = @Column(name = "address_number")),
-        @AttributeOverride(name = "address.complement", column = @Column(name = "address_complement")),
-        @AttributeOverride(name = "address.neighborhood", column = @Column(name = "address_neighborhood")),
-        @AttributeOverride(name = "address.city", column = @Column(name = "address_city")),
-        @AttributeOverride(name = "address.state", column = @Column(name = "address_state")),
-        @AttributeOverride(name = "address.zipCode", column = @Column(name = "address_zipCode"))
+        @AttributeOverride(name = "street", column = @Column(name = "address_street")),
+        @AttributeOverride(name = "number", column = @Column(name = "address_number")),
+        @AttributeOverride(name = "complement", column = @Column(name = "address_complement")),
+        @AttributeOverride(name = "neighborhood", column = @Column(name = "address_neighborhood")),
+        @AttributeOverride(name = "city", column = @Column(name = "address_city")),
+        @AttributeOverride(name = "state", column = @Column(name = "address_state")),
+        @AttributeOverride(name = "zipCode", column = @Column(name = "address_zipCode"))
     })
     private AddressEmbeddable address;
 
     @CreatedBy
     private UUID createdByUserId;
-
-    @CreatedDate
-    private OffsetDateTime createdAt;
 
     @LastModifiedBy
     private UUID lastModifiedByUserId;
@@ -84,7 +80,7 @@ public class CustomerPersistenceEntity extends AbstractAggregateRoot<CustomerPer
     public CustomerPersistenceEntity(UUID id, String firstName, String lastName, LocalDate birthDate, String email,
             String phone, String document, Boolean promotionNotificationsAllowed, Boolean archived,
             OffsetDateTime registeredAt, OffsetDateTime archivedAt, Integer loyaltyPoints, AddressEmbeddable address,
-            UUID createdByUserId, OffsetDateTime createdAt, UUID lastModifiedByUserId, OffsetDateTime lastModifiedAt,
+            UUID createdByUserId, UUID lastModifiedByUserId, OffsetDateTime lastModifiedAt,
             Long version) {
         this.id = id;
         this.firstName = firstName;
@@ -100,7 +96,6 @@ public class CustomerPersistenceEntity extends AbstractAggregateRoot<CustomerPer
         this.loyaltyPoints = loyaltyPoints;
         this.address = address;
         this.createdByUserId = createdByUserId;
-        this.createdAt = createdAt;
         this.lastModifiedByUserId = lastModifiedByUserId;
         this.lastModifiedAt = lastModifiedAt;
         this.version = version;

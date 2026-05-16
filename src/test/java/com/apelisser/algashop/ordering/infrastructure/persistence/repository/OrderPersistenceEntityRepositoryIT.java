@@ -71,7 +71,6 @@ class OrderPersistenceEntityRepositoryIT {
         entity = orderPersistenceEntityRepository.saveAndFlush(entity);
 
         Assertions.assertThat(entity).satisfies(
-            s -> Assertions.assertThat(s.getCreatedAt()).isNotNull(),
             s -> Assertions.assertThat(s.getCreatedByUserId()).isNotNull(),
             s -> Assertions.assertThat(s.getLastModifiedAt()).isNotNull(),
             s -> Assertions.assertThat(s.getLastModifiedByUserId()).isNotNull()

@@ -64,9 +64,6 @@ public class OrderPersistenceEntity extends AbstractAggregateRoot<OrderPersisten
     @CreatedBy
     private UUID createdByUserId;
 
-    @CreatedDate
-    private OffsetDateTime createdAt;
-
     @LastModifiedBy
     private UUID lastModifiedByUserId;
 
@@ -82,6 +79,7 @@ public class OrderPersistenceEntity extends AbstractAggregateRoot<OrderPersisten
         @AttributeOverride(name = "lastName", column = @Column(name = "billing_last_name")),
         @AttributeOverride(name = "document", column = @Column(name = "billing_document")),
         @AttributeOverride(name = "phone", column = @Column(name = "billing_phone")),
+        @AttributeOverride(name = "email", column = @Column(name = "billing_email")),
         @AttributeOverride(name = "address.street", column = @Column(name = "billing_address_street")),
         @AttributeOverride(name = "address.number", column = @Column(name = "billing_address_number")),
         @AttributeOverride(name = "address.complement", column = @Column(name = "billing_address_complement")),
@@ -110,13 +108,13 @@ public class OrderPersistenceEntity extends AbstractAggregateRoot<OrderPersisten
     })
     private ShippingEmbeddable shipping;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<OrderItemPersistenceEntity> items = new HashSet<>();
 
     @Builder
     public OrderPersistenceEntity(Long id, CustomerPersistenceEntity customer, BigDecimal totalAmount, Integer totalItems, String status,
             String paymentMethod, OffsetDateTime placedAt, OffsetDateTime paidAt, OffsetDateTime canceledAt,
-            OffsetDateTime readyAt, UUID createdByUserId, OffsetDateTime createdAt, UUID lastModifiedByUserId,
+            OffsetDateTime readyAt, UUID createdByUserId, UUID lastModifiedByUserId,
             OffsetDateTime lastModifiedAt, Long version, BillingEmbeddable billing, ShippingEmbeddable shipping,
             Set<OrderItemPersistenceEntity> items) {
         this.id = id;
@@ -130,7 +128,6 @@ public class OrderPersistenceEntity extends AbstractAggregateRoot<OrderPersisten
         this.canceledAt = canceledAt;
         this.readyAt = readyAt;
         this.createdByUserId = createdByUserId;
-        this.createdAt = createdAt;
         this.lastModifiedByUserId = lastModifiedByUserId;
         this.lastModifiedAt = lastModifiedAt;
         this.version = version;
