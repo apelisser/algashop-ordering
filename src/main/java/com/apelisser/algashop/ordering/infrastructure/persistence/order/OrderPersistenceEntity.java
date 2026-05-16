@@ -38,7 +38,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @ToString(of = "id")
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "id", callSuper = false)
 @Entity
 @Table(name = "\"order\"")
 @EntityListeners(AuditingEntityListener.class)

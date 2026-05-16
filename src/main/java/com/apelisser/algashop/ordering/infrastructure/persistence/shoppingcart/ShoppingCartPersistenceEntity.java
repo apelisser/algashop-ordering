@@ -34,7 +34,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @ToString(of = "id")
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "id", callSuper = false)
 @Entity
 @Table(name = "shopping_cart")
 @EntityListeners(AuditingEntityListener.class)
