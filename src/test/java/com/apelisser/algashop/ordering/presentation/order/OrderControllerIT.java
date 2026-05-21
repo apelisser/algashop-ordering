@@ -19,7 +19,9 @@ import io.restassured.config.JsonConfig;
 import io.restassured.path.json.config.JsonPathConfig;
 import org.assertj.core.api.Assertions;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -38,7 +41,8 @@ import java.util.UUID;
 //    stubsMode = StubRunnerProperties.StubsMode.LOCAL,
 //    ids = "com.apelisser.algashop:product-catalog:0.0.1-SNAPSHOT:8781"
 //)
-@DirtiesContext(classMode =  DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+//@DirtiesContext(classMode =  DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@Sql(scripts = "classpath:db/clean/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD) // to avoid @DirtiesContext
 public class OrderControllerIT {
 
     @LocalServerPort
@@ -53,25 +57,14 @@ public class OrderControllerIT {
     @Autowired
     ShoppingCartPersistenceEntityRepository shoppingCartRepository;
 
-    private static final UUID validCustomerId = UUID.fromString("6e148bd5-47f6-4022-b9da-07cfaa294f7a");
-    private static final UUID validProductId = UUID.fromString("fffe4676-367b-4015-941a-41c31c3b3d3e");
+    static final UUID validCustomerId = UUID.fromString("6e148bd5-47f6-4022-b9da-07cfaa294f7a");
+    static final UUID validProductId = UUID.fromString("fffe4676-367b-4015-941a-41c31c3b3d3e");
 
-    private WireMockServer wireMockProductCatalog;
-    private WireMockServer wireMockRapidex;
+    static WireMockServer wireMockProductCatalog;
+    static WireMockServer wireMockRapidex;
 
-    @BeforeEach
-    void setUp() {
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-        RestAssured.port = port;
-
-        JsonConfig jsonConfig = JsonConfig.jsonConfig().numberReturnType(JsonPathConfig.NumberReturnType.BIG_DECIMAL);
-        RestAssured.config().jsonConfig(jsonConfig);
-
-        customerRepository.saveAndFlush(
-            CustomerPersistenceEntityTestDataBuilder.existingCustomer()
-                .id(validCustomerId)
-                .build());
-
+    @BeforeAll
+    static void setUpAll() {
         wireMockRapidex = new WireMockServer(WireMockConfiguration.options()
             .port(8780)
             .usingFilesUnderClasspath("src/test/resources/wiremock/rapidex")
@@ -86,10 +79,32 @@ public class OrderControllerIT {
         wireMockProductCatalog.start();
     }
 
-    @AfterEach
-    void tearDown() {
+    @AfterAll
+    static void tearDownAll() {
         wireMockRapidex.stop();
         wireMockProductCatalog.stop();
+    }
+
+    @BeforeEach
+    void setUp() {
+        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+        RestAssured.port = port;
+
+        JsonConfig jsonConfig = JsonConfig.jsonConfig().numberReturnType(JsonPathConfig.NumberReturnType.BIG_DECIMAL);
+        RestAssured.config().jsonConfig(jsonConfig);
+
+        customerRepository.saveAndFlush(
+            CustomerPersistenceEntityTestDataBuilder.existingCustomer()
+                .id(validCustomerId)
+                .build());
+
+        if (!wireMockRapidex.isRunning()) {
+            wireMockRapidex.start();
+        }
+
+        if (!wireMockProductCatalog.isRunning()) {
+            wireMockProductCatalog.start();
+        }
     }
 
     @Test

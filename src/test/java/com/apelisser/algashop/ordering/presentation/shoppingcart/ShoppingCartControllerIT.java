@@ -15,7 +15,9 @@ import io.restassured.config.JsonConfig;
 import io.restassured.path.json.config.JsonPathConfig;
 import org.assertj.core.api.Assertions;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +26,14 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@DirtiesContext(classMode =  DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+//@DirtiesContext(classMode =  DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@Sql(scripts = "classpath:db/clean/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD) // to avoid @DirtiesContext
 class ShoppingCartControllerIT {
 
     @LocalServerPort
@@ -41,9 +45,24 @@ class ShoppingCartControllerIT {
     @Autowired
     ShoppingCartPersistenceEntityRepository shoppingCartRepository;
 
-    private static final UUID validCustomerId = UUID.fromString("6e148bd5-47f6-4022-b9da-07cfaa294f7a");
+    static final UUID validCustomerId = UUID.fromString("6e148bd5-47f6-4022-b9da-07cfaa294f7a");
 
-    private WireMockServer wireMockProductCatalog;
+    static WireMockServer wireMockProductCatalog;
+
+    @BeforeAll
+    static void setUpAll() {
+        wireMockProductCatalog = new WireMockServer(WireMockConfiguration.options()
+            .port(8781)
+            .usingFilesUnderClasspath("src/test/resources/wiremock/product-catalog")
+            .extensions(new ResponseTemplateTransformer(true)));
+
+        wireMockProductCatalog.start();
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        wireMockProductCatalog.stop();
+    }
 
     @BeforeEach
     void setUp() {
@@ -58,17 +77,9 @@ class ShoppingCartControllerIT {
                 .id(validCustomerId)
                 .build());
 
-        wireMockProductCatalog = new WireMockServer(WireMockConfiguration.options()
-            .port(8781)
-            .usingFilesUnderClasspath("src/test/resources/wiremock/product-catalog")
-            .extensions(new ResponseTemplateTransformer(true)));
-
-        wireMockProductCatalog.start();
-    }
-
-    @AfterEach
-    void tearDown() {
-        wireMockProductCatalog.stop();
+        if (!wireMockProductCatalog.isRunning()) {
+            wireMockProductCatalog.start();
+        }
     }
 
     @Test
