@@ -8,6 +8,7 @@ import com.apelisser.algashop.ordering.infrastructure.persistence.customer.Custo
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
@@ -23,6 +24,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
     CustomerPersistenceEntityAssembler.class,
     CustomerPersistenceEntityDisassembler.class
 })
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class CustomersIT {
 
     Customers customers;
@@ -93,10 +95,14 @@ class CustomersIT {
     public void shouldCountExistingOrders() {
         Assertions.assertThat(customers.count()).isZero();
 
-        Customer customer1 = CustomerTestDataBuilder.brandNewCustomer().build();
+        Customer customer1 = CustomerTestDataBuilder.brandNewCustomer()
+            .email(new Email("john.doe+01@example.com"))
+            .build();
         customers.add(customer1);
 
-        Customer customer2 = CustomerTestDataBuilder.brandNewCustomer().build();
+        Customer customer2 = CustomerTestDataBuilder.brandNewCustomer()
+            .email(new Email("john.doe+02@example.com"))
+            .build();
         customers.add(customer2);
 
         Assertions.assertThat(customers.count()).isEqualTo(2L);
