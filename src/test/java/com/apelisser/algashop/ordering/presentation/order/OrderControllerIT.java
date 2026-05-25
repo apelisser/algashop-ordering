@@ -42,7 +42,9 @@ import java.util.UUID;
 //    ids = "com.apelisser.algashop:product-catalog:0.0.1-SNAPSHOT:8781"
 //)
 //@DirtiesContext(classMode =  DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@Sql(scripts = "classpath:db/clean/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD) // to avoid @DirtiesContext
+//@Sql(scripts = "classpath:db/clean/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD) // to avoid @DirtiesContext
+@Sql(scripts = "classpath:db/testdata/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
+@Sql(scripts = "classpath:db/clean/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_CLASS)
 public class OrderControllerIT {
 
     @LocalServerPort
@@ -58,6 +60,7 @@ public class OrderControllerIT {
     ShoppingCartPersistenceEntityRepository shoppingCartRepository;
 
     static final UUID validCustomerId = UUID.fromString("6e148bd5-47f6-4022-b9da-07cfaa294f7a");
+    static final UUID validCustomerIdWithoutShoppingCart = UUID.fromString("3a4b5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d");
     static final UUID validProductId = UUID.fromString("fffe4676-367b-4015-941a-41c31c3b3d3e");
 
     static WireMockServer wireMockProductCatalog;
@@ -92,11 +95,6 @@ public class OrderControllerIT {
 
         JsonConfig jsonConfig = JsonConfig.jsonConfig().numberReturnType(JsonPathConfig.NumberReturnType.BIG_DECIMAL);
         RestAssured.config().jsonConfig(jsonConfig);
-
-        customerRepository.saveAndFlush(
-            CustomerPersistenceEntityTestDataBuilder.existingCustomer()
-                .id(validCustomerId)
-                .build());
 
         if (!wireMockRapidex.isRunning()) {
             wireMockRapidex.start();

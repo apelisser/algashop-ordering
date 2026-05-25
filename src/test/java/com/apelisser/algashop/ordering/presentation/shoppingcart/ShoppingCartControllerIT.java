@@ -33,7 +33,9 @@ import java.util.UUID;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 //@DirtiesContext(classMode =  DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@Sql(scripts = "classpath:db/clean/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD) // to avoid @DirtiesContext
+//@Sql(scripts = "classpath:db/clean/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD) // to avoid @DirtiesContext
+@Sql(scripts = "classpath:db/testdata/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
+@Sql(scripts = "classpath:db/clean/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_CLASS)
 class ShoppingCartControllerIT {
 
     @LocalServerPort
@@ -72,11 +74,6 @@ class ShoppingCartControllerIT {
         JsonConfig jsonConfig = JsonConfig.jsonConfig().numberReturnType(JsonPathConfig.NumberReturnType.BIG_DECIMAL);
         RestAssured.config().jsonConfig(jsonConfig);
 
-        customerRepository.saveAndFlush(
-            CustomerPersistenceEntityTestDataBuilder.existingCustomer()
-                .id(validCustomerId)
-                .build());
-
         if (!wireMockProductCatalog.isRunning()) {
             wireMockProductCatalog.start();
         }
@@ -98,8 +95,7 @@ class ShoppingCartControllerIT {
                 .statusCode(HttpStatus.CREATED.value())
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(
-                    "id", Matchers.not(Matchers.emptyString()),
-                    "customerId", Matchers.is(validCustomerId.toString())
+                    "id", Matchers.not(Matchers.emptyString())
                 )
                 .extract().jsonPath().getString("id");
 

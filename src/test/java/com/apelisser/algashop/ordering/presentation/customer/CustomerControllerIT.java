@@ -21,7 +21,8 @@ import java.util.UUID;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 //@DirtiesContext(classMode =  DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@Sql(scripts = "classpath:db/clean/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+@Sql(scripts = "classpath:db/testdata/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
+@Sql(scripts = "classpath:db/clean/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_CLASS)
 class CustomerControllerIT {
 
     @LocalServerPort
@@ -92,10 +93,6 @@ class CustomerControllerIT {
 
     @Test
     void shouldArchiveCustomer() {
-        customerPersistenceEntityRepository.saveAndFlush(CustomerPersistenceEntityTestDataBuilder.existingCustomer()
-            .id(validCustomerId)
-            .build());
-
         RestAssured
             .when()
                 .delete("/api/v1/customers/{customerId}", validCustomerId)
