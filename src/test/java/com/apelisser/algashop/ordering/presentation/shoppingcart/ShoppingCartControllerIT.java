@@ -2,8 +2,6 @@ package com.apelisser.algashop.ordering.presentation.shoppingcart;
 
 import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartId;
 import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityRepository;
-import com.apelisser.algashop.ordering.infrastructure.persistence.entity.CustomerPersistenceEntityTestDataBuilder;
-import com.apelisser.algashop.ordering.infrastructure.persistence.entity.ShoppingCartPersistenceEntityTestDataBuilder;
 import com.apelisser.algashop.ordering.infrastructure.persistence.shoppingcart.ShoppingCartPersistenceEntity;
 import com.apelisser.algashop.ordering.infrastructure.persistence.shoppingcart.ShoppingCartPersistenceEntityRepository;
 import com.apelisser.algashop.ordering.utils.AlgaShopResourceUtils;
@@ -16,7 +14,6 @@ import io.restassured.path.json.config.JsonPathConfig;
 import org.assertj.core.api.Assertions;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +22,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.math.BigDecimal;
@@ -48,6 +44,7 @@ class ShoppingCartControllerIT {
     ShoppingCartPersistenceEntityRepository shoppingCartRepository;
 
     static final UUID validCustomerId = UUID.fromString("6e148bd5-47f6-4022-b9da-07cfaa294f7a");
+    static final UUID validShoppingCartId = UUID.fromString("4f31582a-66e6-4601-a9d3-ff608c2d4461");
 
     static WireMockServer wireMockProductCatalog;
 
@@ -125,32 +122,20 @@ class ShoppingCartControllerIT {
         String json = AlgaShopResourceUtils.readContent("json/add-shoppingcart-item.json");
         UUID shoppingCartId = UUID.fromString("6e148bd5-47f6-4022-b9da-07cfaa294f7a");
 
-        ShoppingCartPersistenceEntity newShoppingCart = ShoppingCartPersistenceEntityTestDataBuilder
-            .existingShoppingCart()
-            .id(shoppingCartId)
-            .customer(customerRepository.getReferenceById(validCustomerId))
-            .totalItems(0)
-            .totalAmount(BigDecimal.ZERO)
-            .items(null)
-            .build();
-
-        shoppingCartRepository.saveAndFlush(newShoppingCart);
-
         RestAssured
             .given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(json)
             .when()
-                .post("/api/v1/shopping-carts/{shoppingCartId}/items", shoppingCartId)
+                .post("/api/v1/shopping-carts/{shoppingCartId}/items", validShoppingCartId)
             .then()
                 .assertThat()
                 .statusCode(HttpStatus.NO_CONTENT.value());
 
-        ShoppingCartPersistenceEntity updatedShoppingCart = shoppingCartRepository.findByCustomer_Id(validCustomerId).orElseThrow();
+        ShoppingCartPersistenceEntity updatedShoppingCart = shoppingCartRepository.findById(validShoppingCartId).orElseThrow();
 
-        Assertions.assertThat(updatedShoppingCart.getId()).isEqualTo(shoppingCartId);
-        Assertions.assertThat(updatedShoppingCart.getTotalItems()).isEqualTo(2);
-        Assertions.assertThat(updatedShoppingCart.getTotalAmount()).isEqualTo(new BigDecimal("2000.00"));
+        Assertions.assertThat(updatedShoppingCart.getTotalItems()).isEqualTo(4);
+        Assertions.assertThat(updatedShoppingCart.getTotalAmount()).isEqualTo(new BigDecimal("4000.00"));
     }
 
     @Test

@@ -23,7 +23,7 @@ public class CustomerTestDataBuilder {
         return Customer.brandNew()
             .fullName(new FullName("John", "Doe"))
             .birthDate(new BirthDate(LocalDate.of(1991, 7, 5)))
-            .email(new Email("john.doe@example.com"))
+            .email(new Email("john.doe." + UUID.randomUUID() + "@example.com"))
             .phone(new Phone("478-256-2504"))
             .document(new Document("255-08-0578"))
             .promotionNotificationsAllowed(false)
