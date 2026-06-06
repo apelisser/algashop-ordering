@@ -3,11 +3,9 @@ package com.apelisser.algashop.ordering.domain.model.order;
 import com.apelisser.algashop.ordering.domain.model.DomainService;
 import com.apelisser.algashop.ordering.domain.model.commons.Money;
 import com.apelisser.algashop.ordering.domain.model.customer.Customer;
-import com.apelisser.algashop.ordering.domain.model.customer.LoyaltyPoints;
 import com.apelisser.algashop.ordering.domain.model.product.Product;
 import com.apelisser.algashop.ordering.domain.model.commons.Quantity;
 
-import java.time.Year;
 import java.util.Objects;
 
 @DomainService
@@ -20,7 +18,7 @@ public class BuyNowService {
     }
 
     public Order buyNow(Product product, Customer customer, Billing billing, Shipping shipping, Quantity quantity,
-            PaymentMethod paymentMethod) {
+            PaymentMethod paymentMethod, CreditCardId creditCardId) {
         Objects.requireNonNull(product);
         Objects.requireNonNull(customer);
         Objects.requireNonNull(billing);
@@ -31,7 +29,7 @@ public class BuyNowService {
         product.checkOutOfStock();
 
         Order order = Order.draft(customer.id());
-        order.changePaymentMethod(paymentMethod);
+        order.changePaymentMethod(paymentMethod, creditCardId);
         order.changeBilling(billing);
         order.addItem(product, quantity);
 

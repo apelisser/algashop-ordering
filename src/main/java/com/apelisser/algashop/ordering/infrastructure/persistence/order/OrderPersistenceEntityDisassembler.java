@@ -8,17 +8,9 @@ import com.apelisser.algashop.ordering.domain.model.commons.Money;
 import com.apelisser.algashop.ordering.domain.model.commons.Phone;
 import com.apelisser.algashop.ordering.domain.model.commons.Quantity;
 import com.apelisser.algashop.ordering.domain.model.commons.ZipCode;
-import com.apelisser.algashop.ordering.domain.model.order.Billing;
-import com.apelisser.algashop.ordering.domain.model.order.Order;
-import com.apelisser.algashop.ordering.domain.model.order.OrderItem;
-import com.apelisser.algashop.ordering.domain.model.order.OrderStatus;
-import com.apelisser.algashop.ordering.domain.model.order.PaymentMethod;
-import com.apelisser.algashop.ordering.domain.model.order.Recipient;
-import com.apelisser.algashop.ordering.domain.model.order.Shipping;
+import com.apelisser.algashop.ordering.domain.model.order.*;
 import com.apelisser.algashop.ordering.domain.model.product.ProductName;
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerId;
-import com.apelisser.algashop.ordering.domain.model.order.OrderId;
-import com.apelisser.algashop.ordering.domain.model.order.OrderItemId;
 import com.apelisser.algashop.ordering.domain.model.product.ProductId;
 import com.apelisser.algashop.ordering.infrastructure.persistence.commons.AddressEmbeddable;
 import org.springframework.stereotype.Component;
@@ -31,6 +23,11 @@ import java.util.stream.Collectors;
 public class OrderPersistenceEntityDisassembler {
 
     public Order toDomainEntity(OrderPersistenceEntity persistenceEntity) {
+        CreditCardId creditCardId = null;
+        if (persistenceEntity.getCreditCardId() != null) {
+            creditCardId = new CreditCardId(persistenceEntity.getCreditCardId());
+        }
+
         return Order.existing()
             .id(new OrderId(persistenceEntity.getId()))
             .customerId(new CustomerId(persistenceEntity.getCustomerId()))
@@ -46,6 +43,7 @@ public class OrderPersistenceEntityDisassembler {
             .items(this.items(persistenceEntity.getItems()))
             .billing(this.billing(persistenceEntity.getBilling()))
             .shipping(this.shipping(persistenceEntity.getShipping()))
+            .creditCardId(creditCardId)
             .build();
     }
 

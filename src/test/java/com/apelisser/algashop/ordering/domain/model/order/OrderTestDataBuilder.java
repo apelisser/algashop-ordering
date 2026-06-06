@@ -24,6 +24,8 @@ public final class OrderTestDataBuilder {
     private boolean withItems = true;
     private OrderStatus status = OrderStatus.DRAFT;
 
+    private CreditCardId creditCardId = null;
+
     private OrderTestDataBuilder() {
     }
 
@@ -35,7 +37,7 @@ public final class OrderTestDataBuilder {
         Order order = Order.draft(customerId);
         order.changeShipping(shipping);
         order.changeBilling(billing);
-        order.changePaymentMethod(paymentMethod);
+        order.changePaymentMethod(paymentMethod, creditCardId);
 
         if (withItems) {
             order.addItem(
@@ -155,6 +157,11 @@ public final class OrderTestDataBuilder {
 
     public OrderTestDataBuilder status(OrderStatus status) {
         this.status = status;
+        return this;
+    }
+
+    public OrderTestDataBuilder status(CreditCardId creditCardId) {
+        this.creditCardId = creditCardId;
         return this;
     }
 

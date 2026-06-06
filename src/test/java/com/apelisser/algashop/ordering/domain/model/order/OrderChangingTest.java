@@ -42,7 +42,7 @@ public class OrderChangingTest {
             order -> order.addItem(ProductTestDataBuilder.aProduct().build(), new Quantity(1)),
             order -> order.changeBilling(OrderTestDataBuilder.aBilling()),
             order -> order.changeShipping(OrderTestDataBuilder.aShipping()),
-            order -> order.changePaymentMethod(CREDIT_CARD),
+            order -> order.changePaymentMethod(CREDIT_CARD, new CreditCardId()),
             order -> {
                 order.addItem(ProductTestDataBuilder.aProduct().build(), new Quantity(1));
                 OrderItem orderItem = order.items().iterator().next();

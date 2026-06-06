@@ -57,7 +57,7 @@ class CheckoutServiceTest {
         Billing billing = OrderTestDataBuilder.aBilling();
         PaymentMethod paymentMethod = PaymentMethod.CREDIT_CARD;
 
-        Order order = checkoutService.checkout(customer, shoppingCart, billing, shipping, paymentMethod);
+        Order order = checkoutService.checkout(customer, shoppingCart, billing, shipping, paymentMethod, new CreditCardId());
 
         Money expectedOrderTotalAmount = shoppingCartTotalAmount.add(shipping.cost());
 
@@ -102,7 +102,8 @@ class CheckoutServiceTest {
                 shoppingCart,
                 OrderTestDataBuilder.aBilling(),
                 OrderTestDataBuilder.aShipping(),
-                PaymentMethod.CREDIT_CARD)
+                PaymentMethod.CREDIT_CARD,
+                new CreditCardId())
             );
 
         Assertions.assertThat(shoppingCart.totalAmount()).isEqualTo(expectedTotalAmount);
@@ -125,7 +126,8 @@ class CheckoutServiceTest {
                 shoppingCart,
                 OrderTestDataBuilder.aBilling(),
                 OrderTestDataBuilder.aShipping(),
-                PaymentMethod.CREDIT_CARD)
+                PaymentMethod.CREDIT_CARD,
+                new CreditCardId())
             );
     }
 
@@ -150,7 +152,7 @@ class CheckoutServiceTest {
         Billing billing = OrderTestDataBuilder.aBilling();
         PaymentMethod paymentMethod = PaymentMethod.CREDIT_CARD;
 
-        Order order = checkoutService.checkout(customer, shoppingCart, billing, shipping, paymentMethod);
+        Order order = checkoutService.checkout(customer, shoppingCart, billing, shipping, paymentMethod, new CreditCardId());
 
         Assertions.assertThat(order).isNotNull();
         Assertions.assertThat(order.isPlaced()).isTrue();

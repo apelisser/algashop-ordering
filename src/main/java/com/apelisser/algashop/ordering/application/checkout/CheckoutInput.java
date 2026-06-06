@@ -33,14 +33,17 @@ public class CheckoutInput {
     @Valid
     private BillingData billing;
 
+    private UUID creditCardId;
+
     public CheckoutInput() {
     }
 
-    public CheckoutInput(UUID shoppingCartId, String paymentMethod, ShippingInput shipping, BillingData billing) {
+    public CheckoutInput(UUID shoppingCartId, String paymentMethod, ShippingInput shipping, BillingData billing, UUID creditCardId) {
         this.shoppingCartId = shoppingCartId;
         this.paymentMethod = paymentMethod;
         this.shipping = shipping;
         this.billing = billing;
+        this.creditCardId = creditCardId;
     }
 
 }

@@ -41,16 +41,19 @@ public class BuyNowInput {
     @NotBlank
     private String paymentMethod;
 
+    private UUID creditCardId;
+
     public BuyNowInput() {
     }
 
-    public BuyNowInput(ShippingInput shipping, BillingData billing, UUID productId, UUID customerId, Integer quantity, String paymentMethod) {
+    public BuyNowInput(ShippingInput shipping, BillingData billing, UUID productId, UUID customerId, Integer quantity, String paymentMethod, UUID creditCardId) {
         this.shipping = shipping;
         this.billing = billing;
         this.productId = productId;
         this.customerId = customerId;
         this.quantity = quantity;
         this.paymentMethod = paymentMethod;
+        this.creditCardId = creditCardId;
     }
 
 }

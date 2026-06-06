@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -28,6 +29,7 @@ public class OrderDetailOutput {
     private OffsetDateTime readyAt;
     private String status;
     private String paymentMethod;
+    private UUID creditCardId;
     private ShippingData shipping;
     private BillingData billing;
 
@@ -39,7 +41,7 @@ public class OrderDetailOutput {
 
     public OrderDetailOutput(String id, CustomerMinimalOutput customer, Integer totalItems, BigDecimal totalAmount,
             OffsetDateTime placedAt, OffsetDateTime paidAt, OffsetDateTime canceledAt, OffsetDateTime readyAt,
-            String status, String paymentMethod, ShippingData shipping, BillingData billing,
+            String status, String paymentMethod, UUID creditCardId, ShippingData shipping, BillingData billing,
             List<OrderItemDetailOutput> items) {
         this.id = id;
         this.customer = customer;
@@ -51,6 +53,7 @@ public class OrderDetailOutput {
         this.readyAt = readyAt;
         this.status = status;
         this.paymentMethod = paymentMethod;
+        this.creditCardId = creditCardId;
         this.shipping = shipping;
         this.billing = billing;
         this.items = items;

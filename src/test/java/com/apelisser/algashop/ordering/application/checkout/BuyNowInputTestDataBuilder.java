@@ -4,6 +4,7 @@ import com.apelisser.algashop.ordering.application.commons.AddressData;
 import com.apelisser.algashop.ordering.application.order.query.BillingData;
 import com.apelisser.algashop.ordering.application.order.query.RecipientData;
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerTestDataBuilder;
+import com.apelisser.algashop.ordering.domain.model.order.CreditCardId;
 import com.apelisser.algashop.ordering.domain.model.product.ProductTestDataBuilder;
 
 public class BuyNowInputTestDataBuilder {
@@ -14,6 +15,7 @@ public class BuyNowInputTestDataBuilder {
             .customerId(CustomerTestDataBuilder.DEFAULT_CUSTOMER_ID.value())
             .quantity(2)
             .paymentMethod("CREDIT_CARD")
+            .creditCardId(new CreditCardId().id())
             .shipping(ShippingInput.builder()
                 .recipient(RecipientData.builder()
                     .firstName("John")

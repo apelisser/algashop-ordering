@@ -13,7 +13,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -49,7 +48,7 @@ class BuyNowServiceTest {
         PaymentMethod paymentMethod = PaymentMethod.CREDIT_CARD;
         Money expectedTotalAmount = product.price().multiply(quantity).add(shipping.cost());
 
-        Order order = buyNowService.buyNow(product, customer, billing, shipping, quantity, paymentMethod);
+        Order order = buyNowService.buyNow(product, customer, billing, shipping, quantity, paymentMethod, new CreditCardId());
         Assertions.assertThat(order).isNotNull();
         Assertions.assertThat(order.isPlaced()).isTrue();
         Assertions.assertThat(order.customerId()).isEqualTo(customer.id());
@@ -70,7 +69,8 @@ class BuyNowServiceTest {
                 OrderTestDataBuilder.aBilling(),
                 OrderTestDataBuilder.aShipping(),
                 new Quantity(2),
-                PaymentMethod.CREDIT_CARD));
+                PaymentMethod.CREDIT_CARD,
+                new CreditCardId()));
     }
 
     @Test
@@ -84,7 +84,8 @@ class BuyNowServiceTest {
                 OrderTestDataBuilder.aBilling(),
                 OrderTestDataBuilder.aShipping(),
                 invalidQuantity,
-                PaymentMethod.CREDIT_CARD));
+                PaymentMethod.CREDIT_CARD,
+                new CreditCardId()));
     }
 
     @Test
@@ -101,7 +102,7 @@ class BuyNowServiceTest {
         Money expectedTotalAmount = product.price().multiply(quantity);
         Shipping expectedShipping = shipping.toBuilder().cost(Money.ZERO).build();
 
-        Order order = buyNowService.buyNow(product, customer, billing, shipping, quantity, paymentMethod);
+        Order order = buyNowService.buyNow(product, customer, billing, shipping, quantity, paymentMethod, new CreditCardId());
         Assertions.assertThat(order).isNotNull();
         Assertions.assertThat(order.isPlaced()).isTrue();
         Assertions.assertThat(order.customerId()).isEqualTo(customer.id());

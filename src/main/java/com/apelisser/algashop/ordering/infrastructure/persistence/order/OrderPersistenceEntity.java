@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.domain.AbstractAggregateRoot;
@@ -55,6 +54,7 @@ public class OrderPersistenceEntity extends AbstractAggregateRoot<OrderPersisten
     private Integer totalItems;
     private String status;
     private String paymentMethod;
+    private UUID creditCardId;
 
     private OffsetDateTime placedAt;
     private OffsetDateTime paidAt;

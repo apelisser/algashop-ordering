@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.application.checkout;
 
+import com.apelisser.algashop.ordering.domain.model.DomainException;
 import com.apelisser.algashop.ordering.domain.model.commons.Quantity;
 import com.apelisser.algashop.ordering.domain.model.commons.ZipCode;
 import com.apelisser.algashop.ordering.domain.model.customer.Customer;
@@ -8,6 +9,7 @@ import com.apelisser.algashop.ordering.domain.model.customer.CustomerNotFoundExc
 import com.apelisser.algashop.ordering.domain.model.customer.Customers;
 import com.apelisser.algashop.ordering.domain.model.order.Billing;
 import com.apelisser.algashop.ordering.domain.model.order.BuyNowService;
+import com.apelisser.algashop.ordering.domain.model.order.CreditCardId;
 import com.apelisser.algashop.ordering.domain.model.order.Order;
 import com.apelisser.algashop.ordering.domain.model.order.Orders;
 import com.apelisser.algashop.ordering.domain.model.order.PaymentMethod;
@@ -56,6 +58,14 @@ public class BuyNowApplicationService {
         CustomerId customerId = new CustomerId(input.getCustomerId());
         ProductId productId = new ProductId(input.getProductId());
         Quantity quantity = new Quantity(input.getQuantity());
+        CreditCardId creditCardId = null;
+
+        if (paymentMethod == PaymentMethod.CREDIT_CARD) {
+            if (input.getCreditCardId() == null) {
+                throw new DomainException("Credit card id is required");
+            }
+            creditCardId = new CreditCardId(input.getCreditCardId());
+        }
 
         Customer customer = customers.ofId(customerId).orElseThrow(() -> new CustomerNotFoundException(customerId));
         Product product = productCatalogService.ofId(productId).orElseThrow(() -> new ProductNotFoundException(productId));
@@ -66,7 +76,7 @@ public class BuyNowApplicationService {
         Billing billing = billingInputDisassembler.toDomainModel(input.getBilling());
 
 
-        Order order = buyNowService.buyNow(product, customer, billing, shipping, quantity, paymentMethod);
+        Order order = buyNowService.buyNow(product, customer, billing, shipping, quantity, paymentMethod, creditCardId);
 
         orders.add(order);
 

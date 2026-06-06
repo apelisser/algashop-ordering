@@ -3,6 +3,7 @@ package com.apelisser.algashop.ordering.application.checkout;
 import com.apelisser.algashop.ordering.application.commons.AddressData;
 import com.apelisser.algashop.ordering.application.order.query.BillingData;
 import com.apelisser.algashop.ordering.application.order.query.RecipientData;
+import com.apelisser.algashop.ordering.domain.model.order.CreditCardId;
 import com.apelisser.algashop.ordering.domain.model.order.PaymentMethod;
 
 import java.util.UUID;
@@ -15,6 +16,7 @@ public class CheckoutInputTestDataBuilder {
         return CheckoutInput.builder()
             .shoppingCartId(UUID.randomUUID())
             .paymentMethod(PAYMENT_METHOD)
+            .creditCardId(new CreditCardId().id())
             .shipping(aShippingInput())
             .billing(aBillingData());
     }
