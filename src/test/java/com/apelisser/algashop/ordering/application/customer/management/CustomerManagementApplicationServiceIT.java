@@ -17,19 +17,25 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.transaction.annotation.Transactional;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 @SpringBootTest
 @Transactional
+@Testcontainers
 class CustomerManagementApplicationServiceIT {
 
+    @Container
+    @ServiceConnection
     static PostgreSQLContainer postgreSqlContainer = new PostgreSQLContainer<>("postgres:17-alpine")
         .withDatabaseName("ordering_test");
 
@@ -45,29 +51,27 @@ class CustomerManagementApplicationServiceIT {
     @Autowired
     CustomerQueryService queryService;
 
-    @BeforeAll
-    static void setUpAll() {
-        // Required in some environments where the Docker client resolves API v1.32,
-        // causing Testcontainers initialization to fail against newer Docker daemons.
-        System.setProperty("api.version", "1.54");
+    // Removed in favor of @Testcontainers and @Container annotations
+    // @BeforeAll
+    // static void setUpAll() {
+    //   postgreSqlContainer.start();
+    // }
 
-        postgreSqlContainer.start();
-    }
+    // @AfterAll
+    // static void tearDownAll() {
+    //     postgreSqlContainer.stop();
+    // }
 
-    @AfterAll
-    static void tearDownAll() {
-        postgreSqlContainer.stop();
-    }
-
-    @DynamicPropertySource
-    static void configurePropertySource(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url", postgreSqlContainer::getJdbcUrl);
-        registry.add("spring.datasource.username", postgreSqlContainer::getUsername);
-        registry.add("spring.datasource.password", postgreSqlContainer::getPassword);
-        registry.add("spring.flyway.url", postgreSqlContainer::getJdbcUrl);
-        registry.add("spring.flyway.user", postgreSqlContainer::getUsername);
-        registry.add("spring.flyway.password", postgreSqlContainer::getPassword);
-    }
+    // Removed in favor of @Testcontainers and @ServiceConnection annotations
+    // @DynamicPropertySource
+    // static void configurePropertySource(DynamicPropertyRegistry registry) {
+    //     registry.add("spring.datasource.url", postgreSqlContainer::getJdbcUrl);
+    //     registry.add("spring.datasource.username", postgreSqlContainer::getUsername);
+    //     registry.add("spring.datasource.password", postgreSqlContainer::getPassword);
+    //     registry.add("spring.flyway.url", postgreSqlContainer::getJdbcUrl);
+    //     registry.add("spring.flyway.user", postgreSqlContainer::getUsername);
+    //     registry.add("spring.flyway.password", postgreSqlContainer::getPassword);
+    // }
 
     @Test
     void shouldRegister() {

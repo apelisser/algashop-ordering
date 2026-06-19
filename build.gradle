@@ -89,6 +89,10 @@ test {
         excludeTestsMatching("*IT")
     }
     jvmArgs += "-javaagent:${configurations.mockitoAgent.asPath}"
+
+    // Required in some environments where the Docker client resolves API v1.32,
+    // causing Testcontainers initialization to fail against newer Docker daemons.
+//    systemProperty 'api.version', '1.54'
 }
 
 tasks.named('check') {
@@ -115,6 +119,10 @@ tasks.register('integrationTest', Test) {
         includeTestsMatching "*IT"
         excludeTestsMatching "*Test"
     }
+
+    // Required in some environments where the Docker client resolves API v1.32,
+    // causing Testcontainers initialization to fail against newer Docker daemons.
+    systemProperty 'api.version', '1.54'
 }
 
 bootJar {
