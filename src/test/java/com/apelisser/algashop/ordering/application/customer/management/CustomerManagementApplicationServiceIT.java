@@ -11,12 +11,17 @@ import com.apelisser.algashop.ordering.domain.model.customer.CustomerNotFoundExc
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerRegisteredEvent;
 import com.apelisser.algashop.ordering.infrastructure.listener.customer.CustomerEventListener;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
 import org.springframework.transaction.annotation.Transactional;
+import org.testcontainers.containers.PostgreSQLContainer;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -24,6 +29,9 @@ import java.util.UUID;
 @SpringBootTest
 @Transactional
 class CustomerManagementApplicationServiceIT {
+
+    static PostgreSQLContainer postgreSqlContainer = new PostgreSQLContainer<>("postgres:17-alpine")
+        .withDatabaseName("ordering_test");
 
     @Autowired
     CustomerManagementApplicationService customerManagementApplicationService;
@@ -36,6 +44,30 @@ class CustomerManagementApplicationServiceIT {
 
     @Autowired
     CustomerQueryService queryService;
+
+    @BeforeAll
+    static void setUpAll() {
+        // Required in some environments where the Docker client resolves API v1.32,
+        // causing Testcontainers initialization to fail against newer Docker daemons.
+        System.setProperty("api.version", "1.54");
+
+        postgreSqlContainer.start();
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        postgreSqlContainer.stop();
+    }
+
+    @DynamicPropertySource
+    static void configurePropertySource(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url", postgreSqlContainer::getJdbcUrl);
+        registry.add("spring.datasource.username", postgreSqlContainer::getUsername);
+        registry.add("spring.datasource.password", postgreSqlContainer::getPassword);
+        registry.add("spring.flyway.url", postgreSqlContainer::getJdbcUrl);
+        registry.add("spring.flyway.user", postgreSqlContainer::getUsername);
+        registry.add("spring.flyway.password", postgreSqlContainer::getPassword);
+    }
 
     @Test
     void shouldRegister() {
