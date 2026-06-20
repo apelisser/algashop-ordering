@@ -1,16 +1,11 @@
 package com.apelisser.algashop.ordering.presentation.shoppingcart;
 
 import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartId;
-import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityRepository;
 import com.apelisser.algashop.ordering.infrastructure.persistence.shoppingcart.ShoppingCartPersistenceEntity;
 import com.apelisser.algashop.ordering.infrastructure.persistence.shoppingcart.ShoppingCartPersistenceEntityRepository;
+import com.apelisser.algashop.ordering.presentation.AbstractPresentationIT;
 import com.apelisser.algashop.ordering.utils.AlgaShopResourceUtils;
-import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import com.github.tomakehurst.wiremock.extension.responsetemplating.ResponseTemplateTransformer;
 import io.restassured.RestAssured;
-import io.restassured.config.JsonConfig;
-import io.restassured.path.json.config.JsonPathConfig;
 import org.assertj.core.api.Assertions;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterAll;
@@ -18,62 +13,32 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.jdbc.Sql;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@DirtiesContext(classMode =  DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-//@Sql(scripts = "classpath:db/clean/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD) // to avoid @DirtiesContext
-@Sql(scripts = "classpath:db/testdata/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
-@Sql(scripts = "classpath:db/clean/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_CLASS)
-class ShoppingCartControllerIT {
-
-    @LocalServerPort
-    int port;
-
-    @Autowired
-    CustomerPersistenceEntityRepository customerRepository;
+class ShoppingCartControllerIT extends AbstractPresentationIT {
 
     @Autowired
     ShoppingCartPersistenceEntityRepository shoppingCartRepository;
 
-    static final UUID validCustomerId = UUID.fromString("6e148bd5-47f6-4022-b9da-07cfaa294f7a");
     static final UUID validShoppingCartId = UUID.fromString("4f31582a-66e6-4601-a9d3-ff608c2d4461");
-
-    static WireMockServer wireMockProductCatalog;
 
     @BeforeAll
     static void setUpAll() {
-        wireMockProductCatalog = new WireMockServer(WireMockConfiguration.options()
-            .port(8781)
-            .usingFilesUnderClasspath("src/test/resources/wiremock/product-catalog")
-            .extensions(new ResponseTemplateTransformer(true)));
-
-        wireMockProductCatalog.start();
+        AbstractPresentationIT.initWireMock();
     }
 
     @AfterAll
     static void tearDownAll() {
-        wireMockProductCatalog.stop();
+        AbstractPresentationIT.stopWireMock();
     }
 
     @BeforeEach
     void setUp() {
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-        RestAssured.port = port;
-
-        JsonConfig jsonConfig = JsonConfig.jsonConfig().numberReturnType(JsonPathConfig.NumberReturnType.BIG_DECIMAL);
-        RestAssured.config().jsonConfig(jsonConfig);
-
-        if (!wireMockProductCatalog.isRunning()) {
-            wireMockProductCatalog.start();
-        }
+        super.beforeEach();
     }
 
     @Test
