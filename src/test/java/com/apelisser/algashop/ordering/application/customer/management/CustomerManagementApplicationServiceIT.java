@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.application.customer.management;
 
+import com.apelisser.algashop.ordering.application.AbstractApplicationIT;
 import com.apelisser.algashop.ordering.application.customer.notification.CustomerNotificationApplicationService;
 import com.apelisser.algashop.ordering.application.customer.query.CustomerOutput;
 import com.apelisser.algashop.ordering.application.customer.query.CustomerQueryService;
@@ -11,33 +12,15 @@ import com.apelisser.algashop.ordering.domain.model.customer.CustomerNotFoundExc
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerRegisteredEvent;
 import com.apelisser.algashop.ordering.infrastructure.listener.customer.CustomerEventListener;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
-import org.springframework.transaction.annotation.Transactional;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-@SpringBootTest
-@Transactional
-@Testcontainers
-class CustomerManagementApplicationServiceIT {
-
-    @Container
-    @ServiceConnection
-    static PostgreSQLContainer postgreSqlContainer = new PostgreSQLContainer<>("postgres:17-alpine")
-        .withDatabaseName("ordering_test");
+class CustomerManagementApplicationServiceIT extends AbstractApplicationIT {
 
     @Autowired
     CustomerManagementApplicationService customerManagementApplicationService;
@@ -50,28 +33,6 @@ class CustomerManagementApplicationServiceIT {
 
     @Autowired
     CustomerQueryService queryService;
-
-    // Removed in favor of @Testcontainers and @Container annotations
-    // @BeforeAll
-    // static void setUpAll() {
-    //   postgreSqlContainer.start();
-    // }
-
-    // @AfterAll
-    // static void tearDownAll() {
-    //     postgreSqlContainer.stop();
-    // }
-
-    // Removed in favor of @Testcontainers and @ServiceConnection annotations
-    // @DynamicPropertySource
-    // static void configurePropertySource(DynamicPropertyRegistry registry) {
-    //     registry.add("spring.datasource.url", postgreSqlContainer::getJdbcUrl);
-    //     registry.add("spring.datasource.username", postgreSqlContainer::getUsername);
-    //     registry.add("spring.datasource.password", postgreSqlContainer::getPassword);
-    //     registry.add("spring.flyway.url", postgreSqlContainer::getJdbcUrl);
-    //     registry.add("spring.flyway.user", postgreSqlContainer::getUsername);
-    //     registry.add("spring.flyway.password", postgreSqlContainer::getPassword);
-    // }
 
     @Test
     void shouldRegister() {

@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.application.customer.query;
 
+import com.apelisser.algashop.ordering.application.AbstractApplicationIT;
 import com.apelisser.algashop.ordering.domain.model.commons.Email;
 import com.apelisser.algashop.ordering.domain.model.commons.FullName;
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerId;
@@ -17,11 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
 
-@SpringBootTest
-//@Sql(scripts = "classpath:db/clean/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS) //
-//@Sql(scripts = "classpath:db/clean/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-@Transactional // pode ser redundante com o @Sql(...AFTER_TEST_METHOD)
-class CustomerQueryServiceIT {
+class CustomerQueryServiceIT extends AbstractApplicationIT {
 
     @Autowired
     CustomerQueryService queryService;
