@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.application.checkout;
 
+import com.apelisser.algashop.ordering.application.AbstractApplicationIT;
 import com.apelisser.algashop.ordering.domain.model.commons.Money;
 import com.apelisser.algashop.ordering.domain.model.commons.Quantity;
 import com.apelisser.algashop.ordering.domain.model.customer.Customer;
@@ -25,16 +26,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
-@SpringBootTest
-@Transactional
-class CheckoutApplicationServiceIT {
+class CheckoutApplicationServiceIT extends AbstractApplicationIT {
 
     @Autowired
     CheckoutApplicationService checkoutApplicationService;

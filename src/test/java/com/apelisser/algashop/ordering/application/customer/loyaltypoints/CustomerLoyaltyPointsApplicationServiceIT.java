@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.application.customer.loyaltypoints;
 
+import com.apelisser.algashop.ordering.application.AbstractApplicationIT;
 import com.apelisser.algashop.ordering.domain.model.commons.Money;
 import com.apelisser.algashop.ordering.domain.model.commons.Quantity;
 import com.apelisser.algashop.ordering.domain.model.customer.CantAddLoyaltyPointsOrderIsNotReadyException;
@@ -23,13 +24,9 @@ import com.apelisser.algashop.ordering.infrastructure.listener.customer.Customer
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.transaction.annotation.Transactional;
 
-@SpringBootTest
-@Transactional
-class CustomerLoyaltyPointsApplicationServiceIT {
+class CustomerLoyaltyPointsApplicationServiceIT extends AbstractApplicationIT {
 
     @Autowired
     Customers customers;

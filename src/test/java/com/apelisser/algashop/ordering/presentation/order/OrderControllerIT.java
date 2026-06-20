@@ -5,13 +5,9 @@ import com.apelisser.algashop.ordering.application.checkout.BuyNowInputTestDataB
 import com.apelisser.algashop.ordering.application.order.query.OrderDetailOutput;
 import com.apelisser.algashop.ordering.domain.model.order.OrderId;
 import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderPersistenceEntityRepository;
+import com.apelisser.algashop.ordering.presentation.AbstractPresentationIT;
 import com.apelisser.algashop.ordering.utils.AlgaShopResourceUtils;
-import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import com.github.tomakehurst.wiremock.extension.responsetemplating.ResponseTemplateTransformer;
 import io.restassured.RestAssured;
-import io.restassured.config.JsonConfig;
-import io.restassured.path.json.config.JsonPathConfig;
 import org.assertj.core.api.Assertions;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterAll;
@@ -19,27 +15,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.jdbc.Sql;
 
 import java.util.UUID;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@AutoConfigureStubRunner(
-//    stubsMode = StubRunnerProperties.StubsMode.LOCAL,
-//    ids = "com.apelisser.algashop:product-catalog:0.0.1-SNAPSHOT:8781"
-//)
-//@DirtiesContext(classMode =  DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-//@Sql(scripts = "classpath:db/clean/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD) // to avoid @DirtiesContext
-@Sql(scripts = "classpath:db/testdata/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
-@Sql(scripts = "classpath:db/clean/afterMigrate.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_CLASS)
-public class OrderControllerIT {
-
-    @LocalServerPort
-    private int port;
+public class OrderControllerIT extends AbstractPresentationIT {
 
     @Autowired
     OrderPersistenceEntityRepository orderPersistenceEntityRepository;
@@ -47,46 +28,19 @@ public class OrderControllerIT {
     static final UUID validCustomerId = UUID.fromString("6e148bd5-47f6-4022-b9da-07cfaa294f7a");
     static final UUID validProductId = UUID.fromString("fffe4676-367b-4015-941a-41c31c3b3d3e");
 
-    static WireMockServer wireMockProductCatalog;
-    static WireMockServer wireMockRapidex;
-
     @BeforeAll
     static void setUpAll() {
-        wireMockRapidex = new WireMockServer(WireMockConfiguration.options()
-            .port(8780)
-            .usingFilesUnderClasspath("src/test/resources/wiremock/rapidex")
-            .extensions(new ResponseTemplateTransformer(true)));
-
-        wireMockProductCatalog = new WireMockServer(WireMockConfiguration.options()
-            .port(8781)
-            .usingFilesUnderClasspath("src/test/resources/wiremock/product-catalog")
-            .extensions(new ResponseTemplateTransformer(true)));
-
-        wireMockRapidex.start();
-        wireMockProductCatalog.start();
+        AbstractPresentationIT.initWireMock();
     }
 
     @AfterAll
     static void tearDownAll() {
-        wireMockRapidex.stop();
-        wireMockProductCatalog.stop();
+        AbstractPresentationIT.stopWireMock();
     }
 
     @BeforeEach
     void setUp() {
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-        RestAssured.port = port;
-
-        JsonConfig jsonConfig = JsonConfig.jsonConfig().numberReturnType(JsonPathConfig.NumberReturnType.BIG_DECIMAL);
-        RestAssured.config().jsonConfig(jsonConfig);
-
-        if (!wireMockRapidex.isRunning()) {
-            wireMockRapidex.start();
-        }
-
-        if (!wireMockProductCatalog.isRunning()) {
-            wireMockProductCatalog.start();
-        }
+        super.beforeEach();
     }
 
     @Test

@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.application.shoppingcart.management;
 
+import com.apelisser.algashop.ordering.application.AbstractApplicationIT;
 import com.apelisser.algashop.ordering.domain.model.commons.Money;
 import com.apelisser.algashop.ordering.domain.model.commons.Quantity;
 import com.apelisser.algashop.ordering.domain.model.customer.Customer;
@@ -20,17 +21,13 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.bean.override.mockito.MockitoSpyBean;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
 
-@SpringBootTest
-@Transactional
-class ShoppingCartManagementApplicationServiceIT {
+class ShoppingCartManagementApplicationServiceIT extends AbstractApplicationIT {
 
     @Autowired
     ShoppingCartManagementApplicationService shoppingCartManagementApplicationService;
