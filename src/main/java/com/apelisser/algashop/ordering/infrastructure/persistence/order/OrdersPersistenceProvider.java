@@ -1,10 +1,10 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.order;
 
-import com.apelisser.algashop.ordering.domain.model.order.Order;
-import com.apelisser.algashop.ordering.domain.model.order.Orders;
-import com.apelisser.algashop.ordering.domain.model.commons.Money;
-import com.apelisser.algashop.ordering.domain.model.customer.CustomerId;
-import com.apelisser.algashop.ordering.domain.model.order.OrderId;
+import com.apelisser.algashop.ordering.core.domain.model.order.Order;
+import com.apelisser.algashop.ordering.core.domain.model.order.Orders;
+import com.apelisser.algashop.ordering.core.domain.model.commons.Money;
+import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerId;
+import com.apelisser.algashop.ordering.core.domain.model.order.OrderId;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

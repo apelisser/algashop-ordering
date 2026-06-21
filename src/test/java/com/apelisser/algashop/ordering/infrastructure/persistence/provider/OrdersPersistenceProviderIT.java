@@ -1,8 +1,8 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.provider;
 
-import com.apelisser.algashop.ordering.domain.model.order.Order;
-import com.apelisser.algashop.ordering.domain.model.order.OrderStatus;
-import com.apelisser.algashop.ordering.domain.model.order.OrderTestDataBuilder;
+import com.apelisser.algashop.ordering.core.domain.model.order.Order;
+import com.apelisser.algashop.ordering.core.domain.model.order.OrderStatus;
+import com.apelisser.algashop.ordering.core.domain.model.order.OrderTestDataBuilder;
 import com.apelisser.algashop.ordering.infrastructure.AbstractInfrastructureAPI;
 import com.apelisser.algashop.ordering.infrastructure.persistence.SpringDataAuditingConfig;
 import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityAssembler;

@@ -1,6 +1,6 @@
 package com.apelisser.algashop.ordering.presentation.shoppingcart;
 
-import com.apelisser.algashop.ordering.application.shoppingcart.query.ShoppingCartItemOutput;
+import com.apelisser.algashop.ordering.core.application.shoppingcart.query.ShoppingCartItemOutput;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

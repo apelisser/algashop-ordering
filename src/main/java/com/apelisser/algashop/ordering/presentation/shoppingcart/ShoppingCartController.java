@@ -1,12 +1,12 @@
 package com.apelisser.algashop.ordering.presentation.shoppingcart;
 
-import com.apelisser.algashop.ordering.application.shoppingcart.management.ShoppingCartItemInput;
-import com.apelisser.algashop.ordering.application.shoppingcart.management.ShoppingCartManagementApplicationService;
-import com.apelisser.algashop.ordering.application.shoppingcart.query.ShoppingCartItemOutput;
-import com.apelisser.algashop.ordering.application.shoppingcart.query.ShoppingCartOutput;
-import com.apelisser.algashop.ordering.application.shoppingcart.query.ShoppingCartQueryService;
-import com.apelisser.algashop.ordering.domain.model.customer.CustomerNotFoundException;
-import com.apelisser.algashop.ordering.domain.model.product.ProductNotFoundException;
+import com.apelisser.algashop.ordering.core.application.shoppingcart.management.ShoppingCartItemInput;
+import com.apelisser.algashop.ordering.core.application.shoppingcart.management.ShoppingCartManagementApplicationService;
+import com.apelisser.algashop.ordering.core.application.shoppingcart.query.ShoppingCartItemOutput;
+import com.apelisser.algashop.ordering.core.application.shoppingcart.query.ShoppingCartOutput;
+import com.apelisser.algashop.ordering.core.application.shoppingcart.query.ShoppingCartQueryService;
+import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerNotFoundException;
+import com.apelisser.algashop.ordering.core.domain.model.product.ProductNotFoundException;
 import com.apelisser.algashop.ordering.presentation.UnprocessableEntityException;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

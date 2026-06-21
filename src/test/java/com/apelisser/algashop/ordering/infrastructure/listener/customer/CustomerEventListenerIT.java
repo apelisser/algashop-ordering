@@ -1,14 +1,14 @@
 package com.apelisser.algashop.ordering.infrastructure.listener.customer;
 
-import com.apelisser.algashop.ordering.application.customer.loyaltypoints.CustomerLoyaltyPointsApplicationService;
-import com.apelisser.algashop.ordering.application.customer.notification.CustomerNotificationApplicationService;
-import com.apelisser.algashop.ordering.application.customer.notification.CustomerNotificationApplicationService.NotifyNewRegistrationInput;
-import com.apelisser.algashop.ordering.domain.model.commons.Email;
-import com.apelisser.algashop.ordering.domain.model.commons.FullName;
-import com.apelisser.algashop.ordering.domain.model.customer.CustomerId;
-import com.apelisser.algashop.ordering.domain.model.customer.CustomerRegisteredEvent;
-import com.apelisser.algashop.ordering.domain.model.order.OrderId;
-import com.apelisser.algashop.ordering.domain.model.order.OrderReadyEvent;
+import com.apelisser.algashop.ordering.core.application.customer.loyaltypoints.CustomerLoyaltyPointsApplicationService;
+import com.apelisser.algashop.ordering.core.application.customer.notification.CustomerNotificationApplicationService;
+import com.apelisser.algashop.ordering.core.application.customer.notification.CustomerNotificationApplicationService.NotifyNewRegistrationInput;
+import com.apelisser.algashop.ordering.core.domain.model.commons.Email;
+import com.apelisser.algashop.ordering.core.domain.model.commons.FullName;
+import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerId;
+import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerRegisteredEvent;
+import com.apelisser.algashop.ordering.core.domain.model.order.OrderId;
+import com.apelisser.algashop.ordering.core.domain.model.order.OrderReadyEvent;
 import com.apelisser.algashop.ordering.infrastructure.AbstractInfrastructureAPI;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

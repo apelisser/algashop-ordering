@@ -1,15 +1,15 @@
 package com.apelisser.algashop.ordering.contract.base;
 
-import com.apelisser.algashop.ordering.application.checkout.BuyNowApplicationService;
-import com.apelisser.algashop.ordering.application.checkout.BuyNowInput;
-import com.apelisser.algashop.ordering.application.checkout.CheckoutApplicationService;
-import com.apelisser.algashop.ordering.application.checkout.CheckoutInput;
-import com.apelisser.algashop.ordering.application.order.query.OrderDetailOutputTestDataBuilder;
-import com.apelisser.algashop.ordering.application.order.query.OrderFilter;
-import com.apelisser.algashop.ordering.application.order.query.OrderQueryService;
-import com.apelisser.algashop.ordering.application.order.query.OrderSummaryOutput;
-import com.apelisser.algashop.ordering.application.order.query.OrderSummaryOutputTestDataBuilder;
-import com.apelisser.algashop.ordering.domain.model.order.OrderNotFoundException;
+import com.apelisser.algashop.ordering.core.application.checkout.BuyNowApplicationService;
+import com.apelisser.algashop.ordering.core.application.checkout.BuyNowInput;
+import com.apelisser.algashop.ordering.core.application.checkout.CheckoutApplicationService;
+import com.apelisser.algashop.ordering.core.application.checkout.CheckoutInput;
+import com.apelisser.algashop.ordering.core.application.order.query.OrderDetailOutputTestDataBuilder;
+import com.apelisser.algashop.ordering.core.application.order.query.OrderFilter;
+import com.apelisser.algashop.ordering.core.application.order.query.OrderQueryService;
+import com.apelisser.algashop.ordering.core.application.order.query.OrderSummaryOutput;
+import com.apelisser.algashop.ordering.core.application.order.query.OrderSummaryOutputTestDataBuilder;
+import com.apelisser.algashop.ordering.core.domain.model.order.OrderNotFoundException;
 import com.apelisser.algashop.ordering.presentation.order.OrderController;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;

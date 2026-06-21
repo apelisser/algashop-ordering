@@ -1,6 +1,6 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.entity;
 
-import com.apelisser.algashop.ordering.domain.model.IdGenerator;
+import com.apelisser.algashop.ordering.core.domain.model.IdGenerator;
 import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderItemPersistenceEntity;
 import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderPersistenceEntity;
 

@@ -1,8 +1,8 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.provider;
 
-import com.apelisser.algashop.ordering.domain.model.commons.Email;
-import com.apelisser.algashop.ordering.domain.model.customer.Customer;
-import com.apelisser.algashop.ordering.domain.model.customer.CustomerTestDataBuilder;
+import com.apelisser.algashop.ordering.core.domain.model.commons.Email;
+import com.apelisser.algashop.ordering.core.domain.model.customer.Customer;
+import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerTestDataBuilder;
 import com.apelisser.algashop.ordering.infrastructure.AbstractInfrastructureAPI;
 import com.apelisser.algashop.ordering.infrastructure.persistence.SpringDataAuditingConfig;
 import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityAssembler;

@@ -1,12 +1,12 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.disassembler;
 
-import com.apelisser.algashop.ordering.domain.model.order.Order;
-import com.apelisser.algashop.ordering.domain.model.order.OrderStatus;
-import com.apelisser.algashop.ordering.domain.model.order.PaymentMethod;
-import com.apelisser.algashop.ordering.domain.model.commons.Money;
-import com.apelisser.algashop.ordering.domain.model.commons.Quantity;
-import com.apelisser.algashop.ordering.domain.model.customer.CustomerId;
-import com.apelisser.algashop.ordering.domain.model.order.OrderId;
+import com.apelisser.algashop.ordering.core.domain.model.order.Order;
+import com.apelisser.algashop.ordering.core.domain.model.order.OrderStatus;
+import com.apelisser.algashop.ordering.core.domain.model.order.PaymentMethod;
+import com.apelisser.algashop.ordering.core.domain.model.commons.Money;
+import com.apelisser.algashop.ordering.core.domain.model.commons.Quantity;
+import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerId;
+import com.apelisser.algashop.ordering.core.domain.model.order.OrderId;
 import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderPersistenceEntity;
 import com.apelisser.algashop.ordering.infrastructure.persistence.entity.OrderPersistenceEntityTestDataBuilder;
 import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderPersistenceEntityDisassembler;

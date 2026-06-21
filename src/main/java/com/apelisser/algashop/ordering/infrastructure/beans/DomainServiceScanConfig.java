@@ -1,13 +1,13 @@
 package com.apelisser.algashop.ordering.infrastructure.beans;
 
-import com.apelisser.algashop.ordering.domain.model.DomainService;
+import com.apelisser.algashop.ordering.core.domain.model.DomainService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 
 @Configuration
 @ComponentScan(
-    basePackages = "com.apelisser.algashop.ordering.domain.model",
+    basePackages = "com.apelisser.algashop.ordering.core.domain.model",
     includeFilters = @ComponentScan.Filter(
         type = FilterType.ANNOTATION,
         value = DomainService.class

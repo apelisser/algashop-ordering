@@ -1,13 +1,13 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.order;
 
-import com.apelisser.algashop.ordering.application.order.query.CustomerMinimalOutput;
-import com.apelisser.algashop.ordering.application.order.query.OrderDetailOutput;
-import com.apelisser.algashop.ordering.application.order.query.OrderFilter;
-import com.apelisser.algashop.ordering.application.order.query.OrderQueryService;
-import com.apelisser.algashop.ordering.application.order.query.OrderSummaryOutput;
-import com.apelisser.algashop.ordering.application.utility.Mapper;
-import com.apelisser.algashop.ordering.domain.model.order.OrderId;
-import com.apelisser.algashop.ordering.domain.model.order.OrderNotFoundException;
+import com.apelisser.algashop.ordering.core.application.order.query.CustomerMinimalOutput;
+import com.apelisser.algashop.ordering.core.application.order.query.OrderDetailOutput;
+import com.apelisser.algashop.ordering.core.application.order.query.OrderFilter;
+import com.apelisser.algashop.ordering.core.application.order.query.OrderQueryService;
+import com.apelisser.algashop.ordering.core.application.order.query.OrderSummaryOutput;
+import com.apelisser.algashop.ordering.core.application.utility.Mapper;
+import com.apelisser.algashop.ordering.core.domain.model.order.OrderId;
+import com.apelisser.algashop.ordering.core.domain.model.order.OrderNotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;

@@ -1,9 +1,9 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.customer;
 
-import com.apelisser.algashop.ordering.domain.model.customer.Customer;
-import com.apelisser.algashop.ordering.domain.model.customer.Customers;
-import com.apelisser.algashop.ordering.domain.model.commons.Email;
-import com.apelisser.algashop.ordering.domain.model.customer.CustomerId;
+import com.apelisser.algashop.ordering.core.domain.model.customer.Customer;
+import com.apelisser.algashop.ordering.core.domain.model.customer.Customers;
+import com.apelisser.algashop.ordering.core.domain.model.commons.Email;
+import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerId;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

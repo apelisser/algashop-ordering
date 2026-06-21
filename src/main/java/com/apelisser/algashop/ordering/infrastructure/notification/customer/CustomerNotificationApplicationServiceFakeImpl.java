@@ -1,6 +1,6 @@
 package com.apelisser.algashop.ordering.infrastructure.notification.customer;
 
-import com.apelisser.algashop.ordering.application.customer.notification.CustomerNotificationApplicationService;
+import com.apelisser.algashop.ordering.core.application.customer.notification.CustomerNotificationApplicationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

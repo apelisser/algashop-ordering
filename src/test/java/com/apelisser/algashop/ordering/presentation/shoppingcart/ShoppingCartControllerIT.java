@@ -1,6 +1,6 @@
 package com.apelisser.algashop.ordering.presentation.shoppingcart;
 
-import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartId;
+import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCartId;
 import com.apelisser.algashop.ordering.infrastructure.persistence.shoppingcart.ShoppingCartPersistenceEntity;
 import com.apelisser.algashop.ordering.infrastructure.persistence.shoppingcart.ShoppingCartPersistenceEntityRepository;
 import com.apelisser.algashop.ordering.presentation.AbstractPresentationIT;

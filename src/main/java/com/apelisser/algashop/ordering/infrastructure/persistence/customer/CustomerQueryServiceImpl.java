@@ -1,10 +1,10 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.customer;
 
-import com.apelisser.algashop.ordering.application.customer.query.CustomerFilter;
-import com.apelisser.algashop.ordering.application.customer.query.CustomerOutput;
-import com.apelisser.algashop.ordering.application.customer.query.CustomerQueryService;
-import com.apelisser.algashop.ordering.application.customer.query.CustomerSummaryOutput;
-import com.apelisser.algashop.ordering.domain.model.customer.CustomerNotFoundException;
+import com.apelisser.algashop.ordering.core.application.customer.query.CustomerFilter;
+import com.apelisser.algashop.ordering.core.application.customer.query.CustomerOutput;
+import com.apelisser.algashop.ordering.core.application.customer.query.CustomerQueryService;
+import com.apelisser.algashop.ordering.core.application.customer.query.CustomerSummaryOutput;
+import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerNotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
@@ -30,7 +30,7 @@ import java.util.UUID;
 public class CustomerQueryServiceImpl implements CustomerQueryService {
 
     private static final String findByIdAsOutputJPQL = """
-            SELECT new com.apelisser.algashop.ordering.application.customer.query.CustomerOutput(
+            SELECT new com.apelisser.algashop.ordering.core.application.customer.query.CustomerOutput(
                 c.id,
                 c.firstName,
                 c.lastName,
@@ -43,7 +43,7 @@ public class CustomerQueryServiceImpl implements CustomerQueryService {
                 c.registeredAt,
                 c.archivedAt,
                 c.archived,
-                new com.apelisser.algashop.ordering.application.commons.AddressData(
+                new com.apelisser.algashop.ordering.core.application.commons.AddressData(
                     c.address.street,
                     c.address.number,
                     c.address.complement,

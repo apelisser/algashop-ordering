@@ -1,8 +1,8 @@
 package com.apelisser.algashop.ordering.infrastructure.shipping.client.fake;
 
-import com.apelisser.algashop.ordering.domain.model.order.shipping.OriginAddressService;
-import com.apelisser.algashop.ordering.domain.model.commons.Address;
-import com.apelisser.algashop.ordering.domain.model.commons.ZipCode;
+import com.apelisser.algashop.ordering.core.domain.model.order.shipping.OriginAddressService;
+import com.apelisser.algashop.ordering.core.domain.model.commons.Address;
+import com.apelisser.algashop.ordering.core.domain.model.commons.ZipCode;
 import org.springframework.stereotype.Component;
 
 @Component

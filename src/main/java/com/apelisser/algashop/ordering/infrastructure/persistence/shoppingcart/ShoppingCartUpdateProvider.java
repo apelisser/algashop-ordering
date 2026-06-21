@@ -1,8 +1,8 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.shoppingcart;
 
-import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartProductAdjustmentService;
-import com.apelisser.algashop.ordering.domain.model.commons.Money;
-import com.apelisser.algashop.ordering.domain.model.product.ProductId;
+import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCartProductAdjustmentService;
+import com.apelisser.algashop.ordering.core.domain.model.commons.Money;
+import com.apelisser.algashop.ordering.core.domain.model.product.ProductId;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,7 +1,7 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.shoppingcart;
 
-import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCart;
-import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartItem;
+import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCart;
+import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCartItem;
 import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityRepository;
 import org.springframework.stereotype.Component;
 

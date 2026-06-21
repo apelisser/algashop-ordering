@@ -1,8 +1,8 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.assembler;
 
-import com.apelisser.algashop.ordering.domain.model.order.Order;
-import com.apelisser.algashop.ordering.domain.model.order.OrderItem;
-import com.apelisser.algashop.ordering.domain.model.order.OrderTestDataBuilder;
+import com.apelisser.algashop.ordering.core.domain.model.order.Order;
+import com.apelisser.algashop.ordering.core.domain.model.order.OrderItem;
+import com.apelisser.algashop.ordering.core.domain.model.order.OrderTestDataBuilder;
 import com.apelisser.algashop.ordering.infrastructure.persistence.entity.CustomerPersistenceEntityTestDataBuilder;
 import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderItemPersistenceEntity;
 import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderPersistenceEntity;

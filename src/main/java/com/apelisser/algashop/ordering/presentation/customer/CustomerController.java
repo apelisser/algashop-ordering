@@ -1,14 +1,14 @@
 package com.apelisser.algashop.ordering.presentation.customer;
 
-import com.apelisser.algashop.ordering.application.customer.management.CustomerInput;
-import com.apelisser.algashop.ordering.application.customer.management.CustomerManagementApplicationService;
-import com.apelisser.algashop.ordering.application.customer.management.CustomerUpdateInput;
-import com.apelisser.algashop.ordering.application.customer.query.CustomerFilter;
-import com.apelisser.algashop.ordering.application.customer.query.CustomerOutput;
-import com.apelisser.algashop.ordering.application.customer.query.CustomerQueryService;
-import com.apelisser.algashop.ordering.application.customer.query.CustomerSummaryOutput;
-import com.apelisser.algashop.ordering.application.shoppingcart.query.ShoppingCartOutput;
-import com.apelisser.algashop.ordering.application.shoppingcart.query.ShoppingCartQueryService;
+import com.apelisser.algashop.ordering.core.application.customer.management.CustomerInput;
+import com.apelisser.algashop.ordering.core.application.customer.management.CustomerManagementApplicationService;
+import com.apelisser.algashop.ordering.core.application.customer.management.CustomerUpdateInput;
+import com.apelisser.algashop.ordering.core.application.customer.query.CustomerFilter;
+import com.apelisser.algashop.ordering.core.application.customer.query.CustomerOutput;
+import com.apelisser.algashop.ordering.core.application.customer.query.CustomerQueryService;
+import com.apelisser.algashop.ordering.core.application.customer.query.CustomerSummaryOutput;
+import com.apelisser.algashop.ordering.core.application.shoppingcart.query.ShoppingCartOutput;
+import com.apelisser.algashop.ordering.core.application.shoppingcart.query.ShoppingCartQueryService;
 import com.apelisser.algashop.ordering.presentation.PageModel;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;

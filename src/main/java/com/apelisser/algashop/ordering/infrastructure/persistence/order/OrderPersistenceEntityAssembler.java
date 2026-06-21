@@ -1,11 +1,11 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.order;
 
-import com.apelisser.algashop.ordering.domain.model.order.Order;
-import com.apelisser.algashop.ordering.domain.model.order.OrderItem;
-import com.apelisser.algashop.ordering.domain.model.commons.Address;
-import com.apelisser.algashop.ordering.domain.model.order.Billing;
-import com.apelisser.algashop.ordering.domain.model.order.Recipient;
-import com.apelisser.algashop.ordering.domain.model.order.Shipping;
+import com.apelisser.algashop.ordering.core.domain.model.order.Order;
+import com.apelisser.algashop.ordering.core.domain.model.order.OrderItem;
+import com.apelisser.algashop.ordering.core.domain.model.commons.Address;
+import com.apelisser.algashop.ordering.core.domain.model.order.Billing;
+import com.apelisser.algashop.ordering.core.domain.model.order.Recipient;
+import com.apelisser.algashop.ordering.core.domain.model.order.Shipping;
 import com.apelisser.algashop.ordering.infrastructure.persistence.commons.AddressEmbeddable;
 import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntity;
 import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityRepository;

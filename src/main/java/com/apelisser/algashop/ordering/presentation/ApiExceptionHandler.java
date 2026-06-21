@@ -1,8 +1,8 @@
 package com.apelisser.algashop.ordering.presentation;
 
-import com.apelisser.algashop.ordering.domain.model.DomainEntityNotFoundException;
-import com.apelisser.algashop.ordering.domain.model.DomainException;
-import com.apelisser.algashop.ordering.domain.model.customer.CustomerEmailIsInUseException;
+import com.apelisser.algashop.ordering.core.domain.model.DomainEntityNotFoundException;
+import com.apelisser.algashop.ordering.core.domain.model.DomainException;
+import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerEmailIsInUseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;

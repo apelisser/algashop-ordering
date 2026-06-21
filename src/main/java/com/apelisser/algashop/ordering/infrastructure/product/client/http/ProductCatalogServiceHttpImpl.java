@@ -1,10 +1,10 @@
 package com.apelisser.algashop.ordering.infrastructure.product.client.http;
 
-import com.apelisser.algashop.ordering.domain.model.commons.Money;
-import com.apelisser.algashop.ordering.domain.model.product.Product;
-import com.apelisser.algashop.ordering.domain.model.product.ProductCatalogService;
-import com.apelisser.algashop.ordering.domain.model.product.ProductId;
-import com.apelisser.algashop.ordering.domain.model.product.ProductName;
+import com.apelisser.algashop.ordering.core.domain.model.commons.Money;
+import com.apelisser.algashop.ordering.core.domain.model.product.Product;
+import com.apelisser.algashop.ordering.core.domain.model.product.ProductCatalogService;
+import com.apelisser.algashop.ordering.core.domain.model.product.ProductId;
+import com.apelisser.algashop.ordering.core.domain.model.product.ProductName;
 import com.apelisser.algashop.ordering.presentation.BadGatewayException;
 import com.apelisser.algashop.ordering.presentation.GatewayTimeoutException;
 import org.springframework.stereotype.Component;

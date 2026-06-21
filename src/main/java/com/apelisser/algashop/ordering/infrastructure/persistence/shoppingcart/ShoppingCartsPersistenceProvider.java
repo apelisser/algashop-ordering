@@ -1,9 +1,9 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.shoppingcart;
 
-import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCart;
-import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCarts;
-import com.apelisser.algashop.ordering.domain.model.customer.CustomerId;
-import com.apelisser.algashop.ordering.domain.model.shoppingcart.ShoppingCartId;
+import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCart;
+import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCarts;
+import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerId;
+import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCartId;
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
