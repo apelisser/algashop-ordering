@@ -12,7 +12,6 @@ import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCa
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCartNotFoundException;
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCarts;
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingService;
-import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ForManagingShoppingCarts;
 import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ShoppingCartItemInput;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,13 +20,14 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Service
-public class ShoppingCartManagementApplicationService implements ForManagingShoppingCarts {
+public class ForManagingShoppingCarts implements
+    com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ForManagingShoppingCarts {
 
     private final ShoppingCarts shoppingCarts;
     private final ProductCatalogService productCatalogService;
     private final ShoppingService shoppingService;
 
-    public ShoppingCartManagementApplicationService(ShoppingCarts shoppingCarts,
+    public ForManagingShoppingCarts(ShoppingCarts shoppingCarts,
             ProductCatalogService productCatalogService, ShoppingService shoppingService) {
         this.shoppingCarts = shoppingCarts;
         this.productCatalogService = productCatalogService;

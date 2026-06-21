@@ -1,10 +1,10 @@
 package com.apelisser.algashop.ordering.contract.base;
 
-import com.apelisser.algashop.ordering.core.application.shoppingcart.ShoppingCartManagementApplicationService;
+import com.apelisser.algashop.ordering.core.application.shoppingcart.ForManagingShoppingCarts;
 import com.apelisser.algashop.ordering.core.application.shoppingcart.query.ShoppingCartOutputTestDataBuilder;
 import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ForQueryingShoppingCarts;
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCartNotFoundException;
-import com.apelisser.algashop.ordering.presentation.shoppingcart.ShoppingCartController;
+import com.apelisser.algashop.ordering.infrastructure.adapters.in.web.shoppingcart.ShoppingCartController;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
@@ -24,7 +24,7 @@ public class ShoppingCartBase {
     WebApplicationContext context;
 
     @MockitoBean
-    ShoppingCartManagementApplicationService shoppingCartManagementApplicationService;
+    ForManagingShoppingCarts shoppingCartManagementApplicationService;
 
     @MockitoBean
     ForQueryingShoppingCarts shoppingCartQueryService;
