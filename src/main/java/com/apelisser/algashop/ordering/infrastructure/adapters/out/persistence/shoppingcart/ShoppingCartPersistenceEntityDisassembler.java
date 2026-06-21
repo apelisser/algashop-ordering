@@ -1,4 +1,4 @@
-package com.apelisser.algashop.ordering.infrastructure.persistence.shoppingcart;
+package com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.shoppingcart;
 
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCart;
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCartItem;

@@ -1,4 +1,4 @@
-package com.apelisser.algashop.ordering.infrastructure.persistence.shoppingcart;
+package com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.shoppingcart;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
