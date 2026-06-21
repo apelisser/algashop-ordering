@@ -1,8 +1,8 @@
-package com.apelisser.algashop.ordering.core.application.shoppingcart.query;
+package com.apelisser.algashop.ordering.core.ports.in.shoppingcart;
 
 import java.util.UUID;
 
-public interface ShoppingCartQueryService {
+public interface ForQueryingShoppingCarts {
 
     ShoppingCartOutput findById(UUID shoppingCartId);
 

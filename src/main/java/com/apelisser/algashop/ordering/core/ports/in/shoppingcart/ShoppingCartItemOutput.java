@@ -1,4 +1,4 @@
-package com.apelisser.algashop.ordering.core.application.shoppingcart.query;
+package com.apelisser.algashop.ordering.core.ports.in.shoppingcart;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

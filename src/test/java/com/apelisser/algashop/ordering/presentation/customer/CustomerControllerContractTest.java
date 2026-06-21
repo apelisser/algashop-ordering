@@ -10,7 +10,7 @@ import com.apelisser.algashop.ordering.core.application.customer.query.CustomerO
 import com.apelisser.algashop.ordering.core.application.customer.query.CustomerQueryService;
 import com.apelisser.algashop.ordering.core.application.customer.query.CustomerSummaryOutput;
 import com.apelisser.algashop.ordering.core.application.customer.query.CustomerSummaryOutputTestDataBuilder;
-import com.apelisser.algashop.ordering.core.application.shoppingcart.query.ShoppingCartQueryService;
+import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ForQueryingShoppingCarts;
 import com.apelisser.algashop.ordering.core.domain.model.DomainEntityNotFoundException;
 import com.apelisser.algashop.ordering.core.domain.model.DomainException;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerEmailIsInUseException;
@@ -48,7 +48,7 @@ class CustomerControllerContractTest {
     CustomerQueryService customerQueryService;
 
     @MockitoBean
-    ShoppingCartQueryService shoppingCartQueryService;
+    ForQueryingShoppingCarts shoppingCartQueryService;
 
     @BeforeEach
     void setUpAll() {

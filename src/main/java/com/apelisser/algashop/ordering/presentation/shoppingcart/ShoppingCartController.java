@@ -2,9 +2,9 @@ package com.apelisser.algashop.ordering.presentation.shoppingcart;
 
 import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ShoppingCartItemInput;
 import com.apelisser.algashop.ordering.core.application.shoppingcart.ShoppingCartManagementApplicationService;
-import com.apelisser.algashop.ordering.core.application.shoppingcart.query.ShoppingCartItemOutput;
-import com.apelisser.algashop.ordering.core.application.shoppingcart.query.ShoppingCartOutput;
-import com.apelisser.algashop.ordering.core.application.shoppingcart.query.ShoppingCartQueryService;
+import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ShoppingCartItemOutput;
+import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ShoppingCartOutput;
+import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ForQueryingShoppingCarts;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerNotFoundException;
 import com.apelisser.algashop.ordering.core.domain.model.product.ProductNotFoundException;
 import com.apelisser.algashop.ordering.presentation.UnprocessableEntityException;
@@ -27,10 +27,10 @@ import java.util.UUID;
 public class ShoppingCartController {
 
     private final ShoppingCartManagementApplicationService shoppingCartManagementApplicationService;
-    private final ShoppingCartQueryService shoppingCartQueryService;
+    private final ForQueryingShoppingCarts shoppingCartQueryService;
 
     public ShoppingCartController(ShoppingCartManagementApplicationService shoppingCartManagementApplicationService,
-            ShoppingCartQueryService shoppingCartQueryService) {
+            ForQueryingShoppingCarts shoppingCartQueryService) {
         this.shoppingCartManagementApplicationService = shoppingCartManagementApplicationService;
         this.shoppingCartQueryService = shoppingCartQueryService;
     }

@@ -1,7 +1,7 @@
 package com.apelisser.algashop.ordering.core.application.shoppingcart.query;
 
-import com.apelisser.algashop.ordering.core.application.shoppingcart.query.ShoppingCartItemOutput;
-import com.apelisser.algashop.ordering.core.application.shoppingcart.query.ShoppingCartOutput;
+import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ShoppingCartItemOutput;
+import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ShoppingCartOutput;
 
 import java.math.BigDecimal;
 import java.util.List;

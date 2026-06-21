@@ -13,6 +13,8 @@ import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCa
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCartNotFoundException;
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCartTestDataBuilder;
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCarts;
+import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ForQueryingShoppingCarts;
+import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ShoppingCartOutput;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 class ShoppingCartQueryServiceIT extends AbstractApplicationIT {
 
     @Autowired
-    ShoppingCartQueryService shoppingCartQueryService;
+    ForQueryingShoppingCarts shoppingCartQueryService;
 
     @Autowired
     ShoppingCarts shoppingCarts;
