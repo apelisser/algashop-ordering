@@ -1,7 +1,7 @@
 package com.apelisser.algashop.ordering.presentation.shoppingcart;
 
-import com.apelisser.algashop.ordering.core.application.shoppingcart.management.ShoppingCartItemInput;
-import com.apelisser.algashop.ordering.core.application.shoppingcart.management.ShoppingCartManagementApplicationService;
+import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ShoppingCartItemInput;
+import com.apelisser.algashop.ordering.core.application.shoppingcart.ShoppingCartManagementApplicationService;
 import com.apelisser.algashop.ordering.core.application.shoppingcart.query.ShoppingCartItemOutput;
 import com.apelisser.algashop.ordering.core.application.shoppingcart.query.ShoppingCartOutput;
 import com.apelisser.algashop.ordering.core.application.shoppingcart.query.ShoppingCartQueryService;

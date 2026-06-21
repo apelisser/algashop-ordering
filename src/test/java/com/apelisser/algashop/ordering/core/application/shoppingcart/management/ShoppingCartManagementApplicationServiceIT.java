@@ -1,6 +1,7 @@
 package com.apelisser.algashop.ordering.core.application.shoppingcart.management;
 
 import com.apelisser.algashop.ordering.core.application.AbstractApplicationIT;
+import com.apelisser.algashop.ordering.core.application.shoppingcart.ShoppingCartManagementApplicationService;
 import com.apelisser.algashop.ordering.core.domain.model.commons.Money;
 import com.apelisser.algashop.ordering.core.domain.model.commons.Quantity;
 import com.apelisser.algashop.ordering.core.domain.model.customer.Customer;
@@ -16,6 +17,7 @@ import com.apelisser.algashop.ordering.core.domain.model.product.ProductId;
 import com.apelisser.algashop.ordering.core.domain.model.product.ProductNotFoundException;
 import com.apelisser.algashop.ordering.core.domain.model.product.ProductOutOfStockException;
 import com.apelisser.algashop.ordering.core.domain.model.product.ProductTestDataBuilder;
+import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ShoppingCartItemInput;
 import com.apelisser.algashop.ordering.infrastructure.listener.shoppingcart.ShoppingCartEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

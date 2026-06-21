@@ -1,4 +1,4 @@
-package com.apelisser.algashop.ordering.core.application.shoppingcart.management;
+package com.apelisser.algashop.ordering.core.application.shoppingcart;
 
 import com.apelisser.algashop.ordering.core.domain.model.commons.Quantity;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerId;
@@ -12,6 +12,8 @@ import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCa
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCartNotFoundException;
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCarts;
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingService;
+import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ForManagingShoppingCarts;
+import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ShoppingCartItemInput;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +21,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Service
-public class ShoppingCartManagementApplicationService {
+public class ShoppingCartManagementApplicationService implements ForManagingShoppingCarts {
 
     private final ShoppingCarts shoppingCarts;
     private final ProductCatalogService productCatalogService;
@@ -33,6 +35,7 @@ public class ShoppingCartManagementApplicationService {
     }
 
     @Transactional
+    @Override
     public void addItem(ShoppingCartItemInput input) {
         Objects.requireNonNull(input);
 
@@ -49,6 +52,7 @@ public class ShoppingCartManagementApplicationService {
     }
 
     @Transactional
+    @Override
     public UUID createNew(UUID customerId) {
         Objects.requireNonNull(customerId);
         ShoppingCart shoppingCart = shoppingService.startShopping(new CustomerId(customerId));
@@ -57,6 +61,7 @@ public class ShoppingCartManagementApplicationService {
     }
 
     @Transactional
+    @Override
     public void removeItem(UUID shoppingCartId, UUID shoppingCartItemId) {
         Objects.requireNonNull(shoppingCartId);
         Objects.requireNonNull(shoppingCartItemId);
@@ -67,6 +72,7 @@ public class ShoppingCartManagementApplicationService {
     }
 
     @Transactional
+    @Override
     public void empty(UUID shoppingCartId) {
         Objects.requireNonNull(shoppingCartId);
         ShoppingCart shoppingCart = shoppingCarts.ofId(new ShoppingCartId(shoppingCartId))
@@ -76,6 +82,7 @@ public class ShoppingCartManagementApplicationService {
     }
 
     @Transactional
+    @Override
     public void delete(UUID shoppingCartId) {
         Objects.requireNonNull(shoppingCartId);
         ShoppingCart shoppingCart = shoppingCarts.ofId(new ShoppingCartId(shoppingCartId))
