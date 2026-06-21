@@ -1,28 +1,25 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.provider;
 
+import com.apelisser.algashop.ordering.domain.model.commons.Email;
 import com.apelisser.algashop.ordering.domain.model.customer.Customer;
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerTestDataBuilder;
-import com.apelisser.algashop.ordering.domain.model.commons.Email;
-import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityAssembler;
+import com.apelisser.algashop.ordering.infrastructure.AbstractInfrastructureAPI;
 import com.apelisser.algashop.ordering.infrastructure.persistence.SpringDataAuditingConfig;
+import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityAssembler;
 import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityDisassembler;
 import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomersPersistenceProvider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 
-@DataJpaTest
 @Import({
     CustomersPersistenceProvider.class,
     CustomerPersistenceEntityAssembler.class,
     CustomerPersistenceEntityDisassembler.class,
     SpringDataAuditingConfig.class
 })
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class CustomersPersistenceProviderIT {
+class CustomersPersistenceProviderIT extends AbstractInfrastructureAPI {
 
     private final CustomersPersistenceProvider customersPersistenceProvider;
 

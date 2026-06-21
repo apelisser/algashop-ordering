@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.domain.model.order.shipping;
 
+import com.apelisser.algashop.ordering.domain.model.AbstractDomainIT;
 import com.apelisser.algashop.ordering.domain.model.commons.Money;
 import com.apelisser.algashop.ordering.domain.model.commons.ZipCode;
 import com.github.tomakehurst.wiremock.WireMockServer;
@@ -10,12 +11,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 
-@SpringBootTest
-class ShippingCostServiceIT {
+class ShippingCostServiceIT extends AbstractDomainIT {
 
     @Autowired
     ShippingCostService shippingCostService;

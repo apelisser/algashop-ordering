@@ -1,21 +1,20 @@
 package com.apelisser.algashop.ordering.domain.model.order;
 
-import com.apelisser.algashop.ordering.domain.model.customer.Customers;
-import com.apelisser.algashop.ordering.domain.model.customer.CustomerTestDataBuilder;
+import com.apelisser.algashop.ordering.domain.model.AbstractDomainIT;
 import com.apelisser.algashop.ordering.domain.model.commons.Money;
 import com.apelisser.algashop.ordering.domain.model.customer.CustomerId;
+import com.apelisser.algashop.ordering.domain.model.customer.CustomerTestDataBuilder;
+import com.apelisser.algashop.ordering.domain.model.customer.Customers;
 import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityAssembler;
-import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderPersistenceEntityAssembler;
 import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityDisassembler;
-import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderPersistenceEntityDisassembler;
 import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomersPersistenceProvider;
+import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderPersistenceEntityAssembler;
+import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderPersistenceEntityDisassembler;
 import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrdersPersistenceProvider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 
@@ -23,7 +22,6 @@ import java.time.Year;
 import java.util.List;
 import java.util.Optional;
 
-@DataJpaTest
 @Import({
     OrdersPersistenceProvider.class,
     OrderPersistenceEntityAssembler.class,
@@ -32,8 +30,7 @@ import java.util.Optional;
     CustomerPersistenceEntityAssembler.class,
     CustomerPersistenceEntityDisassembler.class
 })
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class OrdersIT {
+class OrdersIT extends AbstractDomainIT {
 
     Orders orders;
     Customers customers;

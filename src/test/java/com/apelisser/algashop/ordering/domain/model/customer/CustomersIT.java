@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.domain.model.customer;
 
+import com.apelisser.algashop.ordering.domain.model.AbstractDomainIT;
 import com.apelisser.algashop.ordering.domain.model.commons.Email;
 import com.apelisser.algashop.ordering.domain.model.commons.FullName;
 import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityAssembler;
@@ -8,8 +9,6 @@ import com.apelisser.algashop.ordering.infrastructure.persistence.customer.Custo
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 
@@ -18,14 +17,12 @@ import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@DataJpaTest
 @Import({
     CustomersPersistenceProvider.class,
     CustomerPersistenceEntityAssembler.class,
     CustomerPersistenceEntityDisassembler.class
 })
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class CustomersIT {
+class CustomersIT extends AbstractDomainIT {
 
     Customers customers;
 
@@ -65,7 +62,6 @@ class CustomersIT {
 
         Assertions.assertThat(savedCustomer.archivedAt()).isNotNull();
         Assertions.assertThat(savedCustomer.isArchived()).isTrue();
-
     }
 
     @Test
@@ -88,7 +84,6 @@ class CustomersIT {
 
         Assertions.assertThat(savedCustomer.archivedAt()).isNotNull();
         Assertions.assertThat(savedCustomer.isArchived()).isTrue();
-
     }
 
     @Test

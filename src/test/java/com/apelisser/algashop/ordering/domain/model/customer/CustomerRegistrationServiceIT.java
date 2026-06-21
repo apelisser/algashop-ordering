@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.domain.model.customer;
 
+import com.apelisser.algashop.ordering.domain.model.AbstractDomainIT;
 import com.apelisser.algashop.ordering.domain.model.commons.Address;
 import com.apelisser.algashop.ordering.domain.model.commons.Document;
 import com.apelisser.algashop.ordering.domain.model.commons.Email;
@@ -9,12 +10,10 @@ import com.apelisser.algashop.ordering.domain.model.commons.ZipCode;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 
-@SpringBootTest
-class CustomerRegistrationServiceIT {
+class CustomerRegistrationServiceIT extends AbstractDomainIT {
 
     @Autowired
     CustomerAlreadyHaveShoppingCartException.CustomerRegistrationService customerRegistrationService;
