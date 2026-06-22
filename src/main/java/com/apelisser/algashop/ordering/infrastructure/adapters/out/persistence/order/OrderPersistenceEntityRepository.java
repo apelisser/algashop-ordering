@@ -1,4 +1,4 @@
-package com.apelisser.algashop.ordering.infrastructure.persistence.order;
+package com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.order;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;

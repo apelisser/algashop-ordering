@@ -18,13 +18,16 @@ import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCa
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCartId;
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCartNotFoundException;
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCarts;
+import com.apelisser.algashop.ordering.core.ports.in.checkout.CheckoutInput;
+import com.apelisser.algashop.ordering.core.ports.in.checkout.ForBuyingWithShoppingCart;
+import com.apelisser.algashop.ordering.core.ports.in.checkout.ShippingInput;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
 @Service
-public class CheckoutApplicationService {
+public class CheckoutApplicationService implements ForBuyingWithShoppingCart {
 
     private final ShoppingCarts shoppingCarts;
     private final ShippingCostService shippingCostService;
@@ -50,6 +53,7 @@ public class CheckoutApplicationService {
     }
 
     @Transactional
+    @Override
     public String checkout(CheckoutInput input) {
         Objects.requireNonNull(input);
 

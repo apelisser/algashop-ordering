@@ -1,5 +1,6 @@
 package com.apelisser.algashop.ordering.core.application.checkout;
 
+import com.apelisser.algashop.ordering.core.ports.in.checkout.ShippingInput;
 import com.apelisser.algashop.ordering.core.ports.in.commons.AddressData;
 import com.apelisser.algashop.ordering.core.domain.model.commons.Address;
 import com.apelisser.algashop.ordering.core.domain.model.commons.Document;

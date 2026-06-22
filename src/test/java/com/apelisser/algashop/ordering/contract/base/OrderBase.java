@@ -1,16 +1,16 @@
 package com.apelisser.algashop.ordering.contract.base;
 
 import com.apelisser.algashop.ordering.core.application.checkout.BuyNowApplicationService;
-import com.apelisser.algashop.ordering.core.application.checkout.BuyNowInput;
+import com.apelisser.algashop.ordering.core.ports.in.checkout.BuyNowInput;
 import com.apelisser.algashop.ordering.core.application.checkout.CheckoutApplicationService;
-import com.apelisser.algashop.ordering.core.application.checkout.CheckoutInput;
+import com.apelisser.algashop.ordering.core.ports.in.checkout.CheckoutInput;
 import com.apelisser.algashop.ordering.core.application.order.query.OrderDetailOutputTestDataBuilder;
-import com.apelisser.algashop.ordering.core.application.order.query.OrderFilter;
-import com.apelisser.algashop.ordering.core.application.order.query.OrderQueryService;
-import com.apelisser.algashop.ordering.core.application.order.query.OrderSummaryOutput;
+import com.apelisser.algashop.ordering.core.ports.in.order.ForQueryingOrders;
+import com.apelisser.algashop.ordering.core.ports.in.order.OrderFilter;
+import com.apelisser.algashop.ordering.core.ports.in.order.OrderSummaryOutput;
 import com.apelisser.algashop.ordering.core.application.order.query.OrderSummaryOutputTestDataBuilder;
 import com.apelisser.algashop.ordering.core.domain.model.order.OrderNotFoundException;
-import com.apelisser.algashop.ordering.presentation.order.OrderController;
+import com.apelisser.algashop.ordering.infrastructure.adapters.in.web.order.OrderController;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
@@ -32,7 +32,7 @@ public class OrderBase {
     WebApplicationContext context;
 
     @MockitoBean
-    OrderQueryService orderQueryService;
+    ForQueryingOrders forQueryingOrders;
 
     @MockitoBean
     BuyNowApplicationService buyNowApplicationService;
@@ -70,17 +70,17 @@ public class OrderBase {
     }
 
     private void mockInvalidOrderFindById() {
-        Mockito.when(orderQueryService.findById(INVALID_ORDER_ID))
+        Mockito.when(forQueryingOrders.findById(INVALID_ORDER_ID))
             .thenThrow(new OrderNotFoundException());
     }
 
     private void mockValidOrderFindById() {
-        Mockito.when(orderQueryService.findById(VALID_ORDER_ID))
+        Mockito.when(forQueryingOrders.findById(VALID_ORDER_ID))
             .thenReturn(OrderDetailOutputTestDataBuilder.placedOrder(VALID_ORDER_ID).build());
     }
 
     private void mockFilterCategories() {
-        Mockito.when(orderQueryService.filter(Mockito.any(OrderFilter.class)))
+        Mockito.when(forQueryingOrders.filter(Mockito.any(OrderFilter.class)))
             .then(answer -> {
                 OrderFilter filter = answer.getArgument(0);
 

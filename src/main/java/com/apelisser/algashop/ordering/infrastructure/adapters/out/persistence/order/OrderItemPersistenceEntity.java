@@ -1,4 +1,4 @@
-package com.apelisser.algashop.ordering.infrastructure.persistence.order;
+package com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.order;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

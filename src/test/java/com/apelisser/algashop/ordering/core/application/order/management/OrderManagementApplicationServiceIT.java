@@ -2,6 +2,7 @@ package com.apelisser.algashop.ordering.core.application.order.management;
 
 import com.apelisser.algashop.ordering.core.application.AbstractApplicationIT;
 import com.apelisser.algashop.ordering.core.application.customer.CustomerLoyaltyPointsApplicationService;
+import com.apelisser.algashop.ordering.core.application.order.OrderManagementApplicationService;
 import com.apelisser.algashop.ordering.core.domain.model.customer.Customer;
 import com.apelisser.algashop.ordering.core.domain.model.order.*;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerTestDataBuilder;

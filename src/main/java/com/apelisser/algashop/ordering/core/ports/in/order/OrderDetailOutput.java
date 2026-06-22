@@ -1,6 +1,5 @@
-package com.apelisser.algashop.ordering.core.application.order.query;
+package com.apelisser.algashop.ordering.core.ports.in.order;
 
-import com.apelisser.algashop.ordering.core.domain.model.order.OrderId;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -9,13 +8,16 @@ import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
 @Builder
-public class OrderSummaryOutput {
+public class OrderDetailOutput {
 
     private String id;
     private CustomerMinimalOutput customer;
@@ -27,13 +29,20 @@ public class OrderSummaryOutput {
     private OffsetDateTime readyAt;
     private String status;
     private String paymentMethod;
+    private UUID creditCardId;
+    private ShippingData shipping;
+    private BillingData billing;
 
-    public OrderSummaryOutput() {
+    @Builder.Default
+    private List<OrderItemDetailOutput> items = new ArrayList<>();
+
+    public OrderDetailOutput() {
     }
 
-    public OrderSummaryOutput(String id,CustomerMinimalOutput customer , Integer totalItems, BigDecimal totalAmount,
+    public OrderDetailOutput(String id, CustomerMinimalOutput customer, Integer totalItems, BigDecimal totalAmount,
             OffsetDateTime placedAt, OffsetDateTime paidAt, OffsetDateTime canceledAt, OffsetDateTime readyAt,
-            String status, String paymentMethod) {
+            String status, String paymentMethod, UUID creditCardId, ShippingData shipping, BillingData billing,
+            List<OrderItemDetailOutput> items) {
         this.id = id;
         this.customer = customer;
         this.totalItems = totalItems;
@@ -44,23 +53,10 @@ public class OrderSummaryOutput {
         this.readyAt = readyAt;
         this.status = status;
         this.paymentMethod = paymentMethod;
-    }
-
-    public OrderSummaryOutput(Long id, Integer totalItems, BigDecimal totalAmount,
-            OffsetDateTime placedAt, OffsetDateTime paidAt, OffsetDateTime canceledAt, OffsetDateTime readyAt,
-            String status, String paymentMethod, CustomerMinimalOutput customer) {
-        this(
-            new OrderId(id).toString(),
-            customer,
-            totalItems,
-            totalAmount,
-            placedAt,
-            paidAt,
-            canceledAt,
-            readyAt,
-            status,
-            paymentMethod
-        );
+        this.creditCardId = creditCardId;
+        this.shipping = shipping;
+        this.billing = billing;
+        this.items = items;
     }
 
 }

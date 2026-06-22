@@ -1,8 +1,8 @@
-package com.apelisser.algashop.ordering.core.application.order.query;
+package com.apelisser.algashop.ordering.core.ports.in.order;
 
 import org.springframework.data.domain.Page;
 
-public interface OrderQueryService {
+public interface ForQueryingOrders {
 
     OrderDetailOutput findById(String id);
 

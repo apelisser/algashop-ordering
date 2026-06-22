@@ -1,4 +1,4 @@
-package com.apelisser.algashop.ordering.infrastructure.persistence.order;
+package com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.order;
 
 import com.apelisser.algashop.ordering.core.domain.model.order.Order;
 import com.apelisser.algashop.ordering.core.domain.model.order.Orders;

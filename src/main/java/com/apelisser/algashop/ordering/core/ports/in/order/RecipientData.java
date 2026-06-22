@@ -1,4 +1,4 @@
-package com.apelisser.algashop.ordering.core.application.order.query;
+package com.apelisser.algashop.ordering.core.ports.in.order;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;

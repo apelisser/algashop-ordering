@@ -8,11 +8,11 @@ import com.apelisser.algashop.ordering.infrastructure.persistence.SpringDataAudi
 import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.customer.CustomerPersistenceEntityAssembler;
 import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.customer.CustomerPersistenceEntityDisassembler;
 import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.customer.CustomersPersistenceProvider;
-import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderPersistenceEntity;
-import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderPersistenceEntityAssembler;
-import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderPersistenceEntityDisassembler;
-import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderPersistenceEntityRepository;
-import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrdersPersistenceProvider;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.order.OrderPersistenceEntity;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.order.OrderPersistenceEntityAssembler;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.order.OrderPersistenceEntityDisassembler;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.order.OrderPersistenceEntityRepository;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.order.OrdersPersistenceProvider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

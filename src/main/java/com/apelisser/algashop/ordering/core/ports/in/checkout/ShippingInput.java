@@ -1,7 +1,7 @@
-package com.apelisser.algashop.ordering.core.application.checkout;
+package com.apelisser.algashop.ordering.core.ports.in.checkout;
 
 import com.apelisser.algashop.ordering.core.ports.in.commons.AddressData;
-import com.apelisser.algashop.ordering.core.application.order.query.RecipientData;
+import com.apelisser.algashop.ordering.core.ports.in.order.RecipientData;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;

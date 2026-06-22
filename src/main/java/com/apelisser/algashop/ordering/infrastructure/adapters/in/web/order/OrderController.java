@@ -1,16 +1,16 @@
-package com.apelisser.algashop.ordering.presentation.order;
+package com.apelisser.algashop.ordering.infrastructure.adapters.in.web.order;
 
 import com.apelisser.algashop.ordering.core.application.checkout.BuyNowApplicationService;
-import com.apelisser.algashop.ordering.core.application.checkout.BuyNowInput;
+import com.apelisser.algashop.ordering.core.ports.in.checkout.BuyNowInput;
 import com.apelisser.algashop.ordering.core.application.checkout.CheckoutApplicationService;
-import com.apelisser.algashop.ordering.core.application.checkout.CheckoutInput;
-import com.apelisser.algashop.ordering.core.application.order.query.OrderDetailOutput;
-import com.apelisser.algashop.ordering.core.application.order.query.OrderFilter;
-import com.apelisser.algashop.ordering.core.application.order.query.OrderQueryService;
-import com.apelisser.algashop.ordering.core.application.order.query.OrderSummaryOutput;
+import com.apelisser.algashop.ordering.core.ports.in.checkout.CheckoutInput;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerNotFoundException;
 import com.apelisser.algashop.ordering.core.domain.model.product.ProductNotFoundException;
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCartNotFoundException;
+import com.apelisser.algashop.ordering.core.ports.in.order.ForQueryingOrders;
+import com.apelisser.algashop.ordering.core.ports.in.order.OrderDetailOutput;
+import com.apelisser.algashop.ordering.core.ports.in.order.OrderFilter;
+import com.apelisser.algashop.ordering.core.ports.in.order.OrderSummaryOutput;
 import com.apelisser.algashop.ordering.presentation.PageModel;
 import com.apelisser.algashop.ordering.presentation.UnprocessableEntityException;
 import jakarta.validation.Valid;
@@ -27,25 +27,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/orders")
 public class OrderController {
 
-    private final OrderQueryService orderQueryService;
+    private final ForQueryingOrders forQueryingOrders;
     private final BuyNowApplicationService buyNowApplicationService;
     private final CheckoutApplicationService checkoutApplicationService;
 
-    public OrderController(OrderQueryService orderQueryService,
+    public OrderController(ForQueryingOrders forQueryingOrders,
             BuyNowApplicationService buyNowApplicationService, CheckoutApplicationService checkoutApplicationService) {
-        this.orderQueryService = orderQueryService;
+        this.forQueryingOrders = forQueryingOrders;
         this.buyNowApplicationService = buyNowApplicationService;
         this.checkoutApplicationService = checkoutApplicationService;
     }
 
     @GetMapping("/{orderId}")
     public OrderDetailOutput findById(@PathVariable String orderId) {
-        return orderQueryService.findById(orderId);
+        return forQueryingOrders.findById(orderId);
     }
 
     @GetMapping
     public PageModel<OrderSummaryOutput> filter(OrderFilter filter) {
-        return PageModel.of(orderQueryService.filter(filter));
+        return PageModel.of(forQueryingOrders.filter(filter));
     }
 
     @PostMapping(consumes = "application/vnd.order-with-product.v1+json")
@@ -57,7 +57,7 @@ public class OrderController {
         } catch (CustomerNotFoundException | ProductNotFoundException e) {
             throw new UnprocessableEntityException(e.getMessage(), e);
         }
-        return orderQueryService.findById(orderId);
+        return forQueryingOrders.findById(orderId);
     }
 
     @PostMapping(consumes = "application/vnd.order-with-shopping-cart.v1+json")
@@ -69,7 +69,7 @@ public class OrderController {
         } catch (CustomerNotFoundException | ShoppingCartNotFoundException e) {
             throw new UnprocessableEntityException(e.getMessage(), e);
         }
-        return orderQueryService.findById(orderId);
+        return forQueryingOrders.findById(orderId);
     }
 
 }

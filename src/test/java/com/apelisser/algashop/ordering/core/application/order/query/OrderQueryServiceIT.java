@@ -9,6 +9,10 @@ import com.apelisser.algashop.ordering.core.domain.model.order.Order;
 import com.apelisser.algashop.ordering.core.domain.model.order.OrderStatus;
 import com.apelisser.algashop.ordering.core.domain.model.order.OrderTestDataBuilder;
 import com.apelisser.algashop.ordering.core.domain.model.order.Orders;
+import com.apelisser.algashop.ordering.core.ports.in.order.ForQueryingOrders;
+import com.apelisser.algashop.ordering.core.ports.in.order.OrderDetailOutput;
+import com.apelisser.algashop.ordering.core.ports.in.order.OrderFilter;
+import com.apelisser.algashop.ordering.core.ports.in.order.OrderSummaryOutput;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +22,7 @@ import org.springframework.data.domain.Sort;
 class OrderQueryServiceIT extends AbstractApplicationIT {
 
     @Autowired
-    OrderQueryService queryService;
+    ForQueryingOrders forQueryingOrders;
 
     @Autowired
     Orders orders;
@@ -34,7 +38,7 @@ class OrderQueryServiceIT extends AbstractApplicationIT {
         Order order = OrderTestDataBuilder.anOrder().customerId(customer.id()).build();
         orders.add(order);
 
-        OrderDetailOutput output = queryService.findById(order.id().value().toString());
+        OrderDetailOutput output = forQueryingOrders.findById(order.id().value().toString());
 
         Assertions.assertThat(output)
             .extracting(
@@ -57,7 +61,7 @@ class OrderQueryServiceIT extends AbstractApplicationIT {
         orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.READY).customerId(customer.id()).build());
         orders.add(OrderTestDataBuilder.anOrder().status(OrderStatus.CANCELED).customerId(customer.id()).build());
 
-        Page<OrderSummaryOutput> page = queryService.filter(new OrderFilter(3, 0));
+        Page<OrderSummaryOutput> page = forQueryingOrders.filter(new OrderFilter(3, 0));
 
         Assertions.assertThat(page.getTotalPages()).isEqualTo(2);
         Assertions.assertThat(page.getTotalElements()).isEqualTo(5);
@@ -79,7 +83,7 @@ class OrderQueryServiceIT extends AbstractApplicationIT {
 
         OrderFilter filter = new OrderFilter();
         filter.setCustomerId(customer1.id().value());
-        Page<OrderSummaryOutput> page = queryService.filter(filter);
+        Page<OrderSummaryOutput> page = forQueryingOrders.filter(filter);
 
         Assertions.assertThat(page.getTotalPages()).isEqualTo(1);
         Assertions.assertThat(page.getTotalElements()).isEqualTo(2);
@@ -105,7 +109,7 @@ class OrderQueryServiceIT extends AbstractApplicationIT {
         filter.setStatus(OrderStatus.PLACED.toString());
         filter.setTotalAmountFrom(order1.totalAmount().value());
 
-        Page<OrderSummaryOutput> page = queryService.filter(filter);
+        Page<OrderSummaryOutput> page = forQueryingOrders.filter(filter);
 
         Assertions.assertThat(page.getTotalPages()).isEqualTo(1);
         Assertions.assertThat(page.getTotalElements()).isEqualTo(1);
@@ -129,7 +133,7 @@ class OrderQueryServiceIT extends AbstractApplicationIT {
         OrderFilter filter = new OrderFilter();
         filter.setOrderId("ABC");
 
-        Page<OrderSummaryOutput> page = queryService.filter(filter);
+        Page<OrderSummaryOutput> page = forQueryingOrders.filter(filter);
 
         Assertions.assertThat(page.getTotalPages()).isEqualTo(0);
         Assertions.assertThat(page.getTotalElements()).isEqualTo(0);
@@ -153,7 +157,7 @@ class OrderQueryServiceIT extends AbstractApplicationIT {
         filter.setSortByProperty(OrderFilter.SortType.STATUS);
         filter.setSortDirection(Sort.Direction.ASC);
 
-        Page<OrderSummaryOutput> page = queryService.filter(filter);
+        Page<OrderSummaryOutput> page = forQueryingOrders.filter(filter);
 
         Assertions.assertThat(page.getContent().getFirst().getStatus()).isEqualTo(OrderStatus.CANCELED.toString());
     }

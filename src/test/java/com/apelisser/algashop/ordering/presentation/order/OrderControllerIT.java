@@ -1,10 +1,10 @@
 package com.apelisser.algashop.ordering.presentation.order;
 
-import com.apelisser.algashop.ordering.core.application.checkout.BuyNowInput;
+import com.apelisser.algashop.ordering.core.ports.in.checkout.BuyNowInput;
 import com.apelisser.algashop.ordering.core.application.checkout.BuyNowInputTestDataBuilder;
-import com.apelisser.algashop.ordering.core.application.order.query.OrderDetailOutput;
+import com.apelisser.algashop.ordering.core.ports.in.order.OrderDetailOutput;
 import com.apelisser.algashop.ordering.core.domain.model.order.OrderId;
-import com.apelisser.algashop.ordering.infrastructure.persistence.order.OrderPersistenceEntityRepository;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.order.OrderPersistenceEntityRepository;
 import com.apelisser.algashop.ordering.presentation.AbstractPresentationIT;
 import com.apelisser.algashop.ordering.utils.AlgaShopResourceUtils;
 import io.restassured.RestAssured;

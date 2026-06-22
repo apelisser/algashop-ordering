@@ -20,13 +20,16 @@ import com.apelisser.algashop.ordering.core.domain.model.product.Product;
 import com.apelisser.algashop.ordering.core.domain.model.product.ProductCatalogService;
 import com.apelisser.algashop.ordering.core.domain.model.product.ProductId;
 import com.apelisser.algashop.ordering.core.domain.model.product.ProductNotFoundException;
+import com.apelisser.algashop.ordering.core.ports.in.checkout.BuyNowInput;
+import com.apelisser.algashop.ordering.core.ports.in.checkout.ForBuyingProduct;
+import com.apelisser.algashop.ordering.core.ports.in.checkout.ShippingInput;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
 @Service
-public class BuyNowApplicationService {
+public class BuyNowApplicationService implements ForBuyingProduct {
 
     private final BuyNowService buyNowService;
     private final ProductCatalogService productCatalogService;
@@ -51,6 +54,7 @@ public class BuyNowApplicationService {
     }
 
     @Transactional
+    @Override
     public String buyNow(BuyNowInput input) {
         Objects.requireNonNull(input);
 
@@ -87,7 +91,7 @@ public class BuyNowApplicationService {
         return productCatalogService.ofId(productId).orElseThrow(() -> new ProductNotFoundException(productId));
     }
 
-    public ShippingCostService.CalculationResult calculateShippingCost(ShippingInput shipping) {
+    private ShippingCostService.CalculationResult calculateShippingCost(ShippingInput shipping) {
         ZipCode origin = originAddressService.originAddress().zipCode();
         ZipCode destination = new ZipCode(shipping.getAddress().getZipCode());
 

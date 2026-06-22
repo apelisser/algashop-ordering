@@ -1,13 +1,13 @@
-package com.apelisser.algashop.ordering.infrastructure.persistence.order;
+package com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.order;
 
-import com.apelisser.algashop.ordering.core.application.order.query.CustomerMinimalOutput;
-import com.apelisser.algashop.ordering.core.application.order.query.OrderDetailOutput;
-import com.apelisser.algashop.ordering.core.application.order.query.OrderFilter;
-import com.apelisser.algashop.ordering.core.application.order.query.OrderQueryService;
-import com.apelisser.algashop.ordering.core.application.order.query.OrderSummaryOutput;
+import com.apelisser.algashop.ordering.core.ports.in.order.CustomerMinimalOutput;
+import com.apelisser.algashop.ordering.core.ports.in.order.OrderDetailOutput;
+import com.apelisser.algashop.ordering.core.ports.in.order.OrderFilter;
+import com.apelisser.algashop.ordering.core.ports.in.order.OrderSummaryOutput;
 import com.apelisser.algashop.ordering.core.application.utility.Mapper;
 import com.apelisser.algashop.ordering.core.domain.model.order.OrderId;
 import com.apelisser.algashop.ordering.core.domain.model.order.OrderNotFoundException;
+import com.apelisser.algashop.ordering.core.ports.out.order.ForObtainingOrders;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -30,14 +30,13 @@ import java.util.UUID;
 
 @Component
 @Transactional(readOnly = true)
-public class OrderQueryServiceImpl implements OrderQueryService {
+public class ForObtainingOrdersJpaRepositoryImpl implements ForObtainingOrders {
 
     private final OrderPersistenceEntityRepository repository;
     private final Mapper mapper;
     private final EntityManager entityManager;
 
-
-    public OrderQueryServiceImpl(OrderPersistenceEntityRepository repository, Mapper mapper, EntityManager entityManager) {
+    public ForObtainingOrdersJpaRepositoryImpl(OrderPersistenceEntityRepository repository, Mapper mapper, EntityManager entityManager) {
         this.repository = repository;
         this.mapper = mapper;
         this.entityManager = entityManager;

@@ -1,5 +1,6 @@
-package com.apelisser.algashop.ordering.core.application.order.query;
+package com.apelisser.algashop.ordering.core.ports.in.order;
 
+import com.apelisser.algashop.ordering.core.domain.model.order.OrderId;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -8,16 +9,13 @@ import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
 @Builder
-public class OrderDetailOutput {
+public class OrderSummaryOutput {
 
     private String id;
     private CustomerMinimalOutput customer;
@@ -29,20 +27,13 @@ public class OrderDetailOutput {
     private OffsetDateTime readyAt;
     private String status;
     private String paymentMethod;
-    private UUID creditCardId;
-    private ShippingData shipping;
-    private BillingData billing;
 
-    @Builder.Default
-    private List<OrderItemDetailOutput> items = new ArrayList<>();
-
-    public OrderDetailOutput() {
+    public OrderSummaryOutput() {
     }
 
-    public OrderDetailOutput(String id, CustomerMinimalOutput customer, Integer totalItems, BigDecimal totalAmount,
+    public OrderSummaryOutput(String id,CustomerMinimalOutput customer , Integer totalItems, BigDecimal totalAmount,
             OffsetDateTime placedAt, OffsetDateTime paidAt, OffsetDateTime canceledAt, OffsetDateTime readyAt,
-            String status, String paymentMethod, UUID creditCardId, ShippingData shipping, BillingData billing,
-            List<OrderItemDetailOutput> items) {
+            String status, String paymentMethod) {
         this.id = id;
         this.customer = customer;
         this.totalItems = totalItems;
@@ -53,10 +44,23 @@ public class OrderDetailOutput {
         this.readyAt = readyAt;
         this.status = status;
         this.paymentMethod = paymentMethod;
-        this.creditCardId = creditCardId;
-        this.shipping = shipping;
-        this.billing = billing;
-        this.items = items;
+    }
+
+    public OrderSummaryOutput(Long id, Integer totalItems, BigDecimal totalAmount,
+            OffsetDateTime placedAt, OffsetDateTime paidAt, OffsetDateTime canceledAt, OffsetDateTime readyAt,
+            String status, String paymentMethod, CustomerMinimalOutput customer) {
+        this(
+            new OrderId(id).toString(),
+            customer,
+            totalItems,
+            totalAmount,
+            placedAt,
+            paidAt,
+            canceledAt,
+            readyAt,
+            status,
+            paymentMethod
+        );
     }
 
 }

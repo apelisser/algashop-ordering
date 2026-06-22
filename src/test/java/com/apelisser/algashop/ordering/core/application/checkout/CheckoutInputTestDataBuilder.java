@@ -1,8 +1,10 @@
 package com.apelisser.algashop.ordering.core.application.checkout;
 
+import com.apelisser.algashop.ordering.core.ports.in.checkout.CheckoutInput;
+import com.apelisser.algashop.ordering.core.ports.in.checkout.ShippingInput;
 import com.apelisser.algashop.ordering.core.ports.in.commons.AddressData;
-import com.apelisser.algashop.ordering.core.application.order.query.BillingData;
-import com.apelisser.algashop.ordering.core.application.order.query.RecipientData;
+import com.apelisser.algashop.ordering.core.ports.in.order.BillingData;
+import com.apelisser.algashop.ordering.core.ports.in.order.RecipientData;
 import com.apelisser.algashop.ordering.core.domain.model.order.CreditCardId;
 import com.apelisser.algashop.ordering.core.domain.model.order.PaymentMethod;
 

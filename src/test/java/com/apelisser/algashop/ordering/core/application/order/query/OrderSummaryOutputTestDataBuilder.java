@@ -1,7 +1,7 @@
 package com.apelisser.algashop.ordering.core.application.order.query;
 
-import com.apelisser.algashop.ordering.core.application.order.query.CustomerMinimalOutput;
-import com.apelisser.algashop.ordering.core.application.order.query.OrderSummaryOutput;
+import com.apelisser.algashop.ordering.core.ports.in.order.CustomerMinimalOutput;
+import com.apelisser.algashop.ordering.core.ports.in.order.OrderSummaryOutput;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerId;
 
 import java.math.BigDecimal;

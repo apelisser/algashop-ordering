@@ -4,6 +4,12 @@ import com.apelisser.algashop.ordering.core.ports.in.commons.AddressData;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerId;
 import com.apelisser.algashop.ordering.core.domain.model.order.OrderId;
 import com.apelisser.algashop.ordering.core.domain.model.order.OrderItemId;
+import com.apelisser.algashop.ordering.core.ports.in.order.BillingData;
+import com.apelisser.algashop.ordering.core.ports.in.order.CustomerMinimalOutput;
+import com.apelisser.algashop.ordering.core.ports.in.order.OrderDetailOutput;
+import com.apelisser.algashop.ordering.core.ports.in.order.OrderItemDetailOutput;
+import com.apelisser.algashop.ordering.core.ports.in.order.RecipientData;
+import com.apelisser.algashop.ordering.core.ports.in.order.ShippingData;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
