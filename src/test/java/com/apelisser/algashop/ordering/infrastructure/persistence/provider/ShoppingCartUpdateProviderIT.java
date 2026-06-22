@@ -11,9 +11,9 @@ import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCa
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCartTestDataBuilder;
 import com.apelisser.algashop.ordering.infrastructure.AbstractInfrastructureAPI;
 import com.apelisser.algashop.ordering.infrastructure.persistence.SpringDataAuditingConfig;
-import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityAssembler;
-import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityDisassembler;
-import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomersPersistenceProvider;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.customer.CustomerPersistenceEntityAssembler;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.customer.CustomerPersistenceEntityDisassembler;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.customer.CustomersPersistenceProvider;
 import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.shoppingcart.ShoppingCartPersistenceEntityAssembler;
 import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.shoppingcart.ShoppingCartPersistenceEntityDisassembler;
 import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.shoppingcart.ShoppingCartUpdateProvider;

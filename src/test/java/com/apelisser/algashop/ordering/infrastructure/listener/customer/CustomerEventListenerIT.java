@@ -1,15 +1,15 @@
 package com.apelisser.algashop.ordering.infrastructure.listener.customer;
 
-import com.apelisser.algashop.ordering.core.application.customer.loyaltypoints.CustomerLoyaltyPointsApplicationService;
-import com.apelisser.algashop.ordering.core.application.customer.notification.CustomerNotificationApplicationService;
-import com.apelisser.algashop.ordering.core.application.customer.notification.CustomerNotificationApplicationService.NotifyNewRegistrationInput;
 import com.apelisser.algashop.ordering.core.domain.model.commons.Email;
 import com.apelisser.algashop.ordering.core.domain.model.commons.FullName;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerId;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerRegisteredEvent;
 import com.apelisser.algashop.ordering.core.domain.model.order.OrderId;
 import com.apelisser.algashop.ordering.core.domain.model.order.OrderReadyEvent;
+import com.apelisser.algashop.ordering.core.ports.in.customer.ForAddingLoyaltyPoints;
+import com.apelisser.algashop.ordering.core.ports.in.customer.ForConfirmCustomerRegistration;
 import com.apelisser.algashop.ordering.infrastructure.AbstractInfrastructureAPI;
+import com.apelisser.algashop.ordering.infrastructure.adapters.in.listener.customer.CustomerEventListener;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +29,10 @@ class CustomerEventListenerIT extends AbstractInfrastructureAPI {
     CustomerEventListener customerEventListener;
 
     @MockitoBean
-    CustomerLoyaltyPointsApplicationService loyaltyPointsApplicationService;
+    ForAddingLoyaltyPoints forAddingLoyaltyPoints;
 
     @MockitoBean
-    CustomerNotificationApplicationService notificationApplicationService;
+    ForConfirmCustomerRegistration forConfirmCustomerRegistration;
 
     @Test
     void shouldListenOrderReadyEvent() {
@@ -43,7 +43,7 @@ class CustomerEventListenerIT extends AbstractInfrastructureAPI {
         );
 
         Mockito.verify(customerEventListener).listen(Mockito.any(OrderReadyEvent.class));
-        Mockito.verify(loyaltyPointsApplicationService).addLoyaltyPoints(
+        Mockito.verify(forAddingLoyaltyPoints).addLoyaltyPoints(
             Mockito.any(UUID.class),
             Mockito.any(String.class)
         );
@@ -60,7 +60,7 @@ class CustomerEventListenerIT extends AbstractInfrastructureAPI {
 
         Mockito.verify(customerEventListener).listen(Mockito.any(CustomerRegisteredEvent.class));
 
-        Mockito.verify(notificationApplicationService).notifyNewRegistration(Mockito.any(NotifyNewRegistrationInput.class));
+        Mockito.verify(forConfirmCustomerRegistration).confirm(Mockito.any(UUID.class));
     }
 
 }

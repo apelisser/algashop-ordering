@@ -6,6 +6,9 @@ import com.apelisser.algashop.ordering.core.domain.model.commons.FullName;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerId;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerTestDataBuilder;
 import com.apelisser.algashop.ordering.core.domain.model.customer.Customers;
+import com.apelisser.algashop.ordering.core.ports.in.customer.CustomerFilter;
+import com.apelisser.algashop.ordering.core.ports.in.customer.ForQueryingCustomers;
+import com.apelisser.algashop.ordering.core.ports.in.customer.CustomerSummaryOutput;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +21,7 @@ import java.time.OffsetDateTime;
 class CustomerQueryServiceIT extends AbstractApplicationIT {
 
     @Autowired
-    CustomerQueryService queryService;
+    ForQueryingCustomers queryService;
 
     @Autowired
     Customers customers;

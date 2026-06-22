@@ -1,12 +1,6 @@
 package com.apelisser.algashop.ordering.core.application.order.query;
 
-import com.apelisser.algashop.ordering.core.application.commons.AddressData;
-import com.apelisser.algashop.ordering.core.application.order.query.BillingData;
-import com.apelisser.algashop.ordering.core.application.order.query.CustomerMinimalOutput;
-import com.apelisser.algashop.ordering.core.application.order.query.OrderDetailOutput;
-import com.apelisser.algashop.ordering.core.application.order.query.OrderItemDetailOutput;
-import com.apelisser.algashop.ordering.core.application.order.query.RecipientData;
-import com.apelisser.algashop.ordering.core.application.order.query.ShippingData;
+import com.apelisser.algashop.ordering.core.ports.in.commons.AddressData;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerId;
 import com.apelisser.algashop.ordering.core.domain.model.order.OrderId;
 import com.apelisser.algashop.ordering.core.domain.model.order.OrderItemId;

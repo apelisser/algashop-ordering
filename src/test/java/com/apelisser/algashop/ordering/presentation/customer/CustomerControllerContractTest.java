@@ -1,14 +1,14 @@
 package com.apelisser.algashop.ordering.presentation.customer;
 
-import com.apelisser.algashop.ordering.core.application.commons.AddressData;
-import com.apelisser.algashop.ordering.core.application.customer.management.CustomerInput;
-import com.apelisser.algashop.ordering.core.application.customer.management.CustomerManagementApplicationService;
-import com.apelisser.algashop.ordering.core.application.customer.management.CustomerUpdateInput;
-import com.apelisser.algashop.ordering.core.application.customer.query.CustomerFilter;
-import com.apelisser.algashop.ordering.core.application.customer.query.CustomerOutput;
+import com.apelisser.algashop.ordering.core.ports.in.commons.AddressData;
+import com.apelisser.algashop.ordering.core.ports.in.customer.CustomerInput;
+import com.apelisser.algashop.ordering.core.application.customer.CustomerManagementApplicationService;
+import com.apelisser.algashop.ordering.core.ports.in.customer.CustomerUpdateInput;
+import com.apelisser.algashop.ordering.core.ports.in.customer.CustomerFilter;
+import com.apelisser.algashop.ordering.core.ports.in.customer.CustomerOutput;
 import com.apelisser.algashop.ordering.core.application.customer.query.CustomerOutputTestDataBuilder;
-import com.apelisser.algashop.ordering.core.application.customer.query.CustomerQueryService;
-import com.apelisser.algashop.ordering.core.application.customer.query.CustomerSummaryOutput;
+import com.apelisser.algashop.ordering.core.ports.in.customer.ForQueryingCustomers;
+import com.apelisser.algashop.ordering.core.ports.in.customer.CustomerSummaryOutput;
 import com.apelisser.algashop.ordering.core.application.customer.query.CustomerSummaryOutputTestDataBuilder;
 import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ForQueryingShoppingCarts;
 import com.apelisser.algashop.ordering.core.domain.model.DomainEntityNotFoundException;
@@ -16,6 +16,7 @@ import com.apelisser.algashop.ordering.core.domain.model.DomainException;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerEmailIsInUseException;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerId;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerNotFoundException;
+import com.apelisser.algashop.ordering.infrastructure.adapters.in.web.customer.CustomerController;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,7 +46,7 @@ class CustomerControllerContractTest {
     CustomerManagementApplicationService customerManagementApplicationService;
 
     @MockitoBean
-    CustomerQueryService customerQueryService;
+    ForQueryingCustomers customerQueryService;
 
     @MockitoBean
     ForQueryingShoppingCarts shoppingCartQueryService;

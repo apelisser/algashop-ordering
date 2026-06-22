@@ -1,6 +1,6 @@
 package com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.shoppingcart;
 
-import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntity;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.customer.CustomerPersistenceEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;

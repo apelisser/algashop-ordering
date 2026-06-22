@@ -3,8 +3,8 @@ package com.apelisser.algashop.ordering.infrastructure.persistence.assembler;
 import com.apelisser.algashop.ordering.core.domain.model.customer.Customer;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerTestDataBuilder;
 import com.apelisser.algashop.ordering.core.domain.model.commons.Address;
-import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntity;
-import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityAssembler;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.customer.CustomerPersistenceEntity;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.customer.CustomerPersistenceEntityAssembler;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

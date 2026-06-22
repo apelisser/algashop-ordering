@@ -20,7 +20,7 @@ import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCa
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCartNotFoundException;
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCartTestDataBuilder;
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCarts;
-import com.apelisser.algashop.ordering.infrastructure.listener.order.OrderEventListener;
+import com.apelisser.algashop.ordering.infrastructure.adapters.in.listener.order.OrderEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

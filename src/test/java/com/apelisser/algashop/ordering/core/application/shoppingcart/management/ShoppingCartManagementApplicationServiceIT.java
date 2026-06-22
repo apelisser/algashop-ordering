@@ -18,7 +18,7 @@ import com.apelisser.algashop.ordering.core.domain.model.product.ProductNotFound
 import com.apelisser.algashop.ordering.core.domain.model.product.ProductOutOfStockException;
 import com.apelisser.algashop.ordering.core.domain.model.product.ProductTestDataBuilder;
 import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ShoppingCartItemInput;
-import com.apelisser.algashop.ordering.infrastructure.listener.shoppingcart.ShoppingCartEventListener;
+import com.apelisser.algashop.ordering.infrastructure.adapters.in.listener.shoppingcart.ShoppingCartEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

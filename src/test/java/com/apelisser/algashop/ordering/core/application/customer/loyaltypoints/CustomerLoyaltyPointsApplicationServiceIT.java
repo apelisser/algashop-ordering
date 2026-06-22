@@ -1,6 +1,7 @@
 package com.apelisser.algashop.ordering.core.application.customer.loyaltypoints;
 
 import com.apelisser.algashop.ordering.core.application.AbstractApplicationIT;
+import com.apelisser.algashop.ordering.core.application.customer.CustomerLoyaltyPointsApplicationService;
 import com.apelisser.algashop.ordering.core.domain.model.commons.Money;
 import com.apelisser.algashop.ordering.core.domain.model.commons.Quantity;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CantAddLoyaltyPointsOrderIsNotReadyException;
@@ -20,7 +21,7 @@ import com.apelisser.algashop.ordering.core.domain.model.order.OrderTestDataBuil
 import com.apelisser.algashop.ordering.core.domain.model.order.Orders;
 import com.apelisser.algashop.ordering.core.domain.model.product.Product;
 import com.apelisser.algashop.ordering.core.domain.model.product.ProductTestDataBuilder;
-import com.apelisser.algashop.ordering.infrastructure.listener.customer.CustomerEventListener;
+import com.apelisser.algashop.ordering.infrastructure.adapters.in.listener.customer.CustomerEventListener;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

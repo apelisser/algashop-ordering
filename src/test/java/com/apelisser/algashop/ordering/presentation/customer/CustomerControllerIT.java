@@ -1,7 +1,7 @@
 package com.apelisser.algashop.ordering.presentation.customer;
 
-import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntity;
-import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityRepository;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.customer.CustomerPersistenceEntity;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.customer.CustomerPersistenceEntityRepository;
 import com.apelisser.algashop.ordering.presentation.AbstractPresentationIT;
 import com.apelisser.algashop.ordering.utils.AlgaShopResourceUtils;
 import io.restassured.RestAssured;

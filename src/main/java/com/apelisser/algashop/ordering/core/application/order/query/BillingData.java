@@ -1,6 +1,6 @@
 package com.apelisser.algashop.ordering.core.application.order.query;
 
-import com.apelisser.algashop.ordering.core.application.commons.AddressData;
+import com.apelisser.algashop.ordering.core.ports.in.commons.AddressData;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

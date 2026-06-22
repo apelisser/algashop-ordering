@@ -2,7 +2,7 @@ package com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.
 
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCart;
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCartItem;
-import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntityRepository;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.customer.CustomerPersistenceEntityRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;

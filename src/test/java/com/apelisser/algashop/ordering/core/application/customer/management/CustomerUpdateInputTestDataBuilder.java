@@ -1,7 +1,7 @@
 package com.apelisser.algashop.ordering.core.application.customer.management;
 
-import com.apelisser.algashop.ordering.core.application.commons.AddressData;
-import com.apelisser.algashop.ordering.core.application.customer.management.CustomerUpdateInput;
+import com.apelisser.algashop.ordering.core.ports.in.commons.AddressData;
+import com.apelisser.algashop.ordering.core.ports.in.customer.CustomerUpdateInput;
 
 public class CustomerUpdateInputTestDataBuilder {
 

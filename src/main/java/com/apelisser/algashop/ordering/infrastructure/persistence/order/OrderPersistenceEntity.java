@@ -1,6 +1,6 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.order;
 
-import com.apelisser.algashop.ordering.infrastructure.persistence.customer.CustomerPersistenceEntity;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.customer.CustomerPersistenceEntity;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.CascadeType;
