@@ -1,9 +1,9 @@
 package com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.order;
 
-import com.apelisser.algashop.ordering.core.ports.in.order.CustomerMinimalOutput;
-import com.apelisser.algashop.ordering.core.ports.in.order.OrderDetailOutput;
+import com.apelisser.algashop.ordering.core.ports.out.order.CustomerMinimalOutput;
+import com.apelisser.algashop.ordering.core.ports.out.order.OrderDetailOutput;
 import com.apelisser.algashop.ordering.core.ports.in.order.OrderFilter;
-import com.apelisser.algashop.ordering.core.ports.in.order.OrderSummaryOutput;
+import com.apelisser.algashop.ordering.core.ports.out.order.OrderSummaryOutput;
 import com.apelisser.algashop.ordering.core.application.utility.Mapper;
 import com.apelisser.algashop.ordering.core.domain.model.order.OrderId;
 import com.apelisser.algashop.ordering.core.domain.model.order.OrderNotFoundException;

@@ -1,16 +1,11 @@
 package com.apelisser.algashop.ordering.core.ports.in.order;
 
-import org.springframework.transaction.annotation.Transactional;
-
 public interface ForManagingOrders {
 
-    @Transactional
-    void cancel(Long orderId);
+    void cancel(String rawOrderId);
 
-    @Transactional
-    void markAsPaid(Long orderId);
+    void markAsPaid(String rawOrderId);
 
-    @Transactional
-    void markAsReady(Long orderId);
+    void markAsReady(String rawOrderId);
 
 }

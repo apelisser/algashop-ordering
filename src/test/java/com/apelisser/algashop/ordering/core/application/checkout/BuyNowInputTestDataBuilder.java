@@ -1,7 +1,7 @@
 package com.apelisser.algashop.ordering.core.application.checkout;
 
 import com.apelisser.algashop.ordering.core.ports.in.checkout.BuyNowInput;
-import com.apelisser.algashop.ordering.core.ports.in.checkout.ShippingInput;
+import com.apelisser.algashop.ordering.core.ports.in.order.ShippingInput;
 import com.apelisser.algashop.ordering.core.ports.in.commons.AddressData;
 import com.apelisser.algashop.ordering.core.ports.in.order.BillingData;
 import com.apelisser.algashop.ordering.core.ports.in.order.RecipientData;

@@ -21,9 +21,9 @@ public class OrderManagementApplicationService implements ForManagingOrders {
 
     @Transactional
     @Override
-    public void cancel(Long orderId) {
-        Objects.requireNonNull(orderId);
-        Order order = orders.ofId(new OrderId(orderId))
+    public void cancel(String rawOrderId) {
+        Objects.requireNonNull(rawOrderId);
+        Order order = orders.ofId(new OrderId(rawOrderId))
             .orElseThrow(OrderNotFoundException::new);
         order.cancel();
         orders.add(order);
@@ -31,9 +31,9 @@ public class OrderManagementApplicationService implements ForManagingOrders {
 
     @Transactional
     @Override
-    public void markAsPaid(Long orderId) {
-        Objects.requireNonNull(orderId);
-        Order order = orders.ofId(new OrderId(orderId))
+    public void markAsPaid(String rawOrderId) {
+        Objects.requireNonNull(rawOrderId);
+        Order order = orders.ofId(new OrderId(rawOrderId))
             .orElseThrow(OrderNotFoundException::new);
         order.markAsPaid();
         orders.add(order);
@@ -41,9 +41,9 @@ public class OrderManagementApplicationService implements ForManagingOrders {
 
     @Transactional
     @Override
-    public void markAsReady(Long orderId) {
-        Objects.requireNonNull(orderId);
-        Order order = orders.ofId(new OrderId(orderId))
+    public void markAsReady(String rawOrderId) {
+        Objects.requireNonNull(rawOrderId);
+        Order order = orders.ofId(new OrderId(rawOrderId))
             .orElseThrow(OrderNotFoundException::new);
         order.markAsReady();
         orders.add(order);

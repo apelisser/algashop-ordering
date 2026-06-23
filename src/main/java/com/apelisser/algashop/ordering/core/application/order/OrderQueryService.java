@@ -1,8 +1,8 @@
 package com.apelisser.algashop.ordering.core.application.order;
 
-import com.apelisser.algashop.ordering.core.ports.in.order.OrderDetailOutput;
+import com.apelisser.algashop.ordering.core.ports.out.order.OrderDetailOutput;
 import com.apelisser.algashop.ordering.core.ports.in.order.OrderFilter;
-import com.apelisser.algashop.ordering.core.ports.in.order.OrderSummaryOutput;
+import com.apelisser.algashop.ordering.core.ports.out.order.OrderSummaryOutput;
 import com.apelisser.algashop.ordering.core.ports.in.order.ForQueryingOrders;
 import com.apelisser.algashop.ordering.core.ports.out.order.ForObtainingOrders;
 import org.springframework.data.domain.Page;

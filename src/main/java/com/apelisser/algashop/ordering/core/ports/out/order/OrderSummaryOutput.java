@@ -1,4 +1,4 @@
-package com.apelisser.algashop.ordering.core.ports.in.order;
+package com.apelisser.algashop.ordering.core.ports.out.order;
 
 import com.apelisser.algashop.ordering.core.domain.model.order.OrderId;
 import lombok.Builder;

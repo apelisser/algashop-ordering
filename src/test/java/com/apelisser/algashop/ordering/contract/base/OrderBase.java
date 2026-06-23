@@ -7,7 +7,7 @@ import com.apelisser.algashop.ordering.core.ports.in.checkout.CheckoutInput;
 import com.apelisser.algashop.ordering.core.application.order.query.OrderDetailOutputTestDataBuilder;
 import com.apelisser.algashop.ordering.core.ports.in.order.ForQueryingOrders;
 import com.apelisser.algashop.ordering.core.ports.in.order.OrderFilter;
-import com.apelisser.algashop.ordering.core.ports.in.order.OrderSummaryOutput;
+import com.apelisser.algashop.ordering.core.ports.out.order.OrderSummaryOutput;
 import com.apelisser.algashop.ordering.core.application.order.query.OrderSummaryOutputTestDataBuilder;
 import com.apelisser.algashop.ordering.core.domain.model.order.OrderNotFoundException;
 import com.apelisser.algashop.ordering.infrastructure.adapters.in.web.order.OrderController;

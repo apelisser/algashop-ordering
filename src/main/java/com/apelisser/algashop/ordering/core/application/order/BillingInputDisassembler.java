@@ -1,4 +1,4 @@
-package com.apelisser.algashop.ordering.core.application.checkout;
+package com.apelisser.algashop.ordering.core.application.order;
 
 import com.apelisser.algashop.ordering.core.ports.in.commons.AddressData;
 import com.apelisser.algashop.ordering.core.ports.in.order.BillingData;

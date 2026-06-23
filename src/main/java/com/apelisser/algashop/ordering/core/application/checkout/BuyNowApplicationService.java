@@ -1,5 +1,7 @@
 package com.apelisser.algashop.ordering.core.application.checkout;
 
+import com.apelisser.algashop.ordering.core.application.order.BillingInputDisassembler;
+import com.apelisser.algashop.ordering.core.application.order.ShippingInputDisassembler;
 import com.apelisser.algashop.ordering.core.domain.model.DomainException;
 import com.apelisser.algashop.ordering.core.domain.model.commons.Quantity;
 import com.apelisser.algashop.ordering.core.domain.model.commons.ZipCode;
@@ -22,7 +24,7 @@ import com.apelisser.algashop.ordering.core.domain.model.product.ProductId;
 import com.apelisser.algashop.ordering.core.domain.model.product.ProductNotFoundException;
 import com.apelisser.algashop.ordering.core.ports.in.checkout.BuyNowInput;
 import com.apelisser.algashop.ordering.core.ports.in.checkout.ForBuyingProduct;
-import com.apelisser.algashop.ordering.core.ports.in.checkout.ShippingInput;
+import com.apelisser.algashop.ordering.core.ports.in.order.ShippingInput;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

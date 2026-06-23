@@ -8,9 +8,9 @@ import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerNotFou
 import com.apelisser.algashop.ordering.core.domain.model.product.ProductNotFoundException;
 import com.apelisser.algashop.ordering.core.domain.model.shoppingcart.ShoppingCartNotFoundException;
 import com.apelisser.algashop.ordering.core.ports.in.order.ForQueryingOrders;
-import com.apelisser.algashop.ordering.core.ports.in.order.OrderDetailOutput;
+import com.apelisser.algashop.ordering.core.ports.out.order.OrderDetailOutput;
 import com.apelisser.algashop.ordering.core.ports.in.order.OrderFilter;
-import com.apelisser.algashop.ordering.core.ports.in.order.OrderSummaryOutput;
+import com.apelisser.algashop.ordering.core.ports.out.order.OrderSummaryOutput;
 import com.apelisser.algashop.ordering.presentation.PageModel;
 import com.apelisser.algashop.ordering.presentation.UnprocessableEntityException;
 import jakarta.validation.Valid;

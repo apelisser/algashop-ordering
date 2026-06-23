@@ -1,5 +1,7 @@
 package com.apelisser.algashop.ordering.core.ports.in.order;
 
+import com.apelisser.algashop.ordering.core.ports.out.order.OrderDetailOutput;
+import com.apelisser.algashop.ordering.core.ports.out.order.OrderSummaryOutput;
 import org.springframework.data.domain.Page;
 
 public interface ForQueryingOrders {

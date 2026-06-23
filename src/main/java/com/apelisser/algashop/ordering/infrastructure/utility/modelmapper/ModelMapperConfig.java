@@ -1,8 +1,8 @@
 package com.apelisser.algashop.ordering.infrastructure.utility.modelmapper;
 
 import com.apelisser.algashop.ordering.core.ports.in.customer.CustomerOutput;
-import com.apelisser.algashop.ordering.core.ports.in.order.OrderDetailOutput;
-import com.apelisser.algashop.ordering.core.ports.in.order.OrderItemDetailOutput;
+import com.apelisser.algashop.ordering.core.ports.out.order.OrderDetailOutput;
+import com.apelisser.algashop.ordering.core.ports.out.order.OrderItemDetailOutput;
 import com.apelisser.algashop.ordering.core.application.utility.Mapper;
 import com.apelisser.algashop.ordering.core.domain.model.commons.FullName;
 import com.apelisser.algashop.ordering.core.domain.model.customer.BirthDate;

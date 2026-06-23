@@ -1,5 +1,7 @@
-package com.apelisser.algashop.ordering.core.ports.in.order;
+package com.apelisser.algashop.ordering.core.ports.out.order;
 
+import com.apelisser.algashop.ordering.core.ports.in.order.BillingData;
+import com.apelisser.algashop.ordering.core.ports.in.order.ShippingData;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

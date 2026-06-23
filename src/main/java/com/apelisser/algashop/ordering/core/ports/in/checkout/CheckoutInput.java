@@ -1,6 +1,7 @@
 package com.apelisser.algashop.ordering.core.ports.in.checkout;
 
 import com.apelisser.algashop.ordering.core.ports.in.order.BillingData;
+import com.apelisser.algashop.ordering.core.ports.in.order.ShippingInput;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

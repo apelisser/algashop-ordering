@@ -44,7 +44,7 @@ class OrderManagementApplicationServiceIT extends AbstractApplicationIT {
             .build();
         orders.add(order);
 
-        orderManagementApplicationService.cancel(order.id().value().toLong());
+        orderManagementApplicationService.cancel(order.id().toString());
 
         Order canceledOrder = orders.ofId(order.id()).orElse(null);
 
@@ -60,7 +60,7 @@ class OrderManagementApplicationServiceIT extends AbstractApplicationIT {
     void givenANonExistentOrder_whenCancel_shouldThrowException() {
         OrderId nonExistentOrderId = new OrderId();
         Assertions.assertThatExceptionOfType(OrderNotFoundException.class)
-            .isThrownBy(() -> orderManagementApplicationService.cancel(nonExistentOrderId.value().toLong()));
+            .isThrownBy(() -> orderManagementApplicationService.cancel(nonExistentOrderId.toString()));
     }
 
     @Test
@@ -75,7 +75,7 @@ class OrderManagementApplicationServiceIT extends AbstractApplicationIT {
         orders.add(order);
 
         Assertions.assertThatExceptionOfType(OrderStatusCannotBeChangedException.class)
-            .isThrownBy(() -> orderManagementApplicationService.cancel(order.id().value().toLong()));
+            .isThrownBy(() -> orderManagementApplicationService.cancel(order.id().toString()));
     }
 
     @Test
@@ -89,7 +89,7 @@ class OrderManagementApplicationServiceIT extends AbstractApplicationIT {
             .build();
         orders.add(order);
 
-        orderManagementApplicationService.markAsPaid(order.id().value().toLong());
+        orderManagementApplicationService.markAsPaid(order.id().toString());
 
         Order paidOrder = orders.ofId(order.id()).orElse(null);
 
@@ -105,7 +105,7 @@ class OrderManagementApplicationServiceIT extends AbstractApplicationIT {
     void givenANonExistentOrder_whenMarkAsPaid_shouldThrowException() {
         OrderId nonExistentOrderId = new OrderId();
         Assertions.assertThatExceptionOfType(OrderNotFoundException.class)
-            .isThrownBy(() -> orderManagementApplicationService.markAsPaid(nonExistentOrderId.value().toLong()));
+            .isThrownBy(() -> orderManagementApplicationService.markAsPaid(nonExistentOrderId.toString()));
     }
 
     @Test
@@ -120,7 +120,7 @@ class OrderManagementApplicationServiceIT extends AbstractApplicationIT {
         orders.add(order);
 
         Assertions.assertThatExceptionOfType(OrderStatusCannotBeChangedException.class)
-            .isThrownBy(() -> orderManagementApplicationService.markAsPaid(order.id().value().toLong()));
+            .isThrownBy(() -> orderManagementApplicationService.markAsPaid(order.id().toString()));
     }
 
     @Test
@@ -134,7 +134,7 @@ class OrderManagementApplicationServiceIT extends AbstractApplicationIT {
             .build();
         orders.add(order);
 
-        orderManagementApplicationService.markAsReady(order.id().value().toLong());
+        orderManagementApplicationService.markAsReady(order.id().toString());
 
         Order readyOrder = orders.ofId(order.id()).orElse(null);
 
@@ -156,7 +156,7 @@ class OrderManagementApplicationServiceIT extends AbstractApplicationIT {
     void givenANonExistentOrder_whenMarkAsReady_shouldThrowException() {
         OrderId nonExistentOrderId = new OrderId();
         Assertions.assertThatExceptionOfType(OrderNotFoundException.class)
-            .isThrownBy(() -> orderManagementApplicationService.markAsReady(nonExistentOrderId.value().toLong()));
+            .isThrownBy(() -> orderManagementApplicationService.markAsReady(nonExistentOrderId.toString()));
     }
 
     @Test
@@ -171,7 +171,7 @@ class OrderManagementApplicationServiceIT extends AbstractApplicationIT {
         orders.add(order);
 
         Assertions.assertThatExceptionOfType(OrderStatusCannotBeChangedException.class)
-            .isThrownBy(() -> orderManagementApplicationService.markAsReady(order.id().value().toLong()));
+            .isThrownBy(() -> orderManagementApplicationService.markAsReady(order.id().toString()));
     }
 
 }
