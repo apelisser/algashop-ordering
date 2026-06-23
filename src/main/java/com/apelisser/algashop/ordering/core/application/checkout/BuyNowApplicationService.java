@@ -25,12 +25,9 @@ import com.apelisser.algashop.ordering.core.domain.model.product.ProductNotFound
 import com.apelisser.algashop.ordering.core.ports.in.checkout.BuyNowInput;
 import com.apelisser.algashop.ordering.core.ports.in.checkout.ForBuyingProduct;
 import com.apelisser.algashop.ordering.core.ports.in.order.ShippingInput;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
-@Service
 public class BuyNowApplicationService implements ForBuyingProduct {
 
     private final BuyNowService buyNowService;
@@ -55,7 +52,6 @@ public class BuyNowApplicationService implements ForBuyingProduct {
         this.billingInputDisassembler = billingInputDisassembler;
     }
 
-    @Transactional
     @Override
     public String buyNow(BuyNowInput input) {
         Objects.requireNonNull(input);
