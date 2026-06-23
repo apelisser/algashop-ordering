@@ -1,7 +1,7 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.repository;
 
 import com.apelisser.algashop.ordering.infrastructure.AbstractInfrastructureAPI;
-import com.apelisser.algashop.ordering.infrastructure.persistence.SpringDataAuditingConfig;
+import com.apelisser.algashop.ordering.infrastructure.config.auditing.SpringDataAuditingConfig;
 import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.customer.CustomerPersistenceEntity;
 import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.customer.CustomerPersistenceEntityRepository;
 import com.apelisser.algashop.ordering.infrastructure.persistence.entity.CustomerPersistenceEntityTestDataBuilder;

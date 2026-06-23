@@ -6,7 +6,7 @@ import com.apelisser.algashop.ordering.core.domain.model.commons.Address;
 import com.apelisser.algashop.ordering.core.domain.model.order.Billing;
 import com.apelisser.algashop.ordering.core.domain.model.order.Recipient;
 import com.apelisser.algashop.ordering.core.domain.model.order.Shipping;
-import com.apelisser.algashop.ordering.infrastructure.persistence.commons.AddressEmbeddable;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.commons.AddressEmbeddable;
 import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.customer.CustomerPersistenceEntity;
 import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.customer.CustomerPersistenceEntityRepository;
 import org.springframework.stereotype.Component;

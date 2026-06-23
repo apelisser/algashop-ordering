@@ -7,7 +7,7 @@ import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ShoppingCartOu
 import com.apelisser.algashop.ordering.core.ports.in.shoppingcart.ForQueryingShoppingCarts;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerNotFoundException;
 import com.apelisser.algashop.ordering.core.domain.model.product.ProductNotFoundException;
-import com.apelisser.algashop.ordering.presentation.UnprocessableEntityException;
+import com.apelisser.algashop.ordering.infrastructure.adapters.in.web.exceptionhandler.UnprocessableEntityException;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;

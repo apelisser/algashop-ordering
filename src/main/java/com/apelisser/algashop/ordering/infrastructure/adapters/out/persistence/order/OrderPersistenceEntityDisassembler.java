@@ -12,7 +12,7 @@ import com.apelisser.algashop.ordering.core.domain.model.order.*;
 import com.apelisser.algashop.ordering.core.domain.model.product.ProductName;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerId;
 import com.apelisser.algashop.ordering.core.domain.model.product.ProductId;
-import com.apelisser.algashop.ordering.infrastructure.persistence.commons.AddressEmbeddable;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.commons.AddressEmbeddable;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;

@@ -1,6 +1,6 @@
 package com.apelisser.algashop.ordering.infrastructure.persistence.embeddable;
 
-import com.apelisser.algashop.ordering.infrastructure.persistence.commons.AddressEmbeddable;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.commons.AddressEmbeddable;
 
 public class AddressEmbeddableTestDataBuilder {
 

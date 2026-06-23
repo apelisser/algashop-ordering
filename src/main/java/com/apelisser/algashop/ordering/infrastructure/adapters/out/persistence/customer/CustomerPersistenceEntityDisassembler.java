@@ -10,7 +10,7 @@ import com.apelisser.algashop.ordering.core.domain.model.customer.LoyaltyPoints;
 import com.apelisser.algashop.ordering.core.domain.model.commons.Phone;
 import com.apelisser.algashop.ordering.core.domain.model.commons.ZipCode;
 import com.apelisser.algashop.ordering.core.domain.model.customer.CustomerId;
-import com.apelisser.algashop.ordering.infrastructure.persistence.commons.AddressEmbeddable;
+import com.apelisser.algashop.ordering.infrastructure.adapters.out.persistence.commons.AddressEmbeddable;
 import org.springframework.stereotype.Component;
 
 @Component
